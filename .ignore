@@ -1,8 +1,6 @@
 # ignore folder
 
-.vs/
-bin/
-bin-int/
+Cpp study/
 
 # ignore another
 
