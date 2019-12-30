@@ -1,1 +1,9 @@
+# ignore folder
 
+.vs/
+bin/
+bin-int/
+
+# ignore another
+
+*.wav
