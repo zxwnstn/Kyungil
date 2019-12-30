@@ -1,13 +1,17 @@
 ﻿#include "stdafx.h"
 
-//if you want to show homeWork2, notation HOMEWORK1 macro
-#define HOMEWORK1
+//if you want to show homeWork1, notation HOMEWORK1 macro
+//#define HOMEWORK1
 
 HINSTANCE m_hInstance;
 HWND m_hWnd;
 POINT m_ptMouse = { 0,0 };
 
+#ifdef HOMEWORK1
 LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+#else
+LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+#endif
 void setWindowSize(int x, int y, int width, int height);
 
 
@@ -44,7 +48,7 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, i
 		WINSTARTY,
 		WINSIZEX,
 		WINSIZEY,
-		NULL,					
+		NULL,
 		(HMENU)NULL,
 		hInst,
 		NULL
@@ -52,7 +56,7 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, i
 	setWindowSize(WINSTARTX, WINSTARTY, WINSIZEX, WINSIZEY);
 	ShowWindow(m_hWnd, nCmdShow);
 
-	
+
 	MSG message;
 	while (GetMessage(&message, 0, 0, 0)) {
 		TranslateMessage(&message);
@@ -78,6 +82,7 @@ void setWindowSize(int x, int y, int width, int height) {
 }
 
 //for homeWork gloabal variables
+#ifdef HOMEWORK1
 RECT rc = RectMake(0, 0, 100, 100);
 RECT rc2 = RectMake(700, 200, 100, 100);
 RECT prisoner = RectMake(35, 35, 25, 25);
@@ -128,8 +133,8 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	HDC hdc;
 	PAINTSTRUCT ps;
 
-	switch (iMessage){
-	case WM_CREATE: 
+	switch (iMessage) {
+	case WM_CREATE:
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
@@ -154,11 +159,73 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		RectangleDraw(hdc, barigate);
 		EndPaint(hWnd, &ps);
 		break;
-	case WM_DESTROY: 
+	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
 	}
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
+}
+
+#else
+RECT player1 = RectMake(0, 0, 100, 100);
+RECT player2 = RectMake(500, 400, 100, 100);
+RECT prisoner;
+bool isPlayer1Control;
+const int psnerWidth = 25;
+const int psnerHeight = 25;
+const int dx = 5;
+const int dy = 5;
+
+void changeControl() {
+	isPlayer1Control = !isPlayer1Control;
+	if (isPlayer1Control)
+		prisoner = RectMakeCenter((player1.left + player1.right) / 2, (player1.top + player1.bottom) / 2, psnerWidth, psnerHeight);
+	else
+		prisoner = RectMakeCenter((player2.left + player2.right) / 2, (player2.top + player2.bottom) / 2, psnerWidth, psnerHeight);
+}
+void moveRect(RECT& rc, int direction) {
+	switch (direction) {
+	case VK_RIGHT:
+		rc.left += dx;
+		rc.right += dx;
+		break;
+	case VK_LEFT:
+		rc.left -= dx;
+		rc.right -= dx;
+		break;
+	case VK_UP:
+		rc.top -= dy;
+		rc.bottom -= dy;
+		break;
+	case VK_DOWN:
+		rc.top += dy;
+		rc.bottom += dy;
+		break;
+	}
+}
+bool isCollision(RECT movable, RECT nonmovable, int direction) {
+	moveRect(movable, direction);
+	if (((nonmovable.top < movable.bottom) && (movable.bottom < nonmovable.bottom)) ||
+		((nonmovable.top < movable.top) && (movable.top < nonmovable.bottom)))
+	{
+		if (((nonmovable.left < movable.right) && (movable.right < nonmovable.right)) ||
+			((nonmovable.left < movable.left) && (movable.left < nonmovable.right)))
+		{
+			changeControl();
+			return true;
+		}
+	}
+	return false;
+}
+bool safe(RECT rc, int direction) {
+	moveRect(rc, direction);
+	return ((0 <= rc.left) && (rc.right <= WINSIZEX) && (0 <= rc.top) && (rc.bottom <= WINSIZEY));
+}
+bool isPrisionerCollision(RECT movable, int direction) {
+	moveRect(movable, direction);
+	return ((prisoner.left <= movable.left) || (prisoner.right >= movable.right)
+		|| (prisoner.top <= movable.top) || (prisoner.bottom >= movable.bottom));
+
 }
 
 //Second windowProc - Prision Rectangle
@@ -167,13 +234,16 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	HDC hdc;
 	PAINTSTRUCT ps;
 
-	switch (iMessage){
+	switch (iMessage) {
 	case WM_CREATE:
+		prisoner = RectMakeCenter((player1.left + player1.right) / 2, (player1.top + player1.bottom) / 2, 25, 25);
+		isPlayer1Control = true;
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		RectangleDraw(hdc, rc);
-		RectangleDraw(hdc, barigate);
+		RectangleDraw(hdc, player1);
+		RectangleDraw(hdc, player2);
+		RectangleDraw(hdc, prisoner);
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_TIMER:
@@ -183,9 +253,23 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 
 		hdc = BeginPaint(hWnd, &ps);
 
-
-
-
+		if (isPlayer1Control) {
+			if (safe(player1, wParam) && !isCollision(player1, player2, wParam)) {
+				if (isPrisionerCollision(player1, wParam))
+					moveRect(prisoner, wParam);
+				moveRect(player1, wParam);
+			}
+		}
+		else {
+			if (safe(player2, wParam) && !isCollision(player2, player1, wParam)) {
+				if (isPrisionerCollision(player2, wParam))
+					moveRect(prisoner, wParam);
+				moveRect(player2, wParam);
+			}
+		}
+		RectangleDraw(hdc, player1);
+		RectangleDraw(hdc, player2);
+		RectangleDraw(hdc, prisoner);
 
 		EndPaint(hWnd, &ps);
 		break;
@@ -196,5 +280,5 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
 
-
+#endif
 
