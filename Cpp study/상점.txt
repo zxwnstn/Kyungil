@@ -1,0 +1,97 @@
+#include <iostream>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <string>
+using namespace std;
+
+
+class goo {
+
+	vector<int> itemList;
+	vector<int>::iterator itemList_iter;
+
+public:
+	void some() 
+	{
+		cout << *itemList_iter << endl;
+	}
+
+
+
+};
+
+class Item {
+public:
+	string name;
+	int number;
+
+};
+
+
+
+
+int main() {
+	vector<Item> v;
+	vector<Item> player_inventory;
+	vector<Item>::iterator it;
+	
+
+	Item item1;
+	item1.name = "모모";
+	item1.number = 1;
+
+	Item item2;
+	item2.name = "집행검";
+	item2.number = 1;
+
+	Item item3;
+	item3.name = "물약";
+	item3.number = 1;
+
+	Item item4;
+	item4.name = "현돌";
+	item4.number = 1;
+
+	Item item5;
+	item5.name = "신발";
+	item5.number = 1;
+
+	v.push_back(item1);
+	v.push_back(item2);
+	v.push_back(item3);
+	v.push_back(item4);
+	v.push_back(item5);
+
+
+	for (it = v.begin(); it != v.end(); )
+	{
+		if (it->name == "현돌")
+		{
+			player_inventory.push_back(*it);
+			it = v.erase(it);
+		}
+		else
+		{
+			it++;
+		}
+		
+	}
+
+	for (int i = 0; i < v.size(); ++i)
+		cout << v[i].name << endl;
+
+	cout << "플레이어 인벤토리\n";
+	for (int i = 0; i < player_inventory.size(); ++i)
+		cout << player_inventory[i].name << endl;
+
+
+
+
+
+	return 0;
+}
