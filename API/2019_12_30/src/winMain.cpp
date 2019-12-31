@@ -14,7 +14,6 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 #endif
 void setWindowSize(int x, int y, int width, int height);
 
-
 //winMain
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {
 
@@ -78,7 +77,7 @@ void setWindowSize(int x, int y, int width, int height) {
 	AdjustWindowRect(&rc, WINSTYLE, false);
 	//위 rect정보로 윈도우 사이즈 설정
 
-	SetWindowPos(m_hWnd, NULL, x, y, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_SHOWWINDOW);
+	SetWindowPos(m_hWnd, NULL, x, y, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE);
 }
 
 //for homeWork gloabal variables
@@ -165,23 +164,22 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	}
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
-
 #else
-RECT player1 = RectMake(0, 0, 100, 100);
-RECT player2 = RectMake(500, 400, 100, 100);
+RECT movable = RectMake(0, 0, 100, 100);
+RECT nonMovable = RectMake(500, 400, 100, 100);
 RECT prisoner;
 bool isPlayer1Control;
 const int psnerWidth = 25;
 const int psnerHeight = 25;
-const int dx = 5;
-const int dy = 5;
+int dx = 3;
+int dy = 3;
 
 void changeControl() {
 	isPlayer1Control = !isPlayer1Control;
 	if (isPlayer1Control)
-		prisoner = RectMakeCenter((player1.left + player1.right) / 2, (player1.top + player1.bottom) / 2, psnerWidth, psnerHeight);
+		prisoner = RectMakeCenter((movable.left + movable.right) / 2, (movable.top + movable.bottom) / 2, psnerWidth, psnerHeight);
 	else
-		prisoner = RectMakeCenter((player2.left + player2.right) / 2, (player2.top + player2.bottom) / 2, psnerWidth, psnerHeight);
+		prisoner = RectMakeCenter((nonMovable.left + nonMovable.right) / 2, (nonMovable.top + nonMovable.bottom) / 2, psnerWidth, psnerHeight);
 }
 void moveRect(RECT& rc, int direction) {
 	switch (direction) {
@@ -236,13 +234,13 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 
 	switch (iMessage) {
 	case WM_CREATE:
-		prisoner = RectMakeCenter((player1.left + player1.right) / 2, (player1.top + player1.bottom) / 2, 25, 25);
+		prisoner = RectMakeCenter((movable.left + movable.right) / 2, (movable.top + movable.bottom) / 2, 25, 25);
 		isPlayer1Control = true;
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		RectangleDraw(hdc, player1);
-		RectangleDraw(hdc, player2);
+		RectangleDraw(hdc, movable);
+		RectangleDraw(hdc, nonMovable);
 		RectangleDraw(hdc, prisoner);
 		EndPaint(hWnd, &ps);
 		break;
@@ -252,24 +250,28 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 		InvalidateRect(hWnd, NULL, true);
 
 		hdc = BeginPaint(hWnd, &ps);
-
 		if (isPlayer1Control) {
-			if (safe(player1, wParam) && !isCollision(player1, player2, wParam)) {
-				if (isPrisionerCollision(player1, wParam))
+			if (safe(movable, wParam) && !isCollision(movable, nonMovable, wParam)) {
+				if (isPrisionerCollision(movable, wParam))
 					moveRect(prisoner, wParam);
-				moveRect(player1, wParam);
+				moveRect(movable, wParam);
 			}
 		}
 		else {
-			if (safe(player2, wParam) && !isCollision(player2, player1, wParam)) {
-				if (isPrisionerCollision(player2, wParam))
+			if (safe(nonMovable, wParam) && !isCollision(nonMovable, movable, wParam)) {
+				if (isPrisionerCollision(nonMovable, wParam))
 					moveRect(prisoner, wParam);
-				moveRect(player2, wParam);
+				moveRect(nonMovable, wParam);
 			}
 		}
-		RectangleDraw(hdc, player1);
-		RectangleDraw(hdc, player2);
+		RectangleDraw(hdc, movable);
+		RectangleDraw(hdc, nonMovable);
 		RectangleDraw(hdc, prisoner);
+		if (wParam == VK_SPACE)
+		{
+			dx += 3;
+			dy += 3;
+		}
 
 		EndPaint(hWnd, &ps);
 		break;
@@ -279,6 +281,4 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	}
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
-
 #endif
-
