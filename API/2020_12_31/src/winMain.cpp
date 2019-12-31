@@ -306,11 +306,11 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {
 	Application* app = new Application;
 	if (!app->init(hInst, nCmdShow)) {
-		delete app;
+		SAFE_DELETE(app);
 		return -1;
 	}
 
 	int iRev = app->run();
-	delete app;
+	SAFE_DELETE(app);
 	return iRev;
 }

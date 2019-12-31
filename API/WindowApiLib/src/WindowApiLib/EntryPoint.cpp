@@ -1,9 +1,6 @@
 #include "EntryPoint.h"
 
-HWND Application::m_hWnd = NULL;
-
-bool Application::init(const HINSTANCE & hInst, int nCmdShow)
-{
+bool Application::init(const HINSTANCE & hInst, int nCmdShow){
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	m_hInstance = hInst;
 	m_nCmdShow = nCmdShow;

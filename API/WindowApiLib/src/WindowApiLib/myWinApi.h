@@ -21,9 +21,10 @@
 #include <list>
 #include <string>
 
-#pragma warning(disable : 4996)
-
 //사용자 정의
 #include "commonFunction.h"
 #include "macro.h"
 #include "type.h"
+
+//pragma
+#pragma warning(disable : 4996)
