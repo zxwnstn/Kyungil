@@ -1,95 +1,20 @@
-﻿#include "stdafx.h"
+#include <myWindowApi.h>
 
-//if you want to show homeWork1, notation HOMEWORK1 macro
-//#define HOMEWORK1
+#define HOMEWORK1
+//The Homework1 is crash and push
+//if you want to show homeWork2(prison rectangle), denotation HOMEWORK1 macro
 
-HINSTANCE m_hInstance;
-HWND m_hWnd;
-POINT m_ptMouse = { 0,0 };
 
 #ifdef HOMEWORK1
-LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
-#else
-LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
-#endif
-void setWindowSize(int x, int y, int width, int height);
-
-//winMain
-int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {
-
-	m_hInstance = hInst;
-
-	WNDCLASS wndClass;
-	wndClass.cbClsExtra = 0;
-	wndClass.cbWndExtra = 0;
-	wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	wndClass.hInstance = hInst;
-
-#ifdef HOMEWORK1
-	wndClass.lpfnWndProc = (WNDPROC)wndProc;
-#else
-	wndClass.lpfnWndProc = (WNDPROC)wndProc2;
-#endif
-
-	wndClass.lpszClassName = WINNAME;
-	wndClass.lpszMenuName = NULL;
-	wndClass.style = CS_HREDRAW | CS_VREDRAW;
-
-
-	RegisterClass(&wndClass);
-	m_hWnd = CreateWindow(
-		WINNAME,
-		WINNAME,
-		WS_OVERLAPPEDWINDOW,
-		WINSTARTX,
-		WINSTARTY,
-		WINSIZEX,
-		WINSIZEY,
-		NULL,
-		(HMENU)NULL,
-		hInst,
-		NULL
-	);
-	setWindowSize(WINSTARTX, WINSTARTY, WINSIZEX, WINSIZEY);
-	ShowWindow(m_hWnd, nCmdShow);
-
-
-	MSG message;
-	while (GetMessage(&message, 0, 0, 0)) {
-		TranslateMessage(&message);
-		DispatchMessage(&message);
-	}
-
-	return message.wParam;
-}
-
-//윈도우 크기조정(클라이언트 영역의 사이즈를 정확히 잡아준다.
-void setWindowSize(int x, int y, int width, int height) {
-
-	RECT rc;
-	rc.left = 0;
-	rc.top = 0;
-	rc.right = width;
-	rc.bottom = height;
-
-	AdjustWindowRect(&rc, WINSTYLE, false);
-	//위 rect정보로 윈도우 사이즈 설정
-
-	SetWindowPos(m_hWnd, NULL, x, y, (rc.right - rc.left), (rc.bottom - rc.top), SWP_NOZORDER | SWP_NOMOVE);
-}
-
-//for homeWork gloabal variables
-#ifdef HOMEWORK1
-RECT rc = RectMake(0, 0, 100, 100);
-RECT rc2 = RectMake(700, 200, 100, 100);
-RECT prisoner = RectMake(35, 35, 25, 25);
-RECT barigate = RectMake(400, 200, 150, 150);
+//gloabal variables
+RECT rc = MakeRect(0, 0, 100, 100);
+RECT rc2 = MakeRect(700, 200, 100, 100);
+RECT prisoner = MakeRect(35, 35, 25, 25);
+RECT barigate = MakeRect(400, 200, 150, 150);
 const int dx = 5;
 const int dy = 5;
 
-//for homeWork Functions
+//specific Functions
 void moveRect(RECT& rc, int direction) {
 	switch (direction) {
 	case VK_RIGHT:
@@ -126,7 +51,7 @@ bool isCollision(RECT rc, int direction) {
 	return false;
 }
 
-//First windowProc - crash and push
+//wndProc - crash
 LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
@@ -137,8 +62,8 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		RectangleDraw(hdc, rc);
-		RectangleDraw(hdc, barigate);
+		DrawRect(hdc, rc);
+		DrawRect(hdc, barigate);
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_KEYDOWN:
@@ -154,8 +79,8 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		//}
 
 		hdc = BeginPaint(hWnd, &ps);
-		RectangleDraw(hdc, rc);
-		RectangleDraw(hdc, barigate);
+		DrawRect(hdc, rc);
+		DrawRect(hdc, barigate);
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_DESTROY:
@@ -165,8 +90,9 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
 #else
-RECT movable = RectMake(0, 0, 100, 100);
-RECT nonMovable = RectMake(500, 400, 100, 100);
+//global variables
+RECT movable = MakeRect(0, 0, 100, 100);
+RECT nonMovable = MakeRect(500, 400, 100, 100);
 RECT prisoner;
 bool isPlayer1Control;
 const int psnerWidth = 25;
@@ -174,12 +100,13 @@ const int psnerHeight = 25;
 int dx = 3;
 int dy = 3;
 
+//specific function
 void changeControl() {
 	isPlayer1Control = !isPlayer1Control;
 	if (isPlayer1Control)
-		prisoner = RectMakeCenter((movable.left + movable.right) / 2, (movable.top + movable.bottom) / 2, psnerWidth, psnerHeight);
+		prisoner = MakeRectFromCenter((movable.left + movable.right) / 2, (movable.top + movable.bottom) / 2, psnerWidth, psnerHeight);
 	else
-		prisoner = RectMakeCenter((nonMovable.left + nonMovable.right) / 2, (nonMovable.top + nonMovable.bottom) / 2, psnerWidth, psnerHeight);
+		prisoner = MakeRectFromCenter((nonMovable.left + nonMovable.right) / 2, (nonMovable.top + nonMovable.bottom) / 2, psnerWidth, psnerHeight);
 }
 void moveRect(RECT& rc, int direction) {
 	switch (direction) {
@@ -226,22 +153,22 @@ bool isPrisionerCollision(RECT movable, int direction) {
 
 }
 
-//Second windowProc - Prision Rectangle
-LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+//windowProc - Prision Rectangle
+LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	PAINTSTRUCT ps;
 
 	switch (iMessage) {
 	case WM_CREATE:
-		prisoner = RectMakeCenter((movable.left + movable.right) / 2, (movable.top + movable.bottom) / 2, 25, 25);
+		prisoner = MakeRectFromCenter((movable.left + movable.right) / 2, (movable.top + movable.bottom) / 2, 25, 25);
 		isPlayer1Control = true;
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
-		RectangleDraw(hdc, movable);
-		RectangleDraw(hdc, nonMovable);
-		RectangleDraw(hdc, prisoner);
+		DrawRect(hdc, movable);
+		DrawRect(hdc, nonMovable);
+		DrawRect(hdc, prisoner);
 		EndPaint(hWnd, &ps);
 		break;
 	case WM_TIMER:
@@ -264,14 +191,9 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 				moveRect(nonMovable, wParam);
 			}
 		}
-		RectangleDraw(hdc, movable);
-		RectangleDraw(hdc, nonMovable);
-		RectangleDraw(hdc, prisoner);
-		if (wParam == VK_SPACE)
-		{
-			dx += 3;
-			dy += 3;
-		}
+		DrawRect(hdc, movable);
+		DrawRect(hdc, nonMovable);
+		DrawRect(hdc, prisoner);
 
 		EndPaint(hWnd, &ps);
 		break;
@@ -282,3 +204,16 @@ LRESULT CALLBACK wndProc2(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam
 	return DefWindowProc(hWnd, iMessage, wParam, lParam);
 }
 #endif
+
+
+//winMain
+int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {
+	Application* app = new Application;
+	if (!app->init(hInst, nCmdShow)) {
+		delete app;
+		return -1;
+	}
+	int iRev = app->run();
+	delete app;
+	return iRev;
+}
