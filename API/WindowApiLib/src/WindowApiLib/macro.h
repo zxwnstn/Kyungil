@@ -11,3 +11,17 @@
 #define WINSIZEX	1024
 #define WINSIZEY	512
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
+
+//WinMain Macro
+#define DEFINE_WINMAIN(TYPE) \
+int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {\
+Application* app = new TYPE;\
+if (!app->init(hInst, nCmdShow)) {\
+	SAFE_DELETE(app);\
+	return -1;\
+}\
+\
+int iRev = app->run();\
+SAFE_DELETE(app);\
+return iRev;\
+}

@@ -2,9 +2,9 @@
 /*============== choose Macro what you want to see =========================*/
 
 //#define HOMEWORK_MODE0				//마우스로 사각형 밀기
-//#define HOMEWORK_MODE1				//사각형 크기 조절	
+#define HOMEWORK_MODE1				//사각형 크기 조절	
 //#define HOMEWORK_MODE2				//사각형 드래그앤 드랍
-#define HOMEWORK_MODE3					//전자시계
+//#define HOMEWORK_MODE3					//전자시계
 
 /*====== be careful that make sure that just only one macro Activated =======*/
 
@@ -303,14 +303,4 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 }
 #endif
 
-int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {
-	Application* app = new Application;
-	if (!app->init(hInst, nCmdShow)) {
-		SAFE_DELETE(app);
-		return -1;
-	}
-
-	int iRev = app->run();
-	SAFE_DELETE(app);
-	return iRev;
-}
+DEFINE_WINMAIN(Application)

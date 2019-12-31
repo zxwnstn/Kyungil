@@ -205,15 +205,4 @@ LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 }
 #endif
 
-
-//winMain
-int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {
-	Application* app = new Application;
-	if (!app->init(hInst, nCmdShow)) {
-		delete app;
-		return -1;
-	}
-	int iRev = app->run();
-	delete app;
-	return iRev;
-}
+DEFINE_WINMAIN(Application)
