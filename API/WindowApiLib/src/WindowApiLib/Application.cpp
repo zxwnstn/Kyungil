@@ -1,4 +1,4 @@
-#include "EntryPoint.h"
+#include "Application.h"
 
 bool Application::init(const HINSTANCE & hInst, int nCmdShow){
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);

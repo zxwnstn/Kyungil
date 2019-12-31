@@ -21,13 +21,13 @@
     <ClInclude Include="src\WindowApiLib\type.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\WindowApiLib\EntryPoint.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="src\myWindowApi.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\WindowApiLib\commonFunction.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowApiLib\Application.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClCompile Include="src\WindowApiLib\myWinApi.h">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\WindowApiLib\EntryPoint.cpp">
+    <ClCompile Include="src\WindowApiLib\Application.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

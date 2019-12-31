@@ -1,2 +1,2 @@
 #pragma once
-#include "WindowApiLib/EntryPoint.h"
+#include "WindowApiLib/Application.h"

@@ -132,12 +132,12 @@
   <ItemGroup>
     <ClInclude Include="src\myWindowApi.h" />
     <ClInclude Include="src\WindowApiLib\commonFunction.h" />
-    <ClInclude Include="src\WindowApiLib\EntryPoint.h" />
+    <ClInclude Include="src\WindowApiLib\Application.h" />
     <ClInclude Include="src\WindowApiLib\macro.h" />
     <ClInclude Include="src\WindowApiLib\type.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\WindowApiLib\EntryPoint.cpp" />
+    <ClCompile Include="src\WindowApiLib\Application.cpp" />
     <ClCompile Include="src\WindowApiLib\myWinApi.h" />
   </ItemGroup>
   <ItemGroup>
