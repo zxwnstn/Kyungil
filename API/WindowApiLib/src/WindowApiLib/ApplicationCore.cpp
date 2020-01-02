@@ -15,6 +15,7 @@ bool ApplicationCore::init(const HINSTANCE & hInst, int nCmdShow) {
 	if (!GET_SINGLE(Timer)->init())
 		return false;
 
+	srand(time(NULL));
 	return true;
 }
 

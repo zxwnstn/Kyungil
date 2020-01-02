@@ -7,13 +7,22 @@
 class InGameScene :
 	public Scene
 {
-	std::vector<Box> BoxList;
+private:
+	std::list<Box> DungList;
+	
 	Player player;
+	float timeLapse;
+	float genTime = 0.3f;
+
+
+
+
+private:
+	void genBox();
 
 public:
 	void update(float deltaTime);
 	void render(HDC hdc);
-	bool init();
 
 private:
 	InGameScene();

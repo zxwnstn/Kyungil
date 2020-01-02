@@ -91,9 +91,19 @@ inline bool isCollision(const RECT& _rect1, const RECT& _rect2) {
 			return true;
 	return false;
 }
+inline bool isCollision(const FRECT& _rect1, const FRECT& _rect2) {
+	if (_rect1.left < _rect2.right && _rect1.right > _rect2.left)
+		if (_rect1.top < _rect2.bottom && _rect1.bottom > _rect2.top)
+			return true;
+	return false;
+}
 
 //사각형 벗어남 체크
 inline bool isInWindow(const RECT& _rect) {
+	return ((0 < _rect.left) && (_rect.right < WINSIZEX) && (0 < _rect.top) && (_rect.bottom < WINSIZEY));
+}
+
+inline bool isInWindow(const FRECT& _rect) {
 	return ((0 < _rect.left) && (_rect.right < WINSIZEX) && (0 < _rect.top) && (_rect.bottom < WINSIZEY));
 }
 
@@ -145,3 +155,8 @@ inline void MoveFRect(FRECT& rect, Direction dir, float deltaDist) {
 		break;
 	}
 }
+
+inline int getRnd(int _max) {
+	return rand() % _max;
+}
+

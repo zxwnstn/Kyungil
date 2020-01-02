@@ -41,6 +41,7 @@ TYPE::GetInst()->Destroy();\
 return iRev;\
 }
 
+//Singleton Macro
 #define DECLARE_SINGLE(TYPE) \
 static TYPE* mInst; \
 \
@@ -60,3 +61,8 @@ private:\
 #define DEFINITION_SINGLE(TYPE) TYPE* TYPE::mInst = nullptr;
 #define GET_SINGLE(TYPE) TYPE::GetInst()
 #define RELEASE_SINGLE(TYPE) TYPE::GetInst()->Destroy()
+
+
+//math
+#define PI 3.141592
+#define GRAVITY 9.8

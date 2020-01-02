@@ -13,7 +13,7 @@ protected:
 private:
 	Scene* pCurScene = nullptr;
 	Scene* pNextScene = nullptr;
-	
+
 private:
 	void sceneChanger();
 
