@@ -19,5 +19,5 @@ private:
 	InGameScene();
 	~InGameScene();
 
+	friend Scene* CreateScene();
 };
-

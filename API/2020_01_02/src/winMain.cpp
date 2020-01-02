@@ -1,5 +1,8 @@
 #include "core/Application.h"
 
+
+
+
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR lpszCmdParam, int nCmdShow) {
 
 	if (!Application::GetInst()->init(hInst, nCmdShow)) {

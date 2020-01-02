@@ -130,10 +130,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Manager\Scene\SceneManager.h" />
     <ClInclude Include="src\Obj\DynamicObj.h" />
     <ClInclude Include="src\Obj\Obj.h" />
     <ClInclude Include="src\Scene\Scene.h" />
-    <ClInclude Include="src\Manager\Scene\SceneManager.h" />
     <ClInclude Include="src\Manager\Input\InputManager.h" />
     <ClInclude Include="src\WindowApiLib\commonFunction.h" />
     <ClInclude Include="src\WindowApiLib\ApplicationCore.h" />
@@ -143,11 +143,11 @@
     <ClInclude Include="src\Obj\StaticObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Manager\Scene\SceneManager.cpp" />
     <ClCompile Include="src\Obj\DynamicObj.cpp" />
     <ClCompile Include="src\Obj\Obj.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Manager.h" />
-    <ClCompile Include="src\Manager\Scene\SceneManager.cpp" />
     <ClCompile Include="src\Manager\Input\InputManager.cpp" />
     <ClCompile Include="src\WindowApiLib\ApplicationCore.cpp" />
     <ClCompile Include="src\WindowApiLib\myWinApi.h" />

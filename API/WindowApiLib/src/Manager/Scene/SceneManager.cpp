@@ -2,14 +2,14 @@
 #include "../Input/InputManager.h"
 
 DEFINITION_SINGLE(SceneManager)
-class InGameScene;
+
 
 bool SceneManager::init(HWND hwnd, HDC hdc)
 {
 	m_hDc = hdc;
 	m_hWnd = hwnd;
 
-	pCurScene = CreateScene<InGameScene>();
+	pCurScene = CreateScene();
 
 	return true;
 }

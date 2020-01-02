@@ -6,7 +6,7 @@ class Player : public DynamicObj
 {
 public:
 	FRECT outerLine;
-	float pSpeed = 40;
+	float pSpeed = 100;
 
 public:
 	FRECT& operator() () {

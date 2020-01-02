@@ -24,9 +24,6 @@
     <ClInclude Include="src\WindowApiLib\commonFunction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\Manager\Scene\SceneManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="src\Manager\Input\InputManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -48,12 +45,12 @@
     <ClInclude Include="src\Obj\StaticObj.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="src\Manager\Scene\SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\WindowApiLib\myWinApi.h">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\Scene\SceneManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\Manager\Input\InputManager.cpp">
@@ -78,6 +75,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\Obj\StaticObj.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\Scene\SceneManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,6 +2,8 @@
 #include "../../WindowApiLib/myWinApi.h"
 #include "../../Scene/Scene.h"
 
+extern Scene* CreateScene();
+
 class SceneManager
 {
 protected:
@@ -13,10 +15,6 @@ private:
 	Scene* pNextScene = nullptr;
 	
 private:
-	template<class T>
-	Scene* CreateScene() {
-		return new T;
-	}
 	void sceneChanger();
 
 public:

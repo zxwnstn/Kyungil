@@ -14,7 +14,7 @@ protected:
 
 protected:
 	HINSTANCE				m_hInstance;
-	static HWND				m_hWnd;
+	HWND					m_hWnd;
 	HDC						m_hDc;
 	int						m_nCmdShow;
 	float					m_fDeltaTime;

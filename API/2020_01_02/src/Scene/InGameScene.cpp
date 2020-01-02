@@ -31,3 +31,7 @@ InGameScene::InGameScene()
 InGameScene::~InGameScene()
 {
 }
+
+Scene* CreateScene() {
+	return new InGameScene;
+}
