@@ -9,12 +9,10 @@ class InGameScene :
 {
 private:
 	std::list<Box> DungList;
-	
+	std::vector<Box> obstacles;
 	Player player;
 	float timeLapse;
 	float genTime = 0.3f;
-
-
 
 
 private:
