@@ -21,13 +21,31 @@
     <ClInclude Include="src\WindowApiLib\type.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\myWindowApi.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="src\WindowApiLib\commonFunction.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\WindowApiLib\Application.h">
+    <ClInclude Include="src\Manager\Scene\SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\Input\InputManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\Timer\Timer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowApiLib\ApplicationCore.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\Obj.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\DynamicObj.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\StaticObj.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,7 +53,31 @@
     <ClCompile Include="src\WindowApiLib\myWinApi.h">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\WindowApiLib\Application.cpp">
+    <ClCompile Include="src\Manager\Scene\SceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\Input\InputManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager.h">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\Timer\Timer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowApiLib\ApplicationCore.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Scene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Obj\Obj.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Obj\DynamicObj.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Obj\StaticObj.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

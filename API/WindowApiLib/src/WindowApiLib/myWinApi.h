@@ -1,3 +1,7 @@
+//pragma
+#pragma once
+#pragma warning(disable : 4996)
+
 #include <SDKDDKVer.h>
 #define WIN32_LEAN_AND_MEAN    
 
@@ -13,18 +17,16 @@
 #include <string.h>
 #include <stdio.h>
 #include <memory>
+#include <bitset>
 
 //std
 #include <vector>
 #include <map>
 #include <iostream>
-#include <list>
 #include <string>
+#include <list>
 
 //사용자 정의
 #include "commonFunction.h"
 #include "macro.h"
 #include "type.h"
-
-//pragma
-#pragma warning(disable : 4996)

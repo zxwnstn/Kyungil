@@ -1,8 +1,8 @@
 ﻿#include <myWindowApi.h>
 /*============== choose Macro what you want to see =========================*/
 
-//#define HOMEWORK_MODE0				//마우스로 사각형 밀기
-#define HOMEWORK_MODE1				//사각형 크기 조절	
+#define HOMEWORK_MODE0				//마우스로 사각형 밀기
+//#define HOMEWORK_MODE1				//사각형 크기 조절	
 //#define HOMEWORK_MODE2				//사각형 드래그앤 드랍
 //#define HOMEWORK_MODE3					//전자시계
 
@@ -27,24 +27,7 @@ int nonMovableCenterX = (nonMovable.left + nonMovable.right) / 2;
 int nonMovableCenterY = (nonMovable.top + nonMovable.bottom) / 2;
 POINT pt{ 0,0 };
 
-//specific Function
-bool isCollision(RECT& movable, RECT& nonmovable) {
-	if (((nonmovable.top < movable.bottom) && (movable.bottom < nonmovable.bottom)) ||
-		((nonmovable.top < movable.top) && (movable.top < nonmovable.bottom)))
-	{
-		if (((nonmovable.left < movable.right) && (movable.right < nonmovable.right)) ||
-			((nonmovable.left < movable.left) && (movable.left < nonmovable.right)))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-bool safe(RECT rc, int direction) {
-	return ((0 <= rc.left) && (rc.right <= WINSIZEX) && (0 <= rc.top) && (rc.bottom <= WINSIZEY));
-}
 bool isInRangeX() {
-
 	if (((nonMovable.left < backRect.left) && (backRect.left < nonMovable.right)) ||
 		((nonMovable.left < backRect.right) && (backRect.right < nonMovable.right)))
 		return true;
