@@ -1,5 +1,5 @@
 #pragma once
-#include "../../WindowApiLib/myWinApi.h"
+#include "WindowApiLib/myWinApi.h"
 
 class Timer
 {

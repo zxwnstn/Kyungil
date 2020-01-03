@@ -48,6 +48,15 @@
     <ClInclude Include="src\Manager\Scene\SceneManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="src\Collider\Collider.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collider\CollisionManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collider\ColliderRect.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\WindowApiLib\myWinApi.h">
@@ -78,6 +87,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\Manager\Scene\SceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collider\Collider.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collider\CollisionManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collider\ColliderRect.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

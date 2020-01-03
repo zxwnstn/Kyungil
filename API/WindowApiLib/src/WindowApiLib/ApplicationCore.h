@@ -1,7 +1,6 @@
 #pragma once
 #include "myWinApi.h"
-#include "../Manager.h"
-//extern LRESULT CALLBACK wndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+#include "Manager.h"
 
 class ApplicationCore {
 private:

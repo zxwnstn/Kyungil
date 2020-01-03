@@ -10,11 +10,15 @@ public:
 	float gravity;
 
 public:
-	FRECT& operator() () {
-		return outerLine;
+	Player(float _left, float _top, float _right, float _bottom, float _speed)
+		:outerLine(_left, _top, _right, _bottom), speed(_speed)
+	{
+		colliderRect = outerLine;
 	}
-
-	Player();
 	~Player();
+
+	virtual void update(float deltaTime) override;
+	virtual void render(HDC memDC) override;
+
 };
 

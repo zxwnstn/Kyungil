@@ -7,24 +7,31 @@
 class InGameScene :
 	public Scene
 {
+
 private:
-	std::list<Box> DungList;
-	std::vector<Box> obstacles;
-	Player player;
+	std::vector<Obj*> objs;
+	HDC memDC;
+	
+private:
+	//gameLogic
 	float timeLapse;
-	float genTime = 0.3f;
+	float genTime = 0.1f;
+	bool isJumping = false;
+	bool falling = false;
+	float jumpDist = 100.f;
+	float jumpDy = 0.f;
 
 
 private:
-	void genBox();
+	void genDung();
 
 public:
 	void update(float deltaTime);
 	void render(HDC hdc);
 
 private:
-	InGameScene();
+	InGameScene(HDC);
 	~InGameScene();
 
-	friend Scene* CreateScene();
+	friend Scene* CreateScene(HDC);
 };

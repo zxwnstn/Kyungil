@@ -97,4 +97,5 @@ ApplicationCore::~ApplicationCore()
 	RELEASE_SINGLE(SceneManager);
 	RELEASE_SINGLE(Timer);
 
+	ReleaseDC(m_hWnd, m_hDc);
 }

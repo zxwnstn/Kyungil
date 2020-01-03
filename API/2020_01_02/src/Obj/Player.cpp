@@ -2,13 +2,16 @@
 
 
 
-Player::Player()
+void Player::update(float deltaTime)
 {
-	outerLine = { 50.f, 400.f, 100.f, 450.f };
-	speed = 200;
 }
 
+void Player::render(HDC memDC)
+{
+	DrawFRect(memDC, outerLine);
+}
 
 Player::~Player()
 {
 }
+

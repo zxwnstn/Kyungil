@@ -1,71 +1,68 @@
 #include "InGameScene.h"
 #include "Manager/Input/InputManager.h"
-void InGameScene::genBox()
+
+
+//플래피버드
+//두더지
+//슈팅대전 스킬(6개)
+
+void InGameScene::genDung()
 {
+	int xPos = getRnd(WINSIZEX - 50);
+	Box* b = new Box(xPos, 0, xPos + 25, 25, 400.f);
+	objs.push_back(b);
 }
+
+
 void InGameScene::update(float deltaTime)
 {
 	timeLapse += deltaTime;
 	if (timeLapse > genTime) {
 		timeLapse -= genTime;
-		if (getRnd(100) < 20) {
-			Box b;
-			int xPos = getRnd(WINSIZEX - 50);
-			b.outerLine.left = xPos;
-			b.outerLine.top = 0;
-			b.outerLine.right = xPos + 50;
-			b.outerLine.bottom = 50;
-			DungList.push_back(b);
+		if (getRnd(100) < 70)
+			genDung();
+	}
+
+	for (auto& e : objs) {
+		e->update(deltaTime);
+	}
+
+	for (auto it = objs.begin(); it != objs.end(); ) {
+		if ((*it)->life == false) {
+			delete *it;
+			it = objs.erase(it);
 		}
+		else ++it;
 	}
-
-	FRECT temp = player();
-	FRECT temp2 = player();
-	
-	MoveFRect(temp2, eDown, deltaTime * player.speed);
-	if (isInWindow(temp2))
-		MoveFRect(player(), eDown, deltaTime * player.speed);
-
-	if (GET_SINGLE(InputManager)->isStayKeyDown(VK_LEFT)) {
-		MoveFRect(temp, eLeft, deltaTime * player.speed);
-		if (isInWindow(temp))
-			MoveFRect(player(), eLeft, deltaTime * player.speed);
-	}
-	if (GET_SINGLE(InputManager)->isStayKeyDown(VK_RIGHT)) {
-		MoveFRect(temp, eRight, deltaTime * player.speed);
-		if (isInWindow(temp))
-			MoveFRect(player(), eRight, deltaTime * player.speed);
-	}
-
-	for (auto it = DungList.begin(); it != DungList.end();) {
-		MoveFRect((*it)(), eDown, deltaTime * it->speed);
-		if (it->outerLine.bottom > WINSIZEY)
-			it = DungList.erase(it);
-		else it++;	
-	}
-
-
 }
 
 void InGameScene::render(HDC hdc)
 {
-	DrawFRect(hdc, player());
-	for (auto it = DungList.begin(); it != DungList.end(); ++it) {
-		DrawFRect(hdc, (*it)());
-	}
+	HBITMAP bit = CreateCompatibleBitmap(hdc, WINSIZEX, WINSIZEY);
+	SelectObject(memDC, bit);
+	
+	for (int i = 0; i < objs.size(); ++i)
+		objs[i]->render(memDC);
+
+	BitBlt(hdc, 0, 0, WINSIZEX, WINSIZEY, memDC, 0, 0, SRCCOPY);
+	DeleteObject(bit);
 }
 
-
-InGameScene::InGameScene()
+InGameScene::InGameScene(HDC hdc)
 {
-	
+	memDC = CreateCompatibleDC(hdc);
+	Player* p = new Player(200.f, 500.f, 300.f, 600.f, 500.f);
+	objs.push_back(p);
 }
 
 
 InGameScene::~InGameScene()
 {
+	for (int i = 0; i < objs.size(); ++i){
+		delete objs[i];
+	}
 }
 
-Scene* CreateScene() {
-	return new InGameScene;
+Scene* CreateScene(HDC hdc) {
+	return new InGameScene(hdc);
 }

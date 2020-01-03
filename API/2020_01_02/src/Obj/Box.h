@@ -1,19 +1,21 @@
 #pragma once
-#include "Obj/StaticObj.h"
-class Box : public StaticObj
+#include "Obj/DynamicObj.h"
+class Box : public DynamicObj
 {
-public:
+private:
 	FRECT outerLine;
-	float speed = 400;
-
+	float speed;
 
 public:
-	FRECT& operator()() {
-		return outerLine;
+	Box(float left, float top, float right, float bottom, float _speed)
+		: outerLine(left, top, right, bottom), speed(_speed)
+	{
+		outerLine = colliderRect;
 	}
-
-
-	Box();
 	~Box();
+
+	virtual void update(float deltaTime) override;
+	virtual void render(HDC memDC) override;
+
 };
 

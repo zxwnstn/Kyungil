@@ -1,8 +1,8 @@
 #pragma once
-#include "../../WindowApiLib/myWinApi.h"
-#include "../../Scene/Scene.h"
+#include "WindowApiLib/myWinApi.h"
+#include "Scene/Scene.h"
 
-extern Scene* CreateScene();
+extern Scene* CreateScene(HDC);
 
 class SceneManager
 {

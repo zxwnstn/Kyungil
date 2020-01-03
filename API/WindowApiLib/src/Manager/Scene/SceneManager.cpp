@@ -1,5 +1,5 @@
 #include "SceneManager.h"
-#include "../Input/InputManager.h"
+#include "Manager.h"
 
 DEFINITION_SINGLE(SceneManager)
 
@@ -9,7 +9,7 @@ bool SceneManager::init(HWND hwnd, HDC hdc)
 	m_hDc = hdc;
 	m_hWnd = hwnd;
 
-	pCurScene = CreateScene();
+	pCurScene = CreateScene(hdc);
 
 	return true;
 }
