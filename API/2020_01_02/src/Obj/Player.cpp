@@ -11,6 +11,10 @@ void Player::render(HDC memDC)
 	DrawFRect(memDC, outerLine);
 }
 
+void Player::CollisionProc(CollisionState colliState)
+{
+}
+
 Player::~Player()
 {
 }

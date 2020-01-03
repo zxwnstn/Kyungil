@@ -1,22 +1,25 @@
 #pragma once
 #include "Collider/Collider.h"
-
+#include "Scene/Scene.h"
 class CollisionManager
 {
-	std::list<Collider> colliderList;
-	std::list<Collider> collsionList;
+	std::list<Collider*> colliderList;
+	std::list<Collider*> collisioningList;
+	Scene* curScene;
 
-	//basic judge collision func
-	//need to templetize
-	bool isCollision(Obj* src, Obj* dest);
-
+private:
+	bool isCollision(Collider* src, Collider* dest);
+	bool isInCollisioningList(Collider* src);
+	void RegisterCollider();
+	void ColliderProc();
 
 public:
-	CollisionManager();
-	~CollisionManager();
-
-
+	void SceneChange(Scene* scn);
 	void update();
+
+
+private:
+	DECLARE_SINGLE(CollisionManager)
 
 };
 

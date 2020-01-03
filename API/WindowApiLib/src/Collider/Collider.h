@@ -6,9 +6,14 @@ class Collider
 {
 private:
 	CollisionState m_cState;
+	Obj* includedObj;
 
 public:
-	Collider();
+	Collider() {}
+	Collider(Obj* obj);
 	virtual ~Collider();
+	
+
+	friend class CollisionManager;
 };
 

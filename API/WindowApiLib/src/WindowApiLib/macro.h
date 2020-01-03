@@ -66,3 +66,6 @@ private:\
 //math
 #define PI 3.141592
 #define GRAVITY 9.8
+
+//bit
+#define BIT(x)(1 << x)

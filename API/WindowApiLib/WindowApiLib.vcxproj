@@ -150,6 +150,7 @@
     <ClInclude Include="src\Obj\StaticObj.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="COLLIDER.CPP" />
     <ClCompile Include="src\Collider\ColliderRect.cpp" />
     <ClCompile Include="src\Collider\Collider.cpp" />
     <ClCompile Include="src\Collider\CollisionManager.cpp" />

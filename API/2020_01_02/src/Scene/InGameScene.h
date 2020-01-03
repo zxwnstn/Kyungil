@@ -9,13 +9,12 @@ class InGameScene :
 {
 
 private:
-	std::vector<Obj*> objs;
 	HDC memDC;
 	
 private:
 	//gameLogic
 	float timeLapse;
-	float genTime = 0.1f;
+	float genTime = 0.3f;
 	bool isJumping = false;
 	bool falling = false;
 	float jumpDist = 100.f;

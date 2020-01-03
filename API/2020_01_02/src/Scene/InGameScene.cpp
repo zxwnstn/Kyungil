@@ -9,7 +9,7 @@
 void InGameScene::genDung()
 {
 	int xPos = getRnd(WINSIZEX - 50);
-	Box* b = new Box(xPos, 0, xPos + 25, 25, 400.f);
+	Box* b = new Box(xPos, 0, xPos + 10, 10, 400.f);
 	objs.push_back(b);
 }
 
@@ -41,6 +41,7 @@ void InGameScene::render(HDC hdc)
 	HBITMAP bit = CreateCompatibleBitmap(hdc, WINSIZEX, WINSIZEY);
 	SelectObject(memDC, bit);
 	
+	//DrawRect(memDC, 0, 0, WINSIZEX, WINSIZEY);
 	for (int i = 0; i < objs.size(); ++i)
 		objs[i]->render(memDC);
 
@@ -51,7 +52,7 @@ void InGameScene::render(HDC hdc)
 InGameScene::InGameScene(HDC hdc)
 {
 	memDC = CreateCompatibleDC(hdc);
-	Player* p = new Player(200.f, 500.f, 300.f, 600.f, 500.f);
+	Obj* p = new Player(200.f, 450.f, 250.f, 500.f, 500.f);
 	objs.push_back(p);
 }
 

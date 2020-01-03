@@ -4,6 +4,7 @@
 class ColliderRect :
 	public Collider
 {
+	FRECT collisionFiled;
 
 public:
 	ColliderRect();
