@@ -1,7 +1,5 @@
 #pragma once
 #include "Scene/Scene.h"
-#include "../Obj/Player.h"
-#include "../Obj/Box.h"
 #include "WindowApiLib/myWinApi.h"
 
 class InGameScene :
@@ -27,6 +25,7 @@ private:
 public:
 	void update(float deltaTime);
 	void render(HDC hdc);
+
 
 private:
 	InGameScene(HDC);

@@ -1,4 +1,6 @@
 #include "InGameScene.h"
+#include "../Obj/Player.h"
+#include "../Obj/Tile.h"
 #include "Manager/Input/InputManager.h"
 
 
@@ -8,32 +10,14 @@
 
 void InGameScene::genDung()
 {
-	int xPos = getRnd(WINSIZEX - 50);
-	Box* b = new Box(xPos, 0, xPos + 10, 10, 400.f);
-	objs.push_back(b);
+	
 }
 
 
 void InGameScene::update(float deltaTime)
 {
-	timeLapse += deltaTime;
-	if (timeLapse > genTime) {
-		timeLapse -= genTime;
-		if (getRnd(100) < 70)
-			genDung();
-	}
-
-	for (auto& e : objs) {
+	for (auto& e : objs) 
 		e->update(deltaTime);
-	}
-
-	for (auto it = objs.begin(); it != objs.end(); ) {
-		if ((*it)->life == false) {
-			delete *it;
-			it = objs.erase(it);
-		}
-		else ++it;
-	}
 }
 
 void InGameScene::render(HDC hdc)
@@ -49,19 +33,22 @@ void InGameScene::render(HDC hdc)
 	DeleteObject(bit);
 }
 
+
+
 InGameScene::InGameScene(HDC hdc)
 {
 	memDC = CreateCompatibleDC(hdc);
-	Obj* p = new Player(200.f, 450.f, 250.f, 500.f, 500.f);
-	objs.push_back(p);
+	objs.push_back(new Player(this, FRECT(10.f, 0.f, 110.f, 100.f), 400.f));
+	objs.push_back(new Tile(this, FRECT(0.f, 400.f, 300.f, 450.f)));
+	objs.push_back(new Tile(this, FRECT(800.f, 500.f, 1200.f, 550.f)));
 }
 
 
 InGameScene::~InGameScene()
 {
-	for (int i = 0; i < objs.size(); ++i){
+	for (int i = 0; i < objs.size(); ++i)
 		delete objs[i];
-	}
+	
 }
 
 Scene* CreateScene(HDC hdc) {

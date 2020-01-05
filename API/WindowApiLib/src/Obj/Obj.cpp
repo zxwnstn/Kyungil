@@ -1,25 +1,14 @@
 #include "Obj.h"
 
-
-
-Collider * Obj::getCollider()
-{
-	return collider;
-}
-
-Obj::Obj()
-{
-}
-
-
-Obj::Obj(Scene * curScene)
-{
-	collider = new Collider(this);
-	objstate = ObjActivate;
-	includedScene = curScene;
-}
-
 Obj::~Obj()
 {
+	//includedScene->eraseObj(this);
+	//collider erase in this place
 	SAFE_DELETE(collider);
+}
+
+Obj::Obj(Scene * curScene, const POSITION & pos)
+	:objPos(pos)
+{
+	includedScene = curScene;
 }

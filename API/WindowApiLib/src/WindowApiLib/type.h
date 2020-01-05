@@ -7,20 +7,49 @@ enum Direction{
 	eRight
 };
 
-enum CollisionState {
-	CollidStart,
-	CollidOnGoing,
-	CollidRelease,
-	CollidNone
-};
 
 enum ObjState {
-	ObjnonActivate,
-	ObjActivate = BIT(0),
-	ObjActivateCollider = BIT(1),
-	ObjActivateNoneCollider = BIT(2),
-	ObjActivateMove = BIT(3),
-	ObjActivateNoneMove = BIT(4)
+	ObjStateNone,
+	ObjStateActivate				= BIT(0),
+	ObjStateActivateCollider		= BIT(1),
+	ObjStateActivateNoneCollider	= BIT(2),
+	ObjStateActivateMove			= BIT(3),
+	ObjStateActivateNoneMove		= BIT(4),
+};
+
+enum ObjType {
+	ObjTypeNone,
+	ObjTypePlayer					= BIT(0),
+	ObjTypePlayerSkill				= BIT(1),
+	ObjTypeEnemy					= BIT(2),
+	ObjTypeTrap						= BIT(3),
+	ObjTypeMissile					= BIT(4),
+	ObjTypeGround					= BIT(5),
+	ObjTypeBackGround				= BIT(6),
+	ObjTypeTeam						= BIT(7),
+	ObjTypeTeamSkil					= BIT(8)	
+};
+
+enum CollisionState {
+	CollidSateNone,
+	CollidStateStart,
+	CollidStateOnGoing,
+	CollidStateRelease
+};
+
+enum CollidBoundary {
+	CollidBoundNone,
+	CollidBoundRect,
+	CollidBoundCircle,
+	CollidBoundEllipse,
+	CollidBoundAnother
+};
+
+enum CollisionResult {
+	CollidRetNoChange,
+	CollidRetAnotherEffect,
+	CollidRetMoveBack,
+	CollidRetdeleted
 };
 
 typedef struct _tagFRactangle {
@@ -34,3 +63,15 @@ typedef struct _tagFRactangle {
 
 }FRECT, *PFRECT;
 
+typedef struct _tagPosition {
+	float x, y;
+	_tagPosition()
+		: x(0.f), y(0.f)
+	{}
+	_tagPosition(float _x, float _y)
+		: x(_x), y(_y)
+	{}
+	_tagPosition(const _tagPosition& pos)
+		: x(pos.x), y(pos.y)
+	{}
+}POSITION, *PPOSITION;

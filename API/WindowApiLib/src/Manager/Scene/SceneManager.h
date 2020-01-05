@@ -21,6 +21,7 @@ public:
 	bool init(HWND, HDC);
 	void update(float deltaTime);
 	void render();
+	Scene* getCurScene() const { return pCurScene; }
 
 private:
 	DECLARE_SINGLE(SceneManager)

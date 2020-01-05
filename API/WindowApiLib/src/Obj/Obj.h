@@ -7,23 +7,35 @@
 class Obj
 {
 protected:
-	Collider* collider;
-	Scene* includedScene;
-	ObjState objstate;
+	//Obj info
+	class Scene*		includedScene;
+	POSITION			objPos;
+
+	class Collider*		collider;		//It will defined Derived class
+	ObjState			objstate;		//It will defined Derived class
+	ObjType				objType;		//It will defined Derived class
+
+	
+	ObjType				CollidOpponent = ObjTypeNone;
 
 public:
+	//obj getter
+	POSITION getPos() { return objPos; }			
+	Collider* getCollider() { return collider; }
+	ObjState getObjstate() const { return objstate; }
+	ObjType getObjType() const { return objType; }
+
+public:
+	//manager interface for 
 	virtual void render(HDC) = 0;
 	virtual void update(float) = 0;
-	Collider* getCollider();
-	ObjState getObjstate() { return objstate; }
+	virtual CollisionResult CollisionProc() = 0;
 
 public:
-	virtual void CollisionProc(CollisionState) = 0;
-
-public:
-	Obj(Scene* curScene);
-	Obj();
+	Obj(Scene * curScene, const POSITION& pos);
 	virtual ~Obj();
-	bool life = true;
+
+private:
+	friend class CollisionManager;
 };
 

@@ -4,8 +4,17 @@
 class DynamicObj :
 	public Obj
 {
+protected:
+	POSITION prevPos;
+
+
 public:
-	DynamicObj();
-	~DynamicObj();
+	DynamicObj(Scene * scene, const POSITION & pos)
+		:Obj(scene, pos)
+	{
+		objstate = ObjStateActivateMove;
+	}
+
+	~DynamicObj() {};
 };
 

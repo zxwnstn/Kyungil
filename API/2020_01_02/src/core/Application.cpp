@@ -29,7 +29,9 @@ void Application::Logic()
 void Application::update()
 {
 	ApplicationCore::update();
+
 	GET_SINGLE(SceneManager)->update(m_fDeltaTime);
+	GET_SINGLE(CollisionManager)->update();
 }
 
 void Application::render()

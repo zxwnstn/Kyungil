@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{43CDF70D-E6EF-43A6-B83A-1BDABD538929}</ProjectGuid>
     <RootNamespace>WindowApiLib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -136,7 +136,7 @@
   <ItemGroup>
     <ClInclude Include="src\Collider\ColliderRect.h" />
     <ClInclude Include="src\Collider\Collider.h" />
-    <ClInclude Include="src\Collider\CollisionManager.h" />
+    <ClInclude Include="src\Manager\Collision\CollisionManager.h" />
     <ClInclude Include="src\Manager\Scene\SceneManager.h" />
     <ClInclude Include="src\Obj\DynamicObj.h" />
     <ClInclude Include="src\Obj\Obj.h" />
@@ -150,12 +150,10 @@
     <ClInclude Include="src\Obj\StaticObj.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="COLLIDER.CPP" />
-    <ClCompile Include="src\Collider\ColliderRect.cpp" />
     <ClCompile Include="src\Collider\Collider.cpp" />
-    <ClCompile Include="src\Collider\CollisionManager.cpp" />
+    <ClCompile Include="src\Collider\ColliderRect.cpp" />
+    <ClCompile Include="src\Manager\Collision\CollisionManager.cpp" />
     <ClCompile Include="src\Manager\Scene\SceneManager.cpp" />
-    <ClCompile Include="src\Obj\DynamicObj.cpp" />
     <ClCompile Include="src\Obj\Obj.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Manager.h" />
@@ -163,7 +161,6 @@
     <ClCompile Include="src\WindowApiLib\ApplicationCore.cpp" />
     <ClCompile Include="src\WindowApiLib\myWinApi.h" />
     <ClCompile Include="src\Manager\Timer\Timer.cpp" />
-    <ClCompile Include="src\Obj\StaticObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\API_FrameWork.aps" />

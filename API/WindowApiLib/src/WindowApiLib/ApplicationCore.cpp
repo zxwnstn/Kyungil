@@ -5,17 +5,19 @@ bool ApplicationCore::init(const HINSTANCE & hInst, int nCmdShow) {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	m_hInstance = hInst;
 	m_nCmdShow = nCmdShow;
+	srand(time(NULL));
+
 	if (!setUpWindow())
 		return false;
-
 	if (!GET_SINGLE(InputManager)->init())
-		return false;
-	if (!GET_SINGLE(SceneManager)->init(m_hWnd, m_hDc))
 		return false;
 	if (!GET_SINGLE(Timer)->init())
 		return false;
+	if (!GET_SINGLE(SceneManager)->init(m_hWnd, m_hDc))
+		return false;
+	if (!GET_SINGLE(CollisionManager)->init(GET_SINGLE(SceneManager)->getCurScene()))
+		return false;
 
-	srand(time(NULL));
 	return true;
 }
 

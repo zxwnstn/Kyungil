@@ -9,9 +9,20 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+	for (auto it = objs.begin(); it != objs.end();) {
+		if(*it != nullptr)
+			it = objs.erase(it);
+	}
 }
 
-std::vector<Obj*>* Scene::getObjs()
+
+void Scene::eraseObj(Obj * obj)
 {
-	return &objs;
+	for (auto it = objs.begin(); it != objs.end(); ++it) {
+		if ((*it) == obj) {
+			delete *it;
+			objs.erase(it);
+			return;
+		}
+	}
 }

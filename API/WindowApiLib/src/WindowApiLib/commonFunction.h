@@ -156,7 +156,13 @@ inline void MoveFRect(FRECT& rect, Direction dir, float deltaDist) {
 	}
 }
 
+inline void MoveFRect(FRECT& rect, float dx, float dy) {
+	rect.left += dx;
+	rect.right += dx;
+	rect.bottom += dy;
+	rect.top += dy;
+}
+
 inline int getRnd(int _max) {
 	return rand() % _max;
 }
-

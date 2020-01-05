@@ -1,20 +1,15 @@
 #pragma once
-
-#include "Obj/DynamicObj.h"
+#include "Obj/StaticObj.h"
 #include "Collider/ColliderRect.h"
 
-class Player : public DynamicObj
+class Tile : public StaticObj
 {
 private:
-	void adjustOuterLineFromPos();
-
-public:
 	FRECT outerLine;
-	float fSpeed;
 
 public:
-	Player(Scene * scene, const FRECT& fRect, float _fSpeed);
-	~Player();
+	Tile(Scene* scene, const FRECT& fRect);
+	~Tile();
 
 	virtual void update(float deltaTime) override;
 	virtual void render(HDC memDC) override;

@@ -18,9 +18,6 @@
     <ClCompile Include="src\winMain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\Obj\Box.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\Application.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -30,11 +27,11 @@
     <ClCompile Include="src\Obj\Player.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="src\Obj\Tile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Obj\Box.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\Application.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -42,6 +39,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\Obj\Player.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\Tile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

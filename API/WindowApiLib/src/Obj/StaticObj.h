@@ -4,7 +4,12 @@ class StaticObj :
 	public Obj
 {
 public:
-	StaticObj();
-	~StaticObj();
+	StaticObj(Scene * curScene, const POSITION& pos)
+		:Obj(curScene, pos)
+	{
+		objstate = ObjStateActivateNoneMove;
+	}
+
+	~StaticObj() {};
 };
 
