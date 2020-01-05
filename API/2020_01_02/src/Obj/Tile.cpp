@@ -15,12 +15,9 @@ CollisionResult Tile::CollisionProc()
 	return CollidRetNoChange;
 }
 
-Tile::Tile(Scene * scene, const FRECT& fRect)
+Tile::Tile(std::shared_ptr<Scene> scene, const FRECT& fRect)
 	:StaticObj(scene, POSITION((fRect.left + fRect.right)/2, (fRect.top + fRect.bottom)/2))
 {
-	outerLine = fRect;
-	collider = new class ColliderRect(this, outerLine);	//set collider same with outerLine
-	
 	//е╦ют
 	int temp = objType;
 	temp |= (int)ObjTypeGround;
@@ -30,6 +27,10 @@ Tile::Tile(Scene * scene, const FRECT& fRect)
 	temp = objstate;
 	temp |= (int)ObjStateActivateCollider;
 	objstate = (ObjState)temp;
+
+	outerLine = fRect;
+	collider = std::make_shared<ColliderRect>(this, outerLine);	//set collider same with outerLine
+	GET_SINGLE(CollisionManager)->RegisterCollider(collider);
 }
 
 Tile::~Tile()

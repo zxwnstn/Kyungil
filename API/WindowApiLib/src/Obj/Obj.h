@@ -8,20 +8,19 @@ class Obj
 {
 protected:
 	//Obj info
-	class Scene*		includedScene;
-	POSITION			objPos;
+	std::shared_ptr<Scene>		includedScene;
+	POSITION					objPos;
 
-	class Collider*		collider;		//It will defined Derived class
-	ObjState			objstate;		//It will defined Derived class
-	ObjType				objType;		//It will defined Derived class
+	std::shared_ptr<class Collider>	collider;		//It will defined Derived class
+	ObjState					objstate;		//It will defined Derived class
+	ObjType						objType;		//It will defined Derived class
 
-	
-	ObjType				CollidOpponent = ObjTypeNone;
+	ObjType						CollidOpponent = ObjTypeNone;
 
 public:
 	//obj getter
+	std::shared_ptr<Collider> getCollider() { return collider; }
 	POSITION& getPos() { return objPos; }			
-	Collider* getCollider() { return collider; }
 	ObjState getObjstate() const { return objstate; }
 	ObjType getObjType() const { return objType; }
 
@@ -32,7 +31,7 @@ public:
 	virtual CollisionResult CollisionProc() = 0;
 
 public:
-	Obj(Scene * curScene, const POSITION& pos);
+	Obj(std::shared_ptr<Scene> curScene, const POSITION& pos);
 	virtual ~Obj();
 
 private:

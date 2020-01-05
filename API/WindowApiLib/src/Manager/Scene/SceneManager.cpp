@@ -34,6 +34,4 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
-	SAFE_DELETE(pCurScene);
-	SAFE_DELETE(pNextScene);
 }

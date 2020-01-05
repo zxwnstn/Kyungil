@@ -1,10 +1,8 @@
 #include "Collider.h"
 
-Collider::Collider(Obj * obj, const POSITION & _collidPosition)
-	:collidPosition(_collidPosition), includedObj(obj)
+Collider::Collider(std::shared_ptr<Obj> obj, const POSITION & _collidPosition)
+	: includedObj(obj), collidPosition(_collidPosition)
 {
-	if((int)includedObj->getObjstate() & (int)ObjStateActivateCollider)
-		GET_SINGLE(CollisionManager)->RegisterCollider(this);
 }
 
 Collider::~Collider()

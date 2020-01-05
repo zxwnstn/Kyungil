@@ -13,8 +13,8 @@ private:
 public:
 	virtual void upDateCollider() override;
 
-	ColliderRect(Obj* obj, const POSITION& _pos, float width, float height);
-	ColliderRect(Obj* obj, const FRECT& frec);
+	ColliderRect(std::shared_ptr<Obj> obj, const POSITION& _pos, float width, float height);
+	ColliderRect(std::shared_ptr<Obj> obj, const FRECT& frec);
 
 	~ColliderRect();
 };

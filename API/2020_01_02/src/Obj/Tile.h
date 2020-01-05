@@ -8,8 +8,8 @@ private:
 	FRECT outerLine;
 
 public:
-	Tile(Scene* scene, const FRECT& fRect);
-	~Tile();
+	Tile(std::shared_ptr<Scene> scene, const FRECT& fRect);
+	virtual ~Tile();
 
 	virtual void update(float deltaTime) override;
 	virtual void render(HDC memDC) override;

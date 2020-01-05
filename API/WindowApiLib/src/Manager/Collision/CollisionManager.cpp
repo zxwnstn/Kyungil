@@ -2,7 +2,7 @@
 
 DEFINITION_SINGLE(CollisionManager)
 
-bool CollisionManager::isCollision(Collider* src, Collider* dest)
+bool CollisionManager::isCollision(std::shared_ptr<Collider> src, std::shared_ptr<Collider> dest)
 {
 	//rect rect collision
 	if (src->collidBoundery == CollidBoundRect && dest->collidBoundery == CollidBoundRect) {
@@ -41,7 +41,7 @@ bool CollisionManager::isCollision(Collider* src, Collider* dest)
 	return false;
 }
 
-bool CollisionManager::isInCollisioningList(Collider * src)
+bool CollisionManager::isInCollisioningList(std::shared_ptr<Collider> src)
 {
 	auto it = collisioningList.begin();
 	auto itEnd = collisioningList.end();
@@ -54,13 +54,13 @@ bool CollisionManager::isInCollisioningList(Collider * src)
 
 
 
-void CollisionManager::RegisterCollider(Collider* collider)
+void CollisionManager::RegisterCollider(std::shared_ptr<Collider> collider)
 {
 	if(collider->includedObj->includedScene == curScene)
 		colliderList.push_back(collider);
 }
 
-void CollisionManager::SceneChange(Scene * scn)
+void CollisionManager::SceneChange(std::shared_ptr<Scene> scn)
 {
 	curScene = scn;
 
@@ -124,7 +124,7 @@ void CollisionManager::update()
 	CollisionProc();
 }
 
-bool CollisionManager::init(Scene* snc)
+bool CollisionManager::init(std::shared_ptr<Scene> snc)
 {
 	curScene = snc;
 
@@ -163,7 +163,6 @@ void CollisionManager::CollisionProc()
 					break;
 				}
 			}
-			delete (*it)->includedObj;
 			it = collisioningList.erase(it);					
 			break;
 		}

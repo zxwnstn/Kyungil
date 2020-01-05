@@ -19,7 +19,7 @@ void ColliderRect::upDateCollider()
 	//printf("%f %f\n", includedObj->getPos().x, includedObj->getPos().y);
 }
 
-ColliderRect::ColliderRect(Obj* obj, const POSITION& _pos, float _width, float _height)
+ColliderRect::ColliderRect(std::shared_ptr<Obj> obj, const POSITION& _pos, float _width, float _height)
 	: Collider(obj, _pos)
 {
 	collidBoundery = CollidBoundRect;
@@ -30,7 +30,7 @@ ColliderRect::ColliderRect(Obj* obj, const POSITION& _pos, float _width, float _
 	setColliderBoundFromPos();
 }
 
-ColliderRect::ColliderRect(Obj * obj, const FRECT & frec)
+ColliderRect::ColliderRect(std::shared_ptr<Obj> obj, const FRECT & frec)
 	:Collider(obj, POSITION((frec.left + frec.right) / 2, (frec.bottom + frec.top) / 2))
 {
 	collidBoundery = CollidBoundRect;

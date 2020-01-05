@@ -39,7 +39,7 @@ void Player::adjustOuterLineFromPos()
 	MoveFRect(outerLine, dx, dy);
 }
 
-Player::Player(Scene * scene, const FRECT & fRect, float _fSpeed = 400)
+Player::Player(std::shared_ptr<Scene> scene, const FRECT & fRect, float _fSpeed = 400)
 	: DynamicObj(scene, POSITION((fRect.left + fRect.right) / 2, (fRect.top + fRect.bottom) / 2))
 {
 	outerLine = fRect;
@@ -53,8 +53,8 @@ Player::Player(Scene * scene, const FRECT & fRect, float _fSpeed = 400)
 	temp = objstate;
 	temp |= (int)ObjStateActivateCollider;
 	objstate = (ObjState)temp;
-
-	collider = new class ColliderRect(this, outerLine);	//set collider same with outerLine
+	collider = std::make_shared<ColliderRect>(this, outerLine);	//set collider same with outerLine
+	GET_SINGLE(CollisionManager)->RegisterCollider(collider);
 }
 
 Player::~Player()

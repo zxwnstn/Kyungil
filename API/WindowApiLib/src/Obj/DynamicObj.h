@@ -9,7 +9,7 @@ protected:
 
 
 public:
-	DynamicObj(Scene * scene, const POSITION & pos)
+	DynamicObj(std::shared_ptr<Scene> scene, const POSITION & pos)
 		:Obj(scene, pos)
 	{
 		objstate = ObjStateActivateMove;

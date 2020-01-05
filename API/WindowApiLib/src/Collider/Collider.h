@@ -8,7 +8,7 @@ class Collider
 protected:
 	CollisionState		m_cState = CollidSateNone;
 	CollidBoundary		collidBoundery;
-	class Obj*			includedObj;
+	std::shared_ptr<class Obj>	includedObj;
 
 protected:
 	POSITION			collidPosition;
@@ -22,7 +22,7 @@ public:
 	CollisionState& getCollisionState() { return m_cState; }
 
 public:
-	Collider(Obj* obj, const POSITION& _collidPosition);
+	Collider(std::shared_ptr<Obj> obj, const POSITION& _collidPosition);
 	virtual ~Collider();
 
 	friend class CollisionManager;

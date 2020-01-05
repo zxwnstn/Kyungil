@@ -4,7 +4,7 @@ class StaticObj :
 	public Obj
 {
 public:
-	StaticObj(Scene * curScene, const POSITION& pos)
+	StaticObj(std::shared_ptr<Scene> curScene, const POSITION& pos)
 		:Obj(curScene, pos)
 	{
 		objstate = ObjStateActivateNoneMove;

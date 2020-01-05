@@ -29,7 +29,7 @@ public:
 
 private:
 	InGameScene(HDC);
-	~InGameScene();
+	virtual ~InGameScene();
 
-	friend Scene* CreateScene(HDC);
+	friend std::shared_ptr<Scene> CreateScene(HDC);
 };

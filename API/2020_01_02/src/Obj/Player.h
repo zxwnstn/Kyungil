@@ -13,8 +13,8 @@ public:
 	float fSpeed;
 
 public:
-	Player(Scene * scene, const FRECT& fRect, float _fSpeed);
-	~Player();
+	Player(std::shared_ptr<Scene> scene, const FRECT& fRect, float _fSpeed);
+	virtual ~Player();
 
 	virtual void update(float deltaTime) override;
 	virtual void render(HDC memDC) override;
