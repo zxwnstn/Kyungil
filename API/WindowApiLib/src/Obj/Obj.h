@@ -20,7 +20,7 @@ protected:
 
 public:
 	//obj getter
-	POSITION getPos() { return objPos; }			
+	POSITION& getPos() { return objPos; }			
 	Collider* getCollider() { return collider; }
 	ObjState getObjstate() const { return objstate; }
 	ObjType getObjType() const { return objType; }

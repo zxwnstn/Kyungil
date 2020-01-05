@@ -4,7 +4,12 @@
 
 void Player::update(float deltaTime)
 {
+	
 	MoveFRect(outerLine, eDown, deltaTime * fSpeed);
+	objPos.y += deltaTime * fSpeed;
+
+	printf("player outer line : %f %f %f %f\n", outerLine.left, outerLine.top, outerLine.right, outerLine.bottom);
+	collider->upDateCollider();
 }
 
 void Player::render(HDC memDC)

@@ -40,7 +40,7 @@ InGameScene::InGameScene(HDC hdc)
 	memDC = CreateCompatibleDC(hdc);
 	objs.push_back(new Player(this, FRECT(10.f, 0.f, 110.f, 100.f), 400.f));
 	objs.push_back(new Tile(this, FRECT(0.f, 400.f, 300.f, 450.f)));
-	objs.push_back(new Tile(this, FRECT(800.f, 500.f, 1200.f, 550.f)));
+	//objs.push_back(new Tile(this, FRECT(800.f, 500.f, 1200.f, 550.f)));
 }
 
 

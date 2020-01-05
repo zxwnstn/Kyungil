@@ -7,19 +7,21 @@ bool CollisionManager::isCollision(Collider* src, Collider* dest)
 	//rect rect collision
 	if (src->collidBoundery == CollidBoundRect && dest->collidBoundery == CollidBoundRect) {
 		//src l t r b
-		int srcLeft = src->collidPosition.x; -src->halfWidth;
-		int srcTop = src->collidPosition.y; +src->halfHeight;
-		int srcRight = src->collidPosition.x; -src->halfWidth;
-		int srcBottom = src->collidPosition.y; +src->halfHeight;
-			//src l t r b	   
-		int destLeft = dest->collidPosition.x; -dest->halfWidth;
-		int destTop = dest->collidPosition.y; +dest->halfHeight;
-		int destRight = dest->collidPosition.x; -dest->halfWidth;
-		int destBottom = dest->collidPosition.y; +dest->halfHeight;
+		float srcLeft = src->collidPosition.x - src->halfWidth;
+		float srcTop = src->collidPosition.y - src->halfHeight;
+		float srcRight = src->collidPosition.x + src->halfWidth;
+		float srcBottom = src->collidPosition.y + src->halfHeight;
+		//dest l t r b	   
+		float destLeft = dest->collidPosition.x - dest->halfWidth;
+		float destTop = dest->collidPosition.y - dest->halfHeight;
+		float destRight = dest->collidPosition.x + dest->halfWidth;
+		float destBottom = dest->collidPosition.y + dest->halfHeight;
+
 		//rect Collision fomula
 		if (srcLeft <= destRight && srcRight >= destLeft 
-			&& srcTop <= destBottom && srcBottom >= destTop) 
+			&& srcTop <= destBottom && srcBottom >= destTop)
 		{
+			//printf("src %d %d", src->)
 			return true;
 		}
 	}
@@ -70,8 +72,16 @@ void CollisionManager::SceneChange(Scene * scn)
 void CollisionManager::update()
 {
 	//Collision Check N^2 ver
-	for (auto src = colliderList.begin(); src != colliderList.end(); ++src) {
-		for (auto dest = ++colliderList.begin(); dest != colliderList.end(); ++dest) {
+	auto src = colliderList.begin();
+	auto srcEnd = colliderList.end();
+	auto dest = colliderList.begin();
+	auto destEnd = colliderList.end();
+	if (colliderList.size()) {
+		srcEnd--;
+		dest++;
+	}
+	for (src; src != srcEnd; ++src) {
+		for (dest; dest != destEnd; ++dest) {
 			//충돌을 할시
 			if (isCollision(*src, *dest)) {
 
