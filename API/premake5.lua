@@ -234,8 +234,8 @@ project "HOMEWORK_TEMPLATE"
 	filter "configurations:Release"
 		optimize "On"
 
-project "2020_20_20"
-	location "2020_20_20"
+project "2020_01_07"
+	location "2020_01_07"
 	kind "WindowedApp"
 	language "C++"
 

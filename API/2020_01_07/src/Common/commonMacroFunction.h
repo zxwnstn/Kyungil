@@ -34,6 +34,19 @@ inline void RectangleMake(HDC hdc, int x, int y, int width, int height)
 {
 	Rectangle(hdc, x, y, x + width, y + height);
 }
+inline void DrawRect(HDC hdc, const RECT& rect) {
+	Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+}
+
+
+//기본 사각 충돌
+inline bool isRectRectCollision(const RECT& rect, const RECT& rect2) {
+	if (rect.right >= rect2.left && rect.left <= rect2.right &&
+		rect.top <= rect2.bottom && rect.bottom >= rect2.top) {
+		return true;
+	}
+	return false;
+}
 //사각형 그리기(중심점)
 inline void RectangleMakeCenter(HDC hdc, int x, int y, int width, int height)
 {
