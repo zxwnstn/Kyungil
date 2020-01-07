@@ -2,7 +2,8 @@
 
 
 
-Scene::Scene()
+Scene::Scene(SCENENO _sceneNo)
+	:sceneNo(_sceneNo)
 {
 }
 

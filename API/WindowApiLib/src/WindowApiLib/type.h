@@ -75,3 +75,7 @@ typedef struct _tagPosition {
 		: x(pos.x), y(pos.y)
 	{}
 }POSITION, *PPOSITION;
+
+
+typedef int SCENENO;
+typedef long long OBJNO;

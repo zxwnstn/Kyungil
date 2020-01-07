@@ -30,12 +30,7 @@ SoundManager::~SoundManager()
 {
 }
 
-void SoundManager::play()
-{
-	sndPlaySoundA("C:\\Users\\KGA_17\\source\\repos\\Project1\\Project3\\a.wav", SND_ASYNC | SND_LOOP | SND_NOSTOP);
-}
-
 void SoundManager::pop()
 {
-	sndPlaySoundA("bottle_pop_2.wav", SND_ASYNC | SND_NODEFAULT);
+	sndPlaySoundA("music/bottle_pop_2.wav", SND_ASYNC | SND_NODEFAULT);
 }

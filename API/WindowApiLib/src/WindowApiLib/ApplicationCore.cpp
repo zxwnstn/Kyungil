@@ -97,6 +97,7 @@ ApplicationCore::~ApplicationCore()
 {
 	RELEASE_SINGLE(InputManager);
 	RELEASE_SINGLE(SceneManager);
+	RELEASE_SINGLE(CollisionManager);
 	RELEASE_SINGLE(Timer);
 
 	ReleaseDC(m_hWnd, m_hDc);

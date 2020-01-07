@@ -1,51 +1,79 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="main">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Core">
+      <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obj">
+      <UniqueIdentifier>{0010880B-6C19-887C-F594-9E7C619D937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{83755900-6F01-880B-D8AF-880BC45A880B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="etc">
+      <UniqueIdentifier>{E16F880B-4D79-887C-D6F4-9E7C42FD937C}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Obj\Block.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\Ui.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\GeneralUi.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UI\Board.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Core.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\etc\func.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\InputManager.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\SoundManager.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
+    <ClInclude Include="src\Core\Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\InputManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\SoundManager.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\Block.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Board.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\GeneralUi.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI\Ui.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\etc\Game.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\etc\Macro.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\etc\func.h">
+      <Filter>etc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\etc\type.h">
+      <Filter>etc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Obj\Block.h" />
-    <ClInclude Include="src\UI\Ui.h" />
-    <ClInclude Include="src\UI\GeneralUi.h" />
-    <ClInclude Include="src\UI\Board.h" />
-    <ClInclude Include="src\Core\Core.h" />
-    <ClInclude Include="src\etc\Game.h" />
-    <ClInclude Include="src\etc\func.h" />
-    <ClInclude Include="src\etc\Macro.h" />
-    <ClInclude Include="src\etc\type.h" />
-    <ClInclude Include="src\Core\InputManager.h" />
-    <ClInclude Include="src\Core\SoundManager.h" />
+    <ClCompile Include="src\Core\Core.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\InputManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\SoundManager.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Obj\Block.cpp">
+      <Filter>Obj</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Board.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\GeneralUi.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI\Ui.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\etc\func.cpp">
+      <Filter>etc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
 </Project>

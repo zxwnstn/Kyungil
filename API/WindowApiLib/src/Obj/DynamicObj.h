@@ -6,13 +6,15 @@ class DynamicObj :
 {
 protected:
 	POSITION prevPos;
-
+	float	 dx;
+	float	 dy;
 
 public:
-	DynamicObj(std::shared_ptr<Scene> scene, const POSITION & pos)
-		:Obj(scene, pos)
+	DynamicObj(SCENENO _includedScene, const POSITION & pos, OBJNO _objNo)
+		:Obj(_includedScene, pos, _objNo)
 	{
 		objstate = ObjStateActivateMove;
+		prevPos = pos;
 	}
 
 	~DynamicObj() {};

@@ -18,7 +18,6 @@ private:
 
 public:
 	
-	void play();
 	void pop();
 };
 

@@ -1,4 +1,4 @@
-﻿#include <myWindowApi.h>
+﻿#include "WindowApiLib/myWinApi.h"
 /*============== choose Macro what you want to see =========================*/
 
 #define HOMEWORK_MODE0				//마우스로 사각형 밀기

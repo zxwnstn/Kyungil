@@ -1,99 +1,109 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Collider">
+      <UniqueIdentifier>{931D39B5-7FEA-93C0-A803-8268942FC94E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{40C44515-ACA3-C4B0-B5BB-4F87211A2B12}</UniqueIdentifier>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Manager\Collision">
+      <UniqueIdentifier>{5B49B1A9-C75F-AF3F-10D7-3A617C2C80C7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Input">
+      <UniqueIdentifier>{3FA4217D-AB64-9DB3-749F-E630E01EE28F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Scene">
+      <UniqueIdentifier>{5D61D07D-C921-4CB4-925C-9531FEDB9090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Timer">
+      <UniqueIdentifier>{10E5E57D-7CA5-61B4-45E0-AA31B15FA690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obj">
+      <UniqueIdentifier>{0010880B-6C19-887C-F594-9E7C619D937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{B3F7140E-1F0C-3DBF-E88D-E01E546139F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowApiLib">
+      <UniqueIdentifier>{4ED226C4-3A35-B668-E3BA-EE1ECFFC81EB}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\WindowApiLib\macro.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowApiLib\type.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowApiLib\commonFunction.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Manager\Input\InputManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Manager\Timer\Timer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowApiLib\ApplicationCore.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\Scene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Obj\Obj.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Obj\DynamicObj.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Obj\StaticObj.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Manager\Scene\SceneManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="src\Collider\Collider.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Collider</Filter>
     </ClInclude>
     <ClInclude Include="src\Collider\ColliderRect.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Collider</Filter>
     </ClInclude>
+    <ClInclude Include="src\Manager.h" />
     <ClInclude Include="src\Manager\Collision\CollisionManager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Manager\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\Input\InputManager.h">
+      <Filter>Manager\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\Scene\SceneManager.h">
+      <Filter>Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Manager\Timer\Timer.h">
+      <Filter>Manager\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\DynamicObj.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\Obj.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Obj\StaticObj.h">
+      <Filter>Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowApiLib\ApplicationCore.h">
+      <Filter>WindowApiLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowApiLib\commonFunction.h">
+      <Filter>WindowApiLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowApiLib\macro.h">
+      <Filter>WindowApiLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowApiLib\myWinApi.h">
+      <Filter>WindowApiLib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowApiLib\type.h">
+      <Filter>WindowApiLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\WindowApiLib\myWinApi.h">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\Input\InputManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager.h">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\Timer\Timer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\WindowApiLib\ApplicationCore.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Scene\Scene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Manager\Scene\SceneManager.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="src\Collider\Collider.cpp">
+      <Filter>Collider</Filter>
     </ClCompile>
     <ClCompile Include="src\Collider\ColliderRect.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Collider</Filter>
     </ClCompile>
     <ClCompile Include="src\Manager\Collision\CollisionManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Manager\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\Input\InputManager.cpp">
+      <Filter>Manager\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\Scene\SceneManager.cpp">
+      <Filter>Manager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager\Timer\Timer.cpp">
+      <Filter>Manager\Timer</Filter>
     </ClCompile>
     <ClCompile Include="src\Obj\Obj.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Obj</Filter>
     </ClCompile>
-    <ClCompile Include="src\Collider\Collider.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="src\Scene\Scene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\API_FrameWork.aps" />
+    <ClCompile Include="src\WindowApiLib\ApplicationCore.cpp">
+      <Filter>WindowApiLib</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

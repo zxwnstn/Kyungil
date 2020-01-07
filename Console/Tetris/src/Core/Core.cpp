@@ -63,7 +63,6 @@ int Core::run()
 	MY_INPUT mInput;
 	while (m_bLoop) {
 		start = clock();
-		SoundManager::GetInst()->play();
 		while (1) {			
 			mInput = InputManager::GetInst()->GetInput();
 			Ui::GetInst()->Update(mInput);

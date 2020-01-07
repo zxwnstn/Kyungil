@@ -1,6 +1,6 @@
 #include "Collider.h"
 
-Collider::Collider(std::shared_ptr<Obj> obj, const POSITION & _collidPosition)
+Collider::Collider(OBJNO obj, const POSITION & _collidPosition)
 	: includedObj(obj), collidPosition(_collidPosition)
 {
 }

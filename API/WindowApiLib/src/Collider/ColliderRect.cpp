@@ -7,19 +7,22 @@ void ColliderRect::setColliderBoundFromPos()
 	collisionFiled.top = collidPosition.y - halfHeight;
 	collisionFiled.right = collidPosition.x + halfWidth;
 	collisionFiled.bottom = collidPosition.y + halfHeight;
-
-	printf("player colliderFiled : %f %f %f %f\n", collisionFiled.left, collisionFiled.top, collisionFiled.right, collisionFiled.bottom);
 }
 
-void ColliderRect::upDateCollider()
+void ColliderRect::setColliderBoundFromDelta(float dx, float dy)
 {
-	collidPosition = includedObj->getPos();
-	setColliderBoundFromPos();
-	//printf("%f %f\n", collidPosition.x, collidPosition.y);
-	//printf("%f %f\n", includedObj->getPos().x, includedObj->getPos().y);
+	MoveFRect(collisionFiled, dx, dy);
 }
 
-ColliderRect::ColliderRect(std::shared_ptr<Obj> obj, const POSITION& _pos, float _width, float _height)
+void ColliderRect::upDateCollider(float dx, float dy)
+{
+	collidPosition.x += dx;
+	collidPosition.y += dy;
+	setColliderBoundFromDelta(dx, dy);
+
+}
+
+ColliderRect::ColliderRect(OBJNO obj, const POSITION& _pos, float _width, float _height)
 	: Collider(obj, _pos)
 {
 	collidBoundery = CollidBoundRect;
@@ -30,7 +33,7 @@ ColliderRect::ColliderRect(std::shared_ptr<Obj> obj, const POSITION& _pos, float
 	setColliderBoundFromPos();
 }
 
-ColliderRect::ColliderRect(std::shared_ptr<Obj> obj, const FRECT & frec)
+ColliderRect::ColliderRect(OBJNO obj, const FRECT & frec)
 	:Collider(obj, POSITION((frec.left + frec.right) / 2, (frec.bottom + frec.top) / 2))
 {
 	collidBoundery = CollidBoundRect;

@@ -8,7 +8,7 @@ class Collider
 protected:
 	CollisionState		m_cState = CollidSateNone;
 	CollidBoundary		collidBoundery;
-	std::shared_ptr<class Obj>	includedObj;
+	OBJNO				includedObj;
 
 protected:
 	POSITION			collidPosition;
@@ -18,11 +18,11 @@ protected:
 	float halfHeight;
 
 public:
-	virtual void upDateCollider() = 0;
+	virtual void upDateCollider(float dx, float dy) = 0;
 	CollisionState& getCollisionState() { return m_cState; }
 
 public:
-	Collider(std::shared_ptr<Obj> obj, const POSITION& _collidPosition);
+	Collider(OBJNO obj, const POSITION& _collidPosition);
 	virtual ~Collider();
 
 	friend class CollisionManager;

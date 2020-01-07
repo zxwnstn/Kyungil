@@ -2,17 +2,18 @@
 #include "WindowApiLib/myWinApi.h"
 #include "Scene/Scene.h"
 
-extern std::shared_ptr<Scene> CreateScene(HDC);
+extern Scene* CreateScene(HDC, SCENENO);
 
 class SceneManager
 {
 protected:
-	HWND m_hWnd;
-	HDC m_hDc;
+	HWND	m_hWnd;
+	HDC		m_hDc;
+	SCENENO createSeed;
 
 private:
-	std::shared_ptr<Scene> pCurScene = nullptr;
-	std::shared_ptr<Scene> pNextScene = nullptr;
+	Scene* pCurScene = nullptr;
+	Scene* pNextScene = nullptr;
 
 private:
 	void sceneChanger();
@@ -20,8 +21,9 @@ private:
 public:
 	bool init(HWND, HDC);
 	void update(float deltaTime);
+	void lateUpdate(float deltaTime);
 	void render();
-	std::shared_ptr<Scene> getCurScene() const { return pCurScene; }
+	Scene* getCurScene() const { return pCurScene; }
 
 private:
 	DECLARE_SINGLE(SceneManager)

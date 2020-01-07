@@ -8,13 +8,13 @@ class Obj
 {
 protected:
 	//Obj info
-	std::shared_ptr<Scene>		includedScene;
+	SCENENO						includedScene;
+	OBJNO						objNo;
 	POSITION					objPos;
 
-	std::shared_ptr<class Collider>	collider;		//It will defined Derived class
+	std::shared_ptr<class Collider>	collider;
 	ObjState					objstate;		//It will defined Derived class
-	ObjType						objType;		//It will defined Derived class
-
+	ObjType						objType = ObjTypeNone;		//It will defined Derived class
 	ObjType						CollidOpponent = ObjTypeNone;
 
 public:
@@ -26,12 +26,13 @@ public:
 
 public:
 	//manager interface for 
+	virtual CollisionResult CollisionProc() = 0;
 	virtual void render(HDC) = 0;
 	virtual void update(float) = 0;
-	virtual CollisionResult CollisionProc() = 0;
+	virtual void lateUpdate(float) = 0;
 
 public:
-	Obj(std::shared_ptr<Scene> curScene, const POSITION& pos);
+	Obj(SCENENO _includedScene, const POSITION& pos, OBJNO _objNo);
 	virtual ~Obj();
 
 private:

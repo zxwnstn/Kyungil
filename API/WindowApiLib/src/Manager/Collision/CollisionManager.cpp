@@ -1,4 +1,5 @@
 #include "CollisionManager.h"
+#include "Manager.h"
 
 DEFINITION_SINGLE(CollisionManager)
 
@@ -21,7 +22,6 @@ bool CollisionManager::isCollision(std::shared_ptr<Collider> src, std::shared_pt
 		if (srcLeft <= destRight && srcRight >= destLeft 
 			&& srcTop <= destBottom && srcBottom >= destTop)
 		{
-			//printf("src %d %d", src->)
 			return true;
 		}
 	}
@@ -41,32 +41,29 @@ bool CollisionManager::isCollision(std::shared_ptr<Collider> src, std::shared_pt
 	return false;
 }
 
-bool CollisionManager::isInCollisioningList(std::shared_ptr<Collider> src)
+bool CollisionManager::isInCollisioningList(std::shared_ptr<Obj> obj)
 {
-	auto it = collisioningList.begin();
-	auto itEnd = collisioningList.end();
-	for (it; it != itEnd; ++it) {
-		if (*it == src)
-			return true;
+	if (collisioningList.end() != collisioningList.find(obj)) {
+		return true;
 	}
 	return false;
 }
 
 
 
-void CollisionManager::RegisterCollider(std::shared_ptr<Collider> collider)
+void CollisionManager::RegisterCollider(std::shared_ptr<Obj> obj ,std::shared_ptr<Collider> collider)
 {
-	if(collider->includedObj->includedScene == curScene)
-		colliderList.push_back(collider);
+	colliderList.insert(make_pair(obj, collider));
 }
 
-void CollisionManager::SceneChange(std::shared_ptr<Scene> scn)
+void CollisionManager::SceneChange(Scene* scn)
 {
-	curScene = scn;
 
 	//TODO : think about SceneChange..
-	//colliderList.clear();
-	//collisioningList.clear();
+	colliderList.clear();
+	collisioningList.clear();
+
+	curScene = GET_SINGLE(SceneManager)->getCurScene();
 }
 
 void CollisionManager::update()
@@ -83,55 +80,55 @@ void CollisionManager::update()
 	for (src; src != srcEnd; ++src) {
 		for (dest; dest != destEnd; ++dest) {
 			//충돌을 할시
-			if (isCollision(*src, *dest)) {
+			if (isCollision((*src).second, (*dest).second)) {
 
 				//src의 입장
 				//만약 collisoningList에 이미 있었다면
-				if (isInCollisioningList(*src)) {
+				if (isInCollisioningList((*src).first)) {
 					//collisioState = onGoing이 된다.(충돌중)
-					(*src)->m_cState = CollidStateOnGoing;
+					(*src).second->m_cState = CollidStateOnGoing;
 				}
 				//아니라면 최초의 충돌이 된다.
 				else {
-					(*src)->m_cState = CollidStateStart;
-					(*src)->includedObj->CollidOpponent = (*dest)->includedObj->objType;
-					collisioningList.push_back(*src);
+					(*src).second->m_cState = CollidStateStart;
+					(*src).first->CollidOpponent = (*dest).first->objType;
+					collisioningList.insert(*src);
 				}
 
 				//dest의 입장
-				if (isInCollisioningList(*dest)) {
-					(*dest)->m_cState = CollidStateOnGoing;
+				if (isInCollisioningList((*dest).first)) {
+					(*dest).second->m_cState = CollidStateOnGoing;
 				}
 				else {
-					(*dest)->m_cState = CollidStateStart;
-					(*dest)->includedObj->CollidOpponent = (*src)->includedObj->objType;
-					collisioningList.push_back(*dest);
+					(*dest).second->m_cState = CollidStateStart;
+					(*dest).first->CollidOpponent = (*src).first->objType;
+					collisioningList.insert(*dest);
 				}
 			}
 			//충돌을 안했는데 list에 있다면
-			else if(isInCollisioningList(*src)){
-				(*src)->m_cState = CollidStateRelease;
-				(*src)->includedObj->CollidOpponent = ObjTypeNone;
-				collisioningList.push_back(*src);
+			else if(isInCollisioningList((*src).first)){
+				(*src).second->m_cState = CollidStateRelease;
+				(*src).first->CollidOpponent = ObjTypeNone;
+				collisioningList.insert(*src);
 			}
-			else if (isInCollisioningList(*dest)) {
-				(*dest)->m_cState = CollidStateRelease;
-				(*dest)->includedObj->CollidOpponent = ObjTypeNone;
-				collisioningList.push_back(*dest);
+			else if (isInCollisioningList((*dest).first)) {
+				(*dest).second->m_cState = CollidStateRelease;
+				(*dest).first->CollidOpponent = ObjTypeNone;
+				collisioningList.insert(*dest);
 			}
 		}
 	}
 	CollisionProc();
 }
 
-bool CollisionManager::init(std::shared_ptr<Scene> snc)
+bool CollisionManager::init(Scene* snc)
 {
 	curScene = snc;
 
 	auto objs = snc->GetObjs();
 	for (int i = 0; i < objs.size(); ++i) {
 		if ((int)objs[i]->objstate & (int)ObjStateActivateCollider) {
-			colliderList.push_back(objs[i]->collider);
+			colliderList.insert(std::make_pair(objs[i], objs[i]->collider));
 		}
 	}
 
@@ -141,7 +138,7 @@ bool CollisionManager::init(std::shared_ptr<Scene> snc)
 void CollisionManager::CollisionProc()
 {
 	for (auto it = collisioningList.begin(); it != collisioningList.end();) {
-		CollisionResult ret = (*it)->includedObj->CollisionProc();
+		CollisionResult ret = (*it).first->CollisionProc();
 		switch (ret)
 		{
 		case CollidRetNoChange:
@@ -152,17 +149,12 @@ void CollisionManager::CollisionProc()
 			++it;
 			break;
 		case CollidRetMoveBack:
-			(*it)->getCollisionState() = CollidSateNone;
-			(*it)->includedObj->CollidOpponent = ObjTypeNone;
+			(*it).second->getCollisionState() = CollidSateNone;
+			(*it).first->CollidOpponent = ObjTypeNone;
 			it = collisioningList.erase(it);
 			break;
 		case CollidRetdeleted:
-			for (auto it2 = colliderList.begin(); it2 != colliderList.end(); ++it2) {
-				if (*it == *it2) {
-					colliderList.erase(it2);
-					break;
-				}
-			}
+			colliderList.erase(colliderList.find((*it).first));
 			it = collisioningList.erase(it);					
 			break;
 		}

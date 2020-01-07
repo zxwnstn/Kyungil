@@ -8,8 +8,9 @@ bool SceneManager::init(HWND hwnd, HDC hdc)
 {
 	m_hDc = hdc;
 	m_hWnd = hwnd;
+	createSeed = 0;
 
-	pCurScene = CreateScene(hdc);
+	pCurScene = CreateScene(hdc, createSeed++);
 
 	return true;
 }
@@ -17,6 +18,11 @@ bool SceneManager::init(HWND hwnd, HDC hdc)
 void SceneManager::update(float deltaTime)
 {
 	pCurScene->update(deltaTime);
+}
+
+void SceneManager::lateUpdate(float deltaTime)
+{
+	pCurScene->lateUpdate(deltaTime);
 }
 
 void SceneManager::render()
@@ -34,4 +40,6 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
+	delete pCurScene;
+	delete pNextScene;
 }

@@ -1,13 +1,10 @@
 #include "Obj.h"
 
-Obj::~Obj()
+Obj::Obj(SCENENO _includedScene, const POSITION & pos, OBJNO _objNo)
+	:objPos(pos), includedScene(_includedScene), objNo(_objNo)
 {
-	//includedScene->eraseObj(this);
-	//collider erase in this place
 }
 
-Obj::Obj(std::shared_ptr<Scene> curScene, const POSITION & pos)
-	:objPos(pos)
+Obj::~Obj()
 {
-	includedScene = curScene;
 }

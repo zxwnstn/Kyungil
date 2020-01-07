@@ -6,15 +6,16 @@ class ColliderRect :
 {
 private:
 	void setColliderBoundFromPos();
+	void setColliderBoundFromDelta(float dx, float dy);
 
 private:
 	FRECT collisionFiled;
 
 public:
-	virtual void upDateCollider() override;
+	virtual void upDateCollider(float dx, float dy) override;
 
-	ColliderRect(std::shared_ptr<Obj> obj, const POSITION& _pos, float width, float height);
-	ColliderRect(std::shared_ptr<Obj> obj, const FRECT& frec);
+	ColliderRect(OBJNO obj, const POSITION& _pos, float width, float height);
+	ColliderRect(OBJNO obj, const FRECT& frec);
 
 	~ColliderRect();
 };
