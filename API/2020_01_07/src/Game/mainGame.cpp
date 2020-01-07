@@ -33,7 +33,7 @@ HRESULT mainGame::init()
 
 	//image init
 	rockMan = new Image;
-	rockMan->init("../Common_Images/록맨.bmp", WINSIZEX / 2, WINSIZEY/2, 480, 100, 10, 2, true, RGB(255, 0, 255));
+	rockMan->init("images/록맨.bmp", WINSIZEX / 2, WINSIZEY/2, 480, 100, 10, 2, true, RGB(255, 0, 255));
 
 	backGround = new Image;
 	!backGround->init("images/록맨배경.bmp", WINSIZEX, WINSIZEY, false);
