@@ -4,15 +4,15 @@ void mainGame::inputHandle()
 {
 
 	if (KEYMANAGER->isStayKeyDown(VK_UP)) {
-		carSpeed += mDeltaTime * 1;
-		if (carSpeed > carSpeedMax) {
-			carSpeed = carSpeedMax;
+		carVelocity += mDeltaTime * 1;
+		if (carVelocity > carSpeedMax) {
+			carVelocity = carSpeedMax;
 		}
 	}
 	else {
-		carSpeed -= mDeltaTime * 2;
-		if (carSpeed < 0) {
-			carSpeed = 0;
+		carVelocity -= mDeltaTime * 2;
+		if (carVelocity < 0) {
+			carVelocity = 0;
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT)) {
@@ -137,7 +137,7 @@ void mainGame::update(float deltaTime)
 	mDeltaTime = deltaTime;
 	pastTime += deltaTime;
 	sprintf_s(pastTimeStr, "time past : %.1fsec", pastTime);
-
+	sprintf_s(carVelocityStr, "velocity : %.0fk/h", carVelocity * 10);
 	//retire check
 	if (pastTime > timeLimite) {
 		MessageBox(m_hWnd, "you retired..", "junsoo CarGame", MB_OK);
@@ -148,16 +148,16 @@ void mainGame::update(float deltaTime)
 	if (!goalIn && !isCollision) {
 		inputHandle();
 		//genOpponent car
-		if(carSpeed > 6.f)
+		if(carVelocity > 6.f)
 			genOpponent();
 	}
 
 	//collision Event
 	if (isCollision) {
 		collisionTime += deltaTime;
-		carSpeed -= mDeltaTime * 3;
-		if (carSpeed < 0) {
-			carSpeed = 0;
+		carVelocity -= mDeltaTime * 3;
+		if (carVelocity < 0) {
+			carVelocity = 0;
 		}
 		if (collisionTime > collisionMaintance) {
 			collisionTime -= collisionMaintance;
@@ -167,7 +167,7 @@ void mainGame::update(float deltaTime)
 
 	//opponent car move
 	for (auto it = opponents.begin(); it != opponents.end();) {
-		float relativeSpeedCoep = carSpeed - carSpeedMax / 2;
+		float relativeSpeedCoep = carVelocity - carSpeedMax / 2;
 		(*it)->y += deltaTime * (*it)->speed * relativeSpeedCoep * 1 / 3;
 
 		if ((*it)->y < -41 || (*it)->y + 40 > MAPSIZEY)
@@ -182,9 +182,9 @@ void mainGame::update(float deltaTime)
 		m_bLoop = false;
 	}
 	else if (ret == 2) {
-		carSpeed -= 4;
-		if (carSpeed < 0)
-			carSpeed = 0;
+		carVelocity -= 4;
+		if (carVelocity < 0)
+			carVelocity = 0;
 		isCollision = true;
 		exFrameIdx = 0;
 		explosion->setFrameY(0);
@@ -192,8 +192,8 @@ void mainGame::update(float deltaTime)
 
 	//goal and start line
 	if (!startLinePass) {
-		if (carSpeed > 1.f) {
-			startLineY += carSpeed * 1 / 3;
+		if (carVelocity > 1.f) {
+			startLineY += carVelocity * 1 / 3;
 			if (startLineY > MAPSIZEY) {
 				startLinePass = true;
 				SAFE_DELETE(startLine);
@@ -203,9 +203,9 @@ void mainGame::update(float deltaTime)
 	if (!appearGoal && totalMoveDist > goalDist)
 		appearGoal = true;
 	if (appearGoal)
-		goalLineY += carSpeed * 1 / 2;
+		goalLineY += carVelocity * 1 / 2;
 
-	totalMoveDist += deltaTime * carSpeed;
+	totalMoveDist += deltaTime * carVelocity;
 	sprintf_s(totalMoveDistStr, "Dist : %.0fm", totalMoveDist);
 	procPointerY = procPointerStartY - totalMoveDist / procScale;
 
@@ -218,7 +218,7 @@ void mainGame::render(HDC hdc)
 	//inGame Render
 	//===============================================
 	//map
-	gameMap->loopRender(memDC, &RectMake(0, 0, MAPSIZEX, MAPSIZEY), 0, -(loopY += carSpeed));
+	gameMap->loopRender(memDC, &RectMake(0, 0, MAPSIZEX, MAPSIZEY), 0, -(loopY += carVelocity));
 	//goal and start line
 	if (appearGoal) {
 		goalLine->render(memDC, leftWall, goalLineY);
@@ -252,7 +252,7 @@ void mainGame::render(HDC hdc)
 	TextOut(memDC, 380, 50, totalMoveDistStr, strlen(totalMoveDistStr));
 	TextOut(memDC, 380, 70, timeLimiteStr, strlen(timeLimiteStr));
 	TextOut(memDC, 380, 90, pastTimeStr, strlen(pastTimeStr));
-	
+	TextOut(memDC, 380, 110, carVelocityStr, strlen(carVelocityStr));
 	ProcBar->render(memDC, 452, 140);
 	procPointer->render(memDC, procPointerX, procPointerY);
 

@@ -42,7 +42,7 @@ private: //inGame var
 	//player car
 	const int playerY = 370;
 	float playerX = 255.f;
-	float carSpeed = 0.f;
+	float carVelocity = 0.f;
 	float carSpeedMax = 10.f;
 	float carMoveSpeed = 100.f;
 	
@@ -86,6 +86,7 @@ private: //inGame var
 	char pastTimeStr[255];
 	char timeLimiteStr[255];
 	char totalMoveDistStr[255];
+	char carVelocityStr[255];
 
 	//time
 	int procBarHeight = 250;
