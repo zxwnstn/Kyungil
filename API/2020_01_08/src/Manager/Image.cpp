@@ -11,7 +11,7 @@ Image::Image()
 
 Image::~Image()
 {
-	SAFE_DELETE(_imageInfo);
+	release();
 }
 
 HRESULT Image::init(int width, int height)
@@ -236,11 +236,13 @@ void Image::release()
 		DeleteObject(_imageInfo->hBit);
 		DeleteDC(_imageInfo->hMemDC);
 
+		SAFE_DELETE(_blendImage);
 		SAFE_DELETE(_imageInfo);
 		
 		_isTrans = false;
 		_transColor = RGB(0, 0, 0);
 	}
+	
 }
 
 void Image::render(HDC hdc)

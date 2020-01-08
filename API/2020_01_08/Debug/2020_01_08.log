@@ -1,0 +1,37 @@
+﻿  mainGame.cpp
+c:\dev\kyungil\api\2020_01_08\src\manager\image.h(109): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.h(51): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(21): warning C4244: '=': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(27): warning C4244: '=': 'const int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(54): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(55): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(57): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(58): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(209): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(220): warning C4244: '+=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(223): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(227): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(232): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(234): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(1801): warning C4244: '인수': '_Ty'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=int
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(1866): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<int,int,float>(int &&,int &&,float &&)'에 대한 참조를 확인하십시오.
+          with
+          [
+              _Ty=OpponentCar
+          ]
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\memory(1866): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::_Ref_count_obj<_Ty>::_Ref_count_obj<int,int,float>(int &&,int &&,float &&)'에 대한 참조를 확인하십시오.
+          with
+          [
+              _Ty=OpponentCar
+          ]
+  c:\dev\kyungil\api\2020_01_08\src\game\maingame.cpp(38): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::shared_ptr<OpponentCar> std::make_shared<OpponentCar,int,int,float>(int &&,int &&,float &&)'에 대한 참조를 확인하십시오.
+  winMain.cpp
+c:\dev\kyungil\api\2020_01_08\src\manager\image.h(109): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\dev\kyungil\api\2020_01_08\src\game\maingame.h(51): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+c:\dev\kyungil\api\2020_01_08\src\winmain.cpp(81): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  2020_01_08.vcxproj -> C:\dev\Kyungil\API\Debug\2020_01_08.exe

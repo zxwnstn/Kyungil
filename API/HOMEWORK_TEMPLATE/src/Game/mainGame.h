@@ -8,6 +8,16 @@ class mainGame :  public gameNode
 private: //InGame Image
 	Image* Sample;
 
+	int _loopX;
+	int _loopY;
+
+	int cameraX;
+	int cameraY;
+	float cameraSpeed = 200.f;
+
+	int posX;
+	int posY;
+
 private: //inGame var
 
 private: //inGame Logic

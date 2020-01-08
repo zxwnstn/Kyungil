@@ -52,7 +52,7 @@ namespace UTIL
 
 		return false;
 	}
-	
+
 	bool isRecRectCollision(RECT & rect1, RECT & rect2)
 	{
 		if (rect1.left < rect2.right && rect1.right > rect2.left &&

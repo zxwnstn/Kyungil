@@ -26,4 +26,5 @@ namespace UTIL
 	bool isCircleRectCollision(Circle& c1, FRECT rect);
 
 	bool isRecRectCollision(RECT& rect1, RECT& rect2);
+
 }
