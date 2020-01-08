@@ -148,7 +148,8 @@ void mainGame::update(float deltaTime)
 	if (!goalIn && !isCollision) {
 		inputHandle();
 		//genOpponent car
-		genOpponent();
+		if(carSpeed > 6.f)
+			genOpponent();
 	}
 
 	//collision Event

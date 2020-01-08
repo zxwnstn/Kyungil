@@ -281,11 +281,6 @@ project "2020_01_08"
 		"%{prj.name}/src",
 		"WindowApiLib/src"
 	}
-	links
-	{
-		"WindowApiLib"
-	}
-
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
