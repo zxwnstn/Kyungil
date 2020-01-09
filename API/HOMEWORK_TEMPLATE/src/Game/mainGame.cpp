@@ -9,61 +9,36 @@ mainGame::~mainGame()
 
 HRESULT mainGame::init()
 {
-	gameNode::init();
+	gameNode::init(true);
 
 	//image init
-	Sample = new Image;
-	Sample->init("../Common_Images/사나.bmp", WINSIZEX, WINSIZEY);
-
-	cameraX = 100;
-	cameraY = 100;
-
-	posX = 100;
-	posY = 100;
-	//inGame obj init
-
-
+	IMAGEMANAGER->addImage("배경화면", "../Common_Images/배경.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	_minimap = new minimap();
+	_minimap->init();
 	return S_OK;
 }
 
 void mainGame::release()
 {
 	gameNode::release();
-	SAFE_DELETE(Sample);
+	SAFE_DELETE(_minimap);
 }  
 
 void mainGame::update(float deltaTime)
 {
 	//inGame FunctionCall
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT)) {
-		cameraX += deltaTime * cameraSpeed;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT)) {
-		cameraX -= deltaTime * cameraSpeed;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP)) {
-		cameraY -= deltaTime * cameraSpeed;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN)) {
-		cameraY += deltaTime * cameraSpeed;
-	}
+	_minimap->update(deltaTime);
+
 }
 
 void mainGame::render(HDC hdc)
 {
-	HDC memDC = getBackBuffer()->getMemDC();
-	PatBlt(memDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
+	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//inGame Render
 	//===============================================
 
-	//camera work
-	//Sample->render(memDC);
-	//Sample->render(memDC, 100, 100, cameraX, cameraY, 150, 150);
-
-	//render loop
-	//Sample->loopAlphaRender(memDC, &RectMake(0, 0, WINSIZEX, WINSIZEY), _loopX, _loopY, 200);
+	_minimap->render(getMemDC());
 
 	//================================================
 	getBackBuffer()->render(hdc, 0, 0);
-	_loopX++;
 }

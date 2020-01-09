@@ -45,7 +45,6 @@ HRESULT Image::init(int width, int height)
 	_blendImage->width = WINSIZEX;
 	_blendImage->height = WINSIZEY;
 
-
 	_isTrans = false;
 	_transColor = RGB(0, 0, 0);
 
@@ -422,11 +421,11 @@ void Image::alphaRender(HDC hdc, BYTE alpha)
 		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height,
 			hdc, 0, 0, _imageInfo->width, _imageInfo->height, _transColor);
 
-		AlphaBlend(hdc, 0, 0, _imageInfo->width, _imageInfo->height,
+		AlphaBlend(hdc, _imageInfo->x, _imageInfo->y, _imageInfo->width, _imageInfo->height,
 			_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
 	}
 	else {
-		AlphaBlend(hdc, 0, 0, _imageInfo->width, _imageInfo->height,
+		AlphaBlend(hdc, _imageInfo->x, _imageInfo->y, _imageInfo->width, _imageInfo->height,
 			_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _blendFunc);
 	}
 }

@@ -2,21 +2,12 @@
 #include "gameNode.h"
 #include "Manager/Image.h"
 #include "Common/utils.h"
-
+#include "minimap/minimap.h"
 class mainGame :  public gameNode
 {
 private: //InGame Image
-	Image* Sample;
 
-	int _loopX;
-	int _loopY;
-
-	int cameraX;
-	int cameraY;
-	float cameraSpeed = 200.f;
-
-	int posX;
-	int posY;
+	minimap* _minimap;
 
 private: //inGame var
 

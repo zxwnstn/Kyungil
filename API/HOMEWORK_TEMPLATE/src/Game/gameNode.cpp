@@ -1,12 +1,5 @@
 #include "gameNode.h"
 
-
-void gameNode::setBackBuffer()
-{
-	_backBuffer = new Image;
-	_backBuffer->init(WINSIZEX, WINSIZEY);
-}
-
 gameNode::gameNode()
 {
 }
@@ -18,31 +11,37 @@ gameNode::~gameNode()
 
 HRESULT gameNode::init()
 {
-	//타이머란 일정한 주기마다 정해진 함수를 실행한다.
-	//1 : 윈도우 핸들
-	//2 :  타이머 번호
-	//3 :  타이머주기 1000=1초
-	//4 :  주기마다 실행할 함수
-	//NULL이면 WM_TIMER가 실행
-	SetTimer(m_hWnd, 1, 10, NULL);
-	//매니저 초기화
-	KEYMANAGER->init();
-
-	setBackBuffer();
-
+	_hdc = GetDC(m_hWnd);
+	_managerInit = false;
 	return S_OK;
 }
 
-void gameNode::release()
-{	//타이머 해제
-
-	//해제를 안하면 종료를 해도 메모리가 줄줄줄~
-	KillTimer(m_hWnd, 1);
-	//매니저 해제
-	KEYMANAGER->releaseSingleton();
-	RND->releaseSingleton();
+HRESULT gameNode::init(bool managerInit)
+{
+	_hdc = GetDC(m_hWnd);
+	_managerInit = managerInit;
+	//SetTimer(m_hWnd, 1, 10, NULL);
+	//매니저 초기화
 	
-	SAFE_DELETE(_backBuffer);
+	if (_managerInit) {
+		KEYMANAGER->init();
+		IMAGEMANAGER->init();
+	}
+	return E_NOTIMPL;
+}
+
+void gameNode::release()
+{
+
+	//KillTimer(m_hWnd, 1);
+	//매니저 해제
+	if (_managerInit) {
+		KEYMANAGER->releaseSingleton();
+		IMAGEMANAGER->release();
+		IMAGEMANAGER->releaseSingleton();
+		RND->releaseSingleton();
+	}
+	ReleaseDC(m_hWnd, _hdc);
 }
 
 void gameNode::update(float deltaTime)
