@@ -20,6 +20,6 @@ public:
 	virtual HRESULT init();	
 	virtual void release();
 	virtual void update(float DeltaTime);
-	virtual void render(HDC hdc);
+	virtual void render();
 };
 

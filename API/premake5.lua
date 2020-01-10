@@ -291,3 +291,33 @@ project "2020_01_08"
 	
 	filter "configurations:Release"
 		optimize "On"
+
+project "2020_01_10"
+	location "2020_01_10"
+	kind "WindowedApp"
+	language "C++"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+	includedirs
+	{
+		"%{prj.name}/src",
+		"WindowApiLib/src"
+	}
+	filter "system:windows"
+		cppdialect "C++17"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+	
+	filter "configurations:Release"
+		optimize "On"
+
