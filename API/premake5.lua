@@ -45,8 +45,8 @@ project "WindowApiLib"
 		optimize "On"
 
 
-project "_WhiteBoard"
-	location "_WhiteBoard"
+project "WhiteBoard"
+	location "WhiteBoard"
 	kind "WindowedApp"
 	language "C++"
 
