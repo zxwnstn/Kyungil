@@ -16,6 +16,8 @@ private: //InGame Image
 private: //inGame var
 	PlayerState pState;
 	bool isCollision = false;
+	bool debugShowRect = false;
+	char str[25] = "press key R";
 
 private: //inGame Logic
 	bool collisionCheck();

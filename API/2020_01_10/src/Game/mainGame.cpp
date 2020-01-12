@@ -2,6 +2,27 @@
 
 bool mainGame::collisionCheck()
 {
+	RECT playerRect = player.getPlayerRect();
+	auto& v = obs.getObjs();
+	for (int i = 0; i < v.size(); ++i) {
+		if (UTIL::isRecRectCollision(playerRect, v[i]->getCollier())) {
+			if (v[i]->getType() != "Goal") {
+				pState = playerCrash;
+				return true;
+			}
+			else{
+				RECT goalRect = v[i]->getCollier();
+				int temp = playerRect.bottom - goalRect.top;
+				if (-1 <= temp && temp <= 1) {
+					if (goalRect.left < playerRect.left && playerRect.right < goalRect.right) {
+						pState = playerGoal;
+						player.setPlayerState(playerGoal);
+						return false;
+					}				
+				}			
+			}
+		}
+	}
 	return false;
 }
 
@@ -17,6 +38,10 @@ void mainGame::inputHandle()
 	if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) {
 		if(!(pState & playerJumping))
 			player.setPlayerState(pState |= playerJumping);
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_TAB)) {
+		debugShowRect = !debugShowRect;
 	}
 }
 
@@ -54,17 +79,26 @@ void mainGame::update(float deltaTime)
 {
 	//inGame FunctionCall
 	pState = player.getPlayerState();
-	if (!(pState & playerCrash) || !(pState & playerDie))
+	if (!(pState & playerCrash) || !(pState & playerDie) || !playerGoal)
 		inputHandle();
-
-
-	bg.update(deltaTime, pState);
-	player.update(deltaTime);
-	obs.update(deltaTime, pState);
+	if( pState == playerCrash || pState == playerGoal){
+		if (KEYMANAGER->isOnceKeyDown('R')) {
+			bg.release();
+			player.release();
+			obs.release();
+			bg.init();
+			player.init(getMemDC());
+			obs.init(getMemDC());
+		}
+	}
 
 	isCollision = collisionCheck();
 	if (isCollision)
 		player.setPlayerState(playerCrash);
+
+	bg.update(deltaTime, pState);
+	player.update(deltaTime);
+	obs.update(deltaTime, pState);
 }
 
 void mainGame::render()
@@ -78,6 +112,14 @@ void mainGame::render()
 	player.render();
 	obs.secondRender();
 
+	if (debugShowRect) {
+		obs.debugRender();
+		player.debugRender();
+	}
+
+	if (pState == playerCrash || pState == playerGoal) {
+		TextOut(getMemDC(), 600, 400, str, 11);
+	}
 	//================================================
 	getBackBuffer()->render(getHDC(), 0, 0);
 }

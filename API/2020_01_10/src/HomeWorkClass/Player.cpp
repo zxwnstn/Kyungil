@@ -16,18 +16,20 @@ void Player::update(float deltaTime)
 	//달리면서 점프
 	if ((pState & playerRunning) && (pState & playerJumping)) {
 		cur = runAndJump;
-		jumpPastTime += deltaTime;
+		jumpPastDist += deltaTime * jumpSpeed;
 
-		if (jumpPastTime < jumpDelay / 2) playerY -= deltaTime * jumpSpeed;
-		else playerY += deltaTime * jumpSpeed;
-
-		if (jumpPastTime > jumpDelay + 0.2f) {
-			jumpPastTime = 0.f;
-			pState ^= playerJumping;
-			playerY = groundHeight;
-			cur = run;
+		if (jumpPastDist < jumpDist)
+			playerY -= deltaTime * jumpSpeed;
+		else {
+			playerY += deltaTime * jumpSpeed;
+			if (-0.1f < playerY - groundHeight && playerY - groundHeight < 0.1f) {
+				jumpPastDist = 0.f;
+				pState ^= playerJumping;
+				playerY = groundHeight;
+				cur = run;
+			}
 		}
-		playerRect.top = playerY;
+		playerRect.top = playerY + rectAjust;
 		playerRect.bottom = playerY + run->getHeight();
 		return;
 	}
@@ -44,18 +46,20 @@ void Player::update(float deltaTime)
 	//점프만
 	if (pState & playerJumping) {
 		cur = jump;
-		jumpPastTime += deltaTime;
+		jumpPastDist += deltaTime * jumpSpeed;
 
-		if (jumpPastTime < jumpDelay / 2) playerY -= deltaTime * jumpSpeed;
-		else playerY += deltaTime * jumpSpeed;
-
-		if (jumpPastTime > jumpDelay + 0.2f) {
-			jumpPastTime = 0.f;
-			pState ^= playerJumping;
-			playerY = groundHeight;
-			cur = run;
-		}		
-		playerRect.top = playerY;
+		if (jumpPastDist < jumpDist)
+			playerY -= deltaTime * jumpSpeed;
+		else {
+			playerY += deltaTime * jumpSpeed;
+			if (-0.1f < playerY - groundHeight && playerY - groundHeight < 0.1f) {
+				jumpPastDist = 0.f;
+				pState ^= playerJumping;
+				playerY = groundHeight;
+				cur = run;
+			}
+		}
+		playerRect.top = playerY + rectAjust;
 		playerRect.bottom = playerY + run->getHeight();
 		return;
 	}
@@ -68,7 +72,6 @@ void Player::update(float deltaTime)
 
 void Player::render()
 {
-	//Rectangle(memDC, playerRect.left, playerRect.top, playerRect.right, playerRect.bottom);
 	if (pState & playerRunning) {
 		if (frameIdx > cur->getMaxFrameX())
 			frameIdx = 0;
@@ -89,7 +92,17 @@ void Player::render()
 		cur->render(memDC, playerX, playerY);
 		return;
 	}
+	if (pState == playerGoal) {
+		cur = dead;
+		cur->render(memDC, playerX, playerY);
+		return;
+	}
 	
+}
+
+void Player::debugRender()
+{
+	Rectangle(memDC, playerRect.left, playerRect.top, playerRect.right, playerRect.bottom);
 }
 
 void Player::init(HDC hdc)
@@ -112,9 +125,9 @@ void Player::init(HDC hdc)
 	dead->init("images/dead.bmp", 96, 120, true, COLOR_MAGENTA);
 
 	playerY = groundHeight;
-	playerRect.left = playerX + 10;
-	playerRect.top = playerY;
-	playerRect.right = playerX + run->getHeight() - 30;
+	playerRect.left = playerX + rectAjust;
+	playerRect.top = playerY + rectAjust;
+	playerRect.right = playerX + run->getHeight() - rectAjust * 2;
 	playerRect.bottom = groundHeight + run->getHeight();
 }
 

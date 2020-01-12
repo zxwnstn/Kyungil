@@ -10,7 +10,8 @@ enum PlayerState {
 	playerRunning	= BIT(1),
 	playerJumping	= BIT(2),
 	playerCrash		= BIT(3),
-	playerDie		= BIT(4)
+	playerDie		= BIT(4),
+	playerGoal		= BIT(5)
 };
 
 inline PlayerState operator|=(PlayerState& ps1, const PlayerState& ps2) {
