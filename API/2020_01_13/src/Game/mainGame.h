@@ -23,5 +23,8 @@ public:
 	virtual void release();//해제
 	virtual void update(float DeltaTime);//연산하는곳
 	virtual void render();//그리는곳
+
+	void handleEnemyCollision();
+	void handlePlayerCollision();
 };
 

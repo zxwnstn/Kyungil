@@ -90,7 +90,6 @@ void Obstacle::init(HDC hdc)
 	img_incense = new Image;
 	img_goal = new Image;
 
-	//TODO : adjust image size!
 	frontRing->init("images/frontRing.bmp", 24, 160, true, RGB(255, 0, 255));
 	backRing->init("images/backRing.bmp", 24, 160, true, RGB(255, 0, 255));
 	img_incense->init("images/incense.bmp", 48, 62, true, RGB(255, 0, 255));

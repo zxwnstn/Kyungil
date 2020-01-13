@@ -115,11 +115,16 @@ void Nuclear::update()
 void Nuclear::render()
 {
 	for (_vBullet_iter = _vBullet.begin(); _vBullet_iter != _vBullet.end(); ++_vBullet_iter) {
-		_vBullet_iter->bulletImage->frameRender(getMemDC(), _vBullet_iter->rc.left, _vBullet_iter->rc.bottom,
+
+#ifdef _DEBUG
+		RECT temp = _vBullet_iter->rc;
+		Rectangle(getMemDC(), temp.left, temp.top, temp.right, temp.bottom);
+#endif 
+		_vBullet_iter->bulletImage->frameRender(getMemDC(), _vBullet_iter->rc.left, _vBullet_iter->rc.top,
 			_vBullet_iter->bulletImage->getFrameX(), _vBullet_iter->bulletImage->getMaxFrameY());
 
 		_vBullet_iter->count++;
-
+		
 		if (_vBullet_iter->count % 10 == 0) {
 			_frameIdx++;
 			if (_frameIdx > _vBullet_iter->bulletImage->getMaxFrameX()) {
@@ -156,6 +161,7 @@ void Nuclear::move()
 			_vBullet_iter->y + _vBullet_iter->bulletImage->getFrameheight()
 		))
 		{
+			SAFE_DELETE(_vBullet_iter->bulletImage);
 			_vBullet_iter = _vBullet.erase(_vBullet_iter);
 		}
 		else
@@ -221,6 +227,10 @@ void Bullet::move()
 
 		_Bullet_iter->rc = RectMakeCenter(_Bullet_iter->x, _Bullet_iter->y, 
 			_Bullet_iter->bulletImage->getWidth(), _Bullet_iter->bulletImage->getHeight());
+
+		if (KEYMANAGER->isOnceKeyDown(VK_SPACE)) {
+			//doSomething..
+		}
 
 		if (_range < getDistance(_Bullet_iter->x, _Bullet_iter->y, _Bullet_iter->fireX, _Bullet_iter->fireY)) {
 			_Bullet_iter = _vBullet.erase(_Bullet_iter);

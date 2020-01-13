@@ -4,37 +4,13 @@
 #include <vector>
 using namespace std;
 
-class parent {
-protected:
-	int a;
-	int b;
 
-	int mainternenceScore;
-	int score;
-
-public:
-	void show() {
-		cout << "a : " << a << "b : " << b << endl;
-	}
-	int d, c;
-
-	parent()
-	{
-		cout << "parent Constructor" << endl;
-	}
-
-	~parent() {
-		cout << "parent Destructor" << endl;
-	}
-
-};
-
-
+#define getType(T) #T
 
 int main() {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	
 
+	
+	cout << getType(Kang) << endl;
 
 
 

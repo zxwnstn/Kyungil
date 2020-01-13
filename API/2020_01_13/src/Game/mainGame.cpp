@@ -34,6 +34,9 @@ void mainGame::update(float deltaTime)
 	//inGame FunctionCall
 	rocket->update();
 	_enemyManager->update();
+
+	handleEnemyCollision();
+	handlePlayerCollision();
 }
 
 void mainGame::render()
@@ -45,7 +48,45 @@ void mainGame::render()
 	IMAGEMANAGER->render("»ç³ª", getMemDC());
 	rocket->render();
 	_enemyManager->render();
+	Rectangle(getMemDC(), 10, 10, rocket->getRocketHp() * 10, 20);
 
 	//================================================
 	getBackBuffer()->render(getHDC(), 0, 0);
+}
+
+void mainGame::handleEnemyCollision()
+{
+	auto& bullets = rocket->getNuclear()->getVBullet();
+	auto& ufos = _enemyManager->getMinion();
+	
+	for (auto it = bullets.begin(); it != bullets.end(); ) {
+		bool isBulletCollision = false;
+		for (auto it2 = ufos.begin(); it2 != ufos.end(); ) {
+			if (isRectRectCollision(it->rc, (*it2)->getRect())) {
+				SAFE_DELETE((*it2));
+				it2 = ufos.erase(it2);
+				SAFE_DELETE(it->bulletImage);
+				it = bullets.erase(it);
+				isBulletCollision = true;
+				break;
+			}
+			else ++it2;
+		}
+		if (!isBulletCollision)
+			++it;
+	}
+}
+
+void mainGame::handlePlayerCollision()
+{
+	auto& bullets = _enemyManager->getBullet()->getBullets();
+	auto& playerRect = rocket->getRect();
+
+	for (auto it = bullets.begin(); it != bullets.end(); ) {
+		if (isRectRectCollision(playerRect, it->rc)) {
+			rocket->decRocketHp();
+			it = bullets.erase(it);
+		}
+		else it++;
+	}
 }

@@ -115,13 +115,9 @@ void Player::init(HDC hdc)
 	runAndJump = new Image;
 	dead = new Image;
 
-	//run->init("images/run.bmp", 63, 40, 2, 1, true, COLOR_MAGENTA);
 	run->init("images/run.bmp", 189, 120, 2, 1, true, COLOR_MAGENTA);
-	//jump->init("images/jump.bmp", 32, 40, true, COLOR_MAGENTA);
 	jump->init("images/jump.bmp", 96, 120, true, COLOR_MAGENTA);
-	//runAndJump->init("images/runAndJump.bmp", 105, 40, 3, 1, true, COLOR_MAGENTA);
 	runAndJump->init("images/runAndJump.bmp", 315, 120, 3, 1, true, COLOR_MAGENTA);
-	//dead->init("images/dead.bmp", 32, 40, true, COLOR_MAGENTA);
 	dead->init("images/dead.bmp", 96, 120, true, COLOR_MAGENTA);
 
 	playerY = groundHeight;

@@ -1,3 +1,4 @@
+#include "..\..\..\..\HOMEWORK_TEMPLATE\src\Manager\Timer.h"
 #include "Timer.h"
 
 DEFINITION_SINGLE(Timer)
@@ -23,6 +24,7 @@ bool Timer::init()
 	m_iFrame = 0;
 	return true;
 }
+
 
 void Timer::update()
 {

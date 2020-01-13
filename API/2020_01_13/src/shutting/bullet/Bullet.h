@@ -34,6 +34,8 @@ public:
 	void fire(float x, float y, float angle, float speed);
 	void move();
 
+	vector<tagBullet>& getBullets() { return _vBullet; }
+
 };
 
 class missile : public gameNode {
@@ -41,6 +43,7 @@ private:
 	vector<tagBullet> _vBullet;
 	vector<tagBullet>::iterator _vBullet_iter;
 	int _bulletMax;
+	float _range;
 
 public:
 	missile();
@@ -52,7 +55,6 @@ public:
 	void release();
 	void move();
 	void fire(float x, float y);
-	float _range;
 
 };
 
@@ -77,7 +79,7 @@ public:
 	void fire(float x, float y);
 	void move();
 
-	vector<tagBullet> getVBullet() { return _vBullet; }
+	vector<tagBullet>& getVBullet() { return _vBullet; }
 	vector<tagBullet>::iterator getBullet() { return _vBullet_iter; }
 
 };
