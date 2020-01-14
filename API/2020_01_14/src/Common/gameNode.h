@@ -7,26 +7,21 @@ static Image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSI
 class gameNode
 {
 private:
-
 	//void setBackBuffer();
 	HDC		_hdc;
 	bool	_managerInit;
-
-
-protected:
-	float mDeltaTime;
 
 public:
 	gameNode();
 	~gameNode();
 
-	virtual HRESULT init();
 	virtual HRESULT init(bool managerInit);
+	virtual HRESULT init();
 	virtual void release();
 	virtual void update(float deltaTime);
-	virtual void render(HDC hdc);
-	Image* getBackBuffer() { return _backBuffer; }
+	virtual void render();
 	
+	Image* getBackBuffer() { return _backBuffer; }
 	HDC getHDC() { return _hdc; }
 	HDC getMemDC() { return _backBuffer->getMemDC(); }
 
