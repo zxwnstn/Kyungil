@@ -3,10 +3,10 @@
 
 
 class gameNode;
+
 class sceneManager :  public singletonBase<sceneManager>
 {
 private:
-
 	typedef map<string, gameNode*> mSceneList;
 	typedef map<string, gameNode*>::iterator miSceneList;
 

@@ -45,6 +45,8 @@ void gameNode::release()
 		IMAGEMANAGER->release();
 		IMAGEMANAGER->releaseSingleton();
 		TIMEMANAGER->releaseSingleton();
+		SCENEMANAGER->release();
+		SCENEMANAGER->releaseSingleton();
 		RND->releaseSingleton();
 	}
 	ReleaseDC(m_hWnd, _hdc);

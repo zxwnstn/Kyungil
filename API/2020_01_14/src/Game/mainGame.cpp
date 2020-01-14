@@ -1,5 +1,5 @@
 #include "mainGame.h"
-#include "Scene/Scene.h"
+#include "HomeWorkClass/Scene/SceneBase.h"
 
 mainGame::mainGame()
 {
@@ -11,10 +11,11 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
+
 	//image init
-	
-	SCENEMANAGER->addScene("사나love", new Scene);
-	SCENEMANAGER->changeScene("사나love");
+
+	SCENEMANAGER->addScene("베이스", new SceneBase);
+	SCENEMANAGER->changeScene("베이스");
 
 	return S_OK;
 }

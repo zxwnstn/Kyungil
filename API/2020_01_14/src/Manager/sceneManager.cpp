@@ -2,6 +2,9 @@
 #include "Common/gameNode.h"
 #include "sceneManager.h"
 
+//현재씬을 널값으로 초기화 하자.
+gameNode* sceneManager::_currentScene = nullptr;
+
 sceneManager::sceneManager()
 {
 }
@@ -10,8 +13,6 @@ sceneManager::sceneManager()
 sceneManager::~sceneManager()
 {
 }
-//현재씬을 널값으로 초기화 하자.
-gameNode* sceneManager::_currentScene = nullptr;
 
 HRESULT sceneManager::init()
 {

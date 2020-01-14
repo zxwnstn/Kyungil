@@ -2,35 +2,31 @@
 #include <vector>
 using namespace std;
 
-struct foo {
-	int a, b;
+class some {
+	static bool up;
+	static bool down;
 
-	void show() {
-		cout << a << " " << b << endl;
+public:
+	void setUp() {
+		up = !up;
 	}
+	void setDown() {
+		down = !down;
+	}
+	void show() {
+		cout << boolalpha;
+		cout << "up : " << up << " down : " << down << endl;
+	}
+
+	
 };
 
+bool some::up = false;
+bool some::down = false;
 
 int main() 
 {
-	vector<foo*> v;
-	for (int i = 0; i < 4; ++i) {
-		foo* k = new foo;
-		k->a = i;
-		k->b = i + 1;
-		v.push_back(k);
-	}
-	for (int i = 0; i < 4; ++i) {
-		v[i]->show();
-	}
 
-	for (auto it = v.begin(); it != v.end(); ++it) 
-	{
-		if ((*it)->a == 1) {
-			delete *it;
-			*it = nullptr;
-			it = v.erase(it);
-		}
-	}
-	cout << "ok" << endl;
+	some::someting();
+	
 }

@@ -40,7 +40,6 @@ void timeManager::render(HDC hdc)
 	//색상
 	SetTextColor(hdc, RGB(0, 0, 255));
 	//디버그 모드라면
-
 	if (_timer != nullptr)
 	{
 		//FPS

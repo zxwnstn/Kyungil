@@ -1,10 +1,6 @@
 #pragma once
 #include "Common/gameNode.h"
-#include "Manager/Image.h"
-#include "Common/utils.h"
-#include "minimap/minimap.h"
-#include "shutting/rocket/Rocket.h"
-#include "Manager/EnemyManager.h"
+#include "Etc/stdafx.h"
 
 class mainGame :  public gameNode
 {
