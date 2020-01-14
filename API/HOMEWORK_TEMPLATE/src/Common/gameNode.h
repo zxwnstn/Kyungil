@@ -20,7 +20,8 @@ public:
 	virtual void release();
 	virtual void update(float deltaTime);
 	virtual void render();
-	
+	virtual void debugRender() {};
+
 	Image* getBackBuffer() { return _backBuffer; }
 	HDC getHDC() { return _hdc; }
 	HDC getMemDC() { return _backBuffer->getMemDC(); }

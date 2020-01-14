@@ -40,7 +40,6 @@ void timeManager::render(HDC hdc)
 	//색상
 	SetTextColor(hdc, RGB(0, 0, 255));
 	//디버그 모드라면
-#ifdef _DEBUG
 
 	if (_timer != nullptr)
 	{
@@ -49,22 +48,17 @@ void timeManager::render(HDC hdc)
 		TextOut(hdc, 0, 0, str, strlen(str));
 
 		//전체 경과 시간
-		sprintf_s(str, "worldTime :  %f", _timer->getWorldTime());
+		sprintf_s(str, "worldTime :  %.2f", _timer->getWorldTime());
 		TextOut(hdc, 0, 20, str, strlen(str));
 		//한프레임당 경과시간
-		sprintf_s(str, "ElapsedTime :  %f", _timer->getElapsedTime());
+		sprintf_s(str, "ElapsedTime :  %.4f", _timer->getElapsedTime());
 		TextOut(hdc, 0, 40, str, strlen(str));
 	}
 
-#else
 	if (_timer != nullptr)
 	{
 		//FPS
 		sprintf_s(str, "FPS :  %d", _timer->getFrameRate());
 		TextOut(hdc, 0, 0, str, strlen(str));
 	}
-
-#endif // _DEBUG
-
-
 }

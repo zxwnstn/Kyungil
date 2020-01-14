@@ -24,11 +24,10 @@ public:
 	void release();
 	void update(float deltaTime);
 	void render();
+	void debugRender();
+	
 	//æ¿√ﬂ∞°«œ±‚
-
 	gameNode* addScene(string sceneName, gameNode* scene);
 	HRESULT changeScene(string sceneName);
-
-
 };
 

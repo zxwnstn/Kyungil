@@ -48,13 +48,20 @@ void sceneManager::update(float deltaTime)
 
 void sceneManager::render()
 {
-	if (_currentScene)_currentScene->render();
+	if (_currentScene)
+		_currentScene->render();
+}
+
+void sceneManager::debugRender()
+{
+	if (m_showRect) 
+		_currentScene->debugRender();
 }
 
 gameNode * sceneManager::addScene(string sceneName, gameNode * scene)
 {
-
-	if(!scene)return nullptr;
+	if(!scene)
+		return nullptr;
 
 	_mSceneList.insert(make_pair(sceneName, scene));
 

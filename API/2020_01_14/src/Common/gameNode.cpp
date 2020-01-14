@@ -11,7 +11,6 @@ gameNode::~gameNode()
 void gameNode::update(float deltaTime)
 {
 }
-
 void gameNode::render()
 {
 }
@@ -28,7 +27,7 @@ HRESULT gameNode::init(bool managerInit)
 	_hdc = GetDC(m_hWnd);
 	_managerInit = managerInit;
 
-	//매니저 초기화	
+	//매니저 초기화
 	if (_managerInit) {
 		KEYMANAGER->init();
 		IMAGEMANAGER->init();
@@ -56,7 +55,6 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 {
 	PAINTSTRUCT ps;
 	HDC hdc;
-
 	switch (iMessage)
 	{
 	case WM_MOUSEMOVE:
