@@ -1,6 +1,5 @@
+#include "Etc/stdafx.h"
 #include "EnemyManager.h"
-
-
 
 EnemyManager::EnemyManager()
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "Etc/Type.h"
 //==================================================
 //commonMacroFunction(필요한 부분은 직접 만들어보시오)
 //==================================================
@@ -34,6 +35,19 @@ inline void RectangleMake(HDC hdc, int x, int y, int width, int height)
 {
 	Rectangle(hdc, x, y, x + width, y + height);
 }
+inline void RectangleMake(HDC hdc, int x, int y, int width, int height)
+{
+	Rectangle(hdc, x, y, x + width, y + height);
+}
+inline void drawRect(HDC hdc, const RECT& rect)
+{
+	Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+}
+inline void drawRect(HDC hdc, const UTIL::FRECT& rect)
+{
+	Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+}
+
 //사각형 그리기(중심점)
 inline void RectangleMakeCenter(HDC hdc, int x, int y, int width, int height)
 {
@@ -52,5 +66,4 @@ inline void EllipseMake(HDC hdc, int x, int y, int width, int height)
 inline void EllipseMakeCenter(HDC hdc, int x, int y, int width, int height)
 {
 	Ellipse(hdc, x - (width / 2), y - (height / 2), x + (width / 2), y + (height / 2));
-
 }

@@ -1,3 +1,5 @@
+#include "..\..\..\CrazyArcade\src\HomeWorkClass\Obj\Player.h"
+#include "..\..\..\CrazyArcade\src\HomeWorkClass\Obj\Player.h"
 #include "Player.h"
 
 
@@ -8,6 +10,10 @@ Player::Player()
 
 
 Player::~Player()
+{
+}
+
+void Player::init()
 {
 }
 
@@ -68,6 +74,10 @@ void Player::update(float deltaTime)
 
 		return;
 	}
+}
+
+void Player::render(HDC hdc)
+{
 }
 
 void Player::render()

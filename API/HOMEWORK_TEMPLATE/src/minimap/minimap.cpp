@@ -1,3 +1,4 @@
+#include "Etc/stdafx.h"
 #include "minimap.h"
 
 #define ROCKMANSPEED 5

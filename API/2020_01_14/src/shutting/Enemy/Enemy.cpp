@@ -1,5 +1,5 @@
+#include "Etc/stdafx.h"
 #include "Enemy.h"
-
 
 
 Enemy::Enemy()

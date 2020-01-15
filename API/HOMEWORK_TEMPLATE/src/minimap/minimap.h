@@ -1,5 +1,4 @@
 #pragma once
-#include "Etc/stdafx.h"
 #include "Common/gameNode.h"
 
 class minimap : public gameNode

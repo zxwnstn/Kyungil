@@ -1,3 +1,4 @@
+#include "Etc/stdafx.h"
 #include "mainGame.h"
 #include "HomeWorkClass/Scene/SceneBase.h"
 

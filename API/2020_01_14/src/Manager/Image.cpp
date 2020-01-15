@@ -1,5 +1,5 @@
+#include "Etc/stdafx.h"
 #include "Image.h"
-
 //for alpha blending library
 #pragma comment(lib, "msimg32.lib")
 
