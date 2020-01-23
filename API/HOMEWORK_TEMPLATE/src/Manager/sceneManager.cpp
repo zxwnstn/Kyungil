@@ -1,6 +1,5 @@
-#include "Etc/stdafx.h"
-#include "Common/gameNode.h"
 #include "sceneManager.h"
+DEFINITION_SINGLE(sceneManager)
 
 sceneManager::sceneManager()
 {
@@ -10,30 +9,23 @@ sceneManager::sceneManager()
 sceneManager::~sceneManager()
 {
 }
-//현재씬을 널값으로 초기화 하자.
-gameNode* sceneManager::_currentScene = nullptr;
 
-HRESULT sceneManager::init()
+bool sceneManager::init()
 {
-	return S_OK;
+	_currentScene = nullptr;
+	return true;
 }
 
 void sceneManager::release()
 {
-	miSceneList iter = _mSceneList.begin();
-	for (iter; iter != _mSceneList.end();)
-	{
-		//삭제
-		if (iter->second != NULL)
-		{
-			if (iter->second == _currentScene)iter->second->release();
+	for (auto iter = _mSceneList.begin(); iter != _mSceneList.end(); ) {
+		if (iter->second != nullptr){
+			if (iter->second == _currentScene)
+				iter->second->release();
 			SAFE_DELETE(iter->second);
 			iter = _mSceneList.erase(iter);
 		}
-		else
-		{
-			iter++;
-		}
+		else iter++;
 	}
 	_mSceneList.clear();
 }
@@ -41,43 +33,47 @@ void sceneManager::release()
 void sceneManager::update(float deltaTime)
 {
 	if (_currentScene)
-	{
 		_currentScene->update(deltaTime);
-	}
 }
 
-void sceneManager::render()
+void sceneManager::render(HDC hdc)
 {
 	if (_currentScene)
-		_currentScene->render();
+		_currentScene->render(hdc);
 }
 
-void sceneManager::debugRender()
+void sceneManager::afterRender(HDC hdc)
 {
-	if (m_showRect) 
-		_currentScene->debugRender();
+	if (_currentScene)
+		_currentScene->afterRender(hdc);
 }
 
-gameNode * sceneManager::addScene(string sceneName, gameNode * scene)
+void sceneManager::debugRender(HDC hdc)
 {
-	if(!scene)
+	if (_currentScene)
+		_currentScene->debugRender(hdc);
+}
+
+Scene * sceneManager::addScene(tstring sceneName, Scene* scene) {
+	
+	if(!scene) 
 		return nullptr;
-
+	
 	_mSceneList.insert(make_pair(sceneName, scene));
-
-	return nullptr;
-
+	return scene;
 }
 
-HRESULT sceneManager::changeScene(string sceneName)
+bool sceneManager::changeScene(tstring sceneName)
 {
 	miSceneList find = _mSceneList.find(sceneName);
 
 	//못찾으면 E_FAIL
-	if (find == _mSceneList.end())return E_FAIL;
+	if (find == _mSceneList.end())
+		return false;
 
 	//바꾸려는씬이 현재씬이랑 같아도 E_FAIL
-	if (find->second == _currentScene)return E_FAIL;
+	if (find->second == _currentScene)
+		return false;
 
 	//여기까지 왔다면 문제가 없다 즉 씬을 초기화하고 변경하자.
 	if (SUCCEEDED(find->second->init()))

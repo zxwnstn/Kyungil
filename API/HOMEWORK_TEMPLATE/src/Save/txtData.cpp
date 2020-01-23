@@ -1,5 +1,5 @@
-#include "Etc/stdafx.h"
 #include "txtData.h"
+DEFINITION_SINGLE(txtData)
 
 txtData::txtData()
 {
@@ -8,21 +8,19 @@ txtData::~txtData()
 {
 }
 
-HRESULT txtData::init()
+bool txtData::init()
 {
-	return S_OK;
+	return true;
 }
+
 //한줄짜리 데이터를 담아둘것(모든 데이터를 한줄 단위로 짤라서 지정한다.)
-void txtData::txtSave(char * saveFileName, vector<string> vStr)
+void txtData::txtSave(TCHAR * saveFileName, std::vector<tstring> vStr)
 {
 
 	HANDLE file;
-	char str[128];
+	TCHAR str[128];
 	DWORD write;
-
-
-	strncpy_s(str, 128, vectorArrayCombine(vStr), 128);
-
+	_tcsncpy_s(str, 128, vectorArrayCombine(vStr), 128);
 
 	file = CreateFile
 	(saveFileName,			//생성할 파일또는 열 장치나 파일이름
@@ -38,27 +36,27 @@ void txtData::txtSave(char * saveFileName, vector<string> vStr)
 
 }
 //현재 사용할 데이터(한줄짜리 데이터를 쉼표 단위로 띄어서 저장)
-char * txtData::vectorArrayCombine(vector<string> vArray)
+TCHAR * txtData::vectorArrayCombine(std::vector<tstring> vArray)
 {
-	char str[128];
+	TCHAR str[128];
 	ZeroMemory(str, sizeof(str));
 
 	for (int i = 0; i < vArray.size(); i++)
 	{
-		strncat_s(str, 128, vArray[i].c_str(), 128);
+		_tcsncat_s(str, 128, vArray[i].c_str(), 128);
 
 		if ((i + 1) < vArray.size())
 		{
-			strcat(str, ",");
+			_tcscat(str, TEXT(","));
 		}
 	}
 	return str;
 }
 
-vector<string> txtData::txtLoad(char * loadFileName)
+std::vector<tstring> txtData::txtLoad(TCHAR * loadFileName)
 {
 	HANDLE file;
-	char str[128];
+	TCHAR str[128];
 	DWORD read;
 
 	file = CreateFile
@@ -74,17 +72,17 @@ vector<string> txtData::txtLoad(char * loadFileName)
 	CloseHandle(file);
 	return charArraySeperation(str);
 }
-vector<string> txtData::charArraySeperation(char charArray[])
+std::vector<tstring> txtData::charArraySeperation(TCHAR charArray[])
 {
-	vector<string>vArray;
+	std::vector<tstring>vArray;
 
-	char* seperator = ",";
-	char* token;
+	TCHAR* seperator = TEXT(",");
+	TCHAR* token;
 
-	token = strtok(charArray, seperator);
+	token = _tcstok(charArray, seperator);
 	vArray.push_back(token);
 
-	while (NULL!=(token = strtok(NULL, seperator)))
+	while (NULL!=(token = _tcstok(NULL, seperator)))
 	{
 		vArray.push_back(token);
 	}

@@ -1,8 +1,9 @@
-#include "Etc/stdafx.h"
+#include "utils.h"
+#include <math.h>
+#include <memory>
 
 namespace UTIL
 {
-	
 	float getDistance(float startX, float startY, float endX, float endY)
 	{
 		float x = endX - startX;
@@ -53,7 +54,7 @@ namespace UTIL
 		return false;
 	}
 
-	bool isRectRectCollision(RECT & rect1, RECT & rect2)
+	bool isRectRectCollision(const RECT & rect1, const RECT & rect2)
 	{
 		if (rect1.left < rect2.right && rect1.right > rect2.left &&
 			rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
@@ -61,6 +62,15 @@ namespace UTIL
 		}
 		return false;
 	}
+	bool isRectRectCollision(const RECT & rect1, const FRECT & rect2)
+	{
+		if (rect1.left < rect2.right && rect1.right > rect2.left &&
+			rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
+			return true;
+		}
+		return false;
+	}
+
 
 	bool isRectRectCollision(const FRECT & rect1, const FRECT & rect2)
 	{
@@ -71,7 +81,16 @@ namespace UTIL
 		return false;
 	}
 
-	bool isPointRectCollison(const POINT & point, const RECT & rect)
+	bool isRectRectCollision(const IRECT & rect1, const IRECT & rect2)
+	{
+		if (rect1.left < rect2.right && rect1.right > rect2.left &&
+			rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
+			return true;
+		}
+		return false;
+	}
+
+	bool isPointRectCollision(const POINT & point, const RECT & rect)
 	{
 		if ((rect.left < point.x && point.x < rect.right) &&
 			(rect.top < point.y && point.y < rect.bottom))
@@ -79,7 +98,7 @@ namespace UTIL
 		return false;
 	}
 
-	bool isPointRectCollicson(const POINT & point, const FRECT & rect)
+	bool isPointRectCollision(const POINT & point, const FRECT & rect)
 	{
 		if ((rect.left < point.x && point.x < rect.right) &&
 			(rect.top < point.y && point.y < rect.bottom))
@@ -87,4 +106,184 @@ namespace UTIL
 		return false;
 	}
 
+	bool isPointRectCollision(const FPOINT & point, const RECT& rect) {
+		if ((rect.left < point.x && point.x < rect.right) &&
+			(rect.top < point.y && point.y < rect.bottom))
+			return true;
+		return false;
+	}
+
+	bool isPointRectCollision(const FPOINT & point, const FRECT& rect) {
+		if ((rect.left < point.x && point.x < rect.right) &&
+			(rect.top < point.y && point.y < rect.bottom))
+			return true;
+		return false;
+	}
+
+	bool isPointRectCollision(const POINT & point, const IRECT & rect)
+	{
+		if ((rect.left <= point.x && point.x <= rect.right) &&
+			(rect.top <= point.y && point.y <= rect.bottom))
+			return true;
+		return false;
+	}
+
+	bool operator==(const IRECT& rect1, const IRECT& rect2) {
+		if (rect1.left == rect2.left && rect1.right == rect2.right &&
+			rect1.top == rect2.top && rect1.bottom == rect2.bottom)
+			return true;
+		return false;
+	}
+
+	void _tagIrect::moveUp(int dist) {
+		top -= dist;
+		bottom -= dist;
+	}
+	void _tagIrect::moveDown(int dist) {
+		top += dist;
+		bottom += dist;
+	}
+	void _tagIrect::moveLeft(int dist) {
+		left -= dist;
+		right -= dist;
+	}
+	void _tagIrect::moveRight(int dist) {
+		left += dist;
+		right += dist;
+	}
+	void _tagIrect::reset() {
+		left = 0;
+		top = 0;
+		right = 0;
+		bottom = 0;
+	}
+
+	//포인트
+	POINT PointMake(int x, int y)
+	{
+		POINT pt = { x ,y };
+		return pt;
+	}
+
+	//선그리는 함수
+	void LineMake(HDC hdc, int x1, int y1, int x2, int y2)
+	{
+		MoveToEx(hdc, x1, y1, NULL);
+		LineTo(hdc, x2, y2);
+	}
+
+	//RECT만들기(좌상단 기준)
+	RECT RectMake(int x, int y, int width, int height)
+	{
+		RECT rc = { x,y, x + width, y + height };
+		return rc;
+	}
+
+	FRECT FRectMake(float x, float y, float width, float height)
+	{
+		UTIL::FRECT rc = { x,y, x + width, y + height };
+		return rc;
+	}
+
+	//RECT만들기(중심점으로 부터)
+	RECT RectMakeCenter(int x, int y, int width, int height)
+	{
+		RECT rc = { x - width / 2, y - height / 2, x + width / 2, y + height / 2 };
+		return rc;
+	}
+
+	FRECT FRectMakeCenter(float x, float y, float width, float height)
+	{
+		FRECT rc = { x - width / 2, y - height / 2, x + width / 2, y + height / 2 };
+
+		return rc;
+	}
+
+	//사각형 그리기
+	void RectangleMake(HDC hdc, int x, int y, int width, int height)
+	{
+		Rectangle(hdc, x, y, x + width, y + height);
+	}
+
+	void drawRect(HDC hdc, const RECT & rect)
+	{
+		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+	}
+
+	void DrawColorRect(HDC hdc, const RECT & rect, COLORREF color) {
+		HBRUSH oldBrush, curBrush;
+		curBrush = CreateSolidBrush(color);
+		oldBrush = (HBRUSH)SelectObject(hdc, curBrush);
+		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+		SelectObject(hdc, oldBrush);
+		DeleteObject(curBrush);
+	}
+
+	//사각형 그리기(중심점)
+	void RectangleMakeCenter(HDC hdc, int x, int y, int width, int height)
+	{
+		Rectangle(hdc, x - (width / 2), y - (height / 2), x + (width / 2), y + (height / 2));
+	}
+
+	void DrawRect(HDC hdc, const RECT & rect) {
+		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+	}
+
+	//원그리기
+	void EllipseMake(HDC hdc, int x, int y, int width, int height)
+	{
+		Ellipse(hdc, x, y, x + width, y + height);
+	}
+
+	//원그리기(중심점)
+	void EllipseMakeCenter(HDC hdc, int x, int y, int width, int height)
+	{
+		Ellipse(hdc, x - (width / 2), y - (height / 2), x + (width / 2), y + (height / 2));
+	}
+
+	//IRECT
+	void DrawColorRect(HDC hdc, const UTIL::IRECT & rect, COLORREF color) {
+		HBRUSH oldBrush, curBrush;
+		curBrush = CreateSolidBrush(color);
+		oldBrush = (HBRUSH)SelectObject(hdc, curBrush);
+		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+		SelectObject(hdc, oldBrush);
+		DeleteObject(curBrush);
+	}
+
+	void drawRect(HDC hdc, const UTIL::IRECT & rect)
+	{
+		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+	}
+
+	IRECT IRectMake(int x, int y, int width, int height)
+	{
+		IRECT rc = { x,y, x + width, y + height };
+		return rc;
+	}
+
+	IRECT IRectMakeCenter(int x, int y, int width, int height)
+	{
+		IRECT rc = { x - width / 2, y - height / 2, x + width / 2, y + height / 2 };
+		return rc;
+	}
+
+	int getInt(int num)
+	{
+		return rand() % num;
+	}
+
+	int getFromIntTo(int fromNum, int toNum)
+	{
+		return rand() % (toNum - fromNum + 1) + fromNum;
+	}
+	
+	char* ConvertWCtoC(const wchar_t * str)
+	{
+		char* pStr;
+		int strSize = WideCharToMultiByte(CP_ACP, 0, str, -1, NULL, 0, NULL, NULL);
+		pStr = new char[strSize];
+		WideCharToMultiByte(CP_ACP, 0, str, -1, &(*pStr), strSize, 0, 0);
+		return pStr;
+	}
 }

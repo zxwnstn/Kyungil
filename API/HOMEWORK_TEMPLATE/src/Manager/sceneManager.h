@@ -1,33 +1,31 @@
 #pragma once
-#include "Common/singletonBase.h"
+#include "stdafx.h"
+#include "Scene/Scene.h"
 
-
-class gameNode;
-class sceneManager :  public singletonBase<sceneManager>
-{
-private:
-
-	typedef map<string, gameNode*> mSceneList;
-	typedef map<string, gameNode*>::iterator miSceneList;
-
-private:
-	//ÇöÀç¾À
-	static gameNode* _currentScene;
-	//¸ñ·Ï
-	mSceneList _mSceneList;
+class sceneManager {
+public:
+	bool init();
+	void release();
 
 public:
-	sceneManager();
-	~sceneManager();
-
-	HRESULT init();
-	void release();
 	void update(float deltaTime);
-	void render();
-	void debugRender();
-	
-	//¾ÀÃß°¡ÇÏ±â
-	gameNode* addScene(string sceneName, gameNode* scene);
-	HRESULT changeScene(string sceneName);
+	void render(HDC hdc);
+	void afterRender(HDC hdc);
+	void debugRender(HDC hdc);
+
+public:
+	Scene* addScene(tstring sceneName, Scene* scene);
+	bool changeScene(tstring sceneName);
+
+private:
+	typedef std::map<tstring, Scene*> mSceneList;
+	typedef std::map<tstring, Scene*>::iterator miSceneList;
+
+private:
+	Scene* _currentScene;
+	mSceneList _mSceneList;
+
+private:
+	DECLARE_SINGLE(sceneManager)
 };
 

@@ -1,25 +1,24 @@
-#include "Etc/stdafx.h"
 #include "timeManager.h"
-
+DEFINITION_SINGLE(timeManager)
 
 timeManager::timeManager()
 {
 }
 
-
 timeManager::~timeManager()
 {
 }
 
-HRESULT timeManager::init()
+bool timeManager::init()
 {
 	_timer = new timer;
 	_timer->init();
-	return S_OK;
+	return true;
 }
 
 void timeManager::release()
 {
+	delete _timer;
 }
 
 void timeManager::update(float lock)
@@ -32,9 +31,9 @@ void timeManager::update(float lock)
 
 void timeManager::render(HDC hdc)
 {
-	char str[256];
+	TCHAR str[256];
 
-	string strFrame;
+	tstring strFrame;
 	//배경모드
 	SetBkMode(hdc, TRANSPARENT);
 	//색상
@@ -43,21 +42,21 @@ void timeManager::render(HDC hdc)
 	if (_timer != nullptr)
 	{
 		//FPS
-		sprintf_s(str, "FPS :  %d", _timer->getFrameRate());
-		TextOut(hdc, 0, 0, str, strlen(str));
+		_tprintf_s(str, TEXT("FPS :  %d"), _timer->getFrameRate());
+		TextOut(hdc, 0, 0, str, _tcslen(str));
 
 		//전체 경과 시간
-		sprintf_s(str, "worldTime :  %.2f", _timer->getWorldTime());
-		TextOut(hdc, 0, 20, str, strlen(str));
+		_stprintf_s(str, TEXT("worldTime :  %.2f"), _timer->getWorldTime());
+		TextOut(hdc, 0, 20, str, _tcslen(str));
 		//한프레임당 경과시간
-		sprintf_s(str, "ElapsedTime :  %.4f", _timer->getElapsedTime());
-		TextOut(hdc, 0, 40, str, strlen(str));
+		_stprintf_s(str, TEXT("ElapsedTime :  %.4f"), _timer->getElapsedTime());
+		TextOut(hdc, 0, 40, str, _tcslen(str));
 	}
 
 	if (_timer != nullptr)
 	{
 		//FPS
-		sprintf_s(str, "FPS :  %d", _timer->getFrameRate());
-		TextOut(hdc, 0, 0, str, strlen(str));
+		_stprintf_s(str, TEXT("FPS :  %d"), _timer->getFrameRate());
+		TextOut(hdc, 0, 0, str, _tcslen(str));
 	}
 }

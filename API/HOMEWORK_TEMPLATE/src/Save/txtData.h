@@ -1,22 +1,21 @@
 #pragma once
-#include "Common/singletonBase.h"
-class txtData :  public singletonBase<txtData>
+#include "stdafx.h"
+
+class txtData 
 {
 public:
-	txtData();
-	~txtData();
+	bool init();
 
-	HRESULT init();
+public:
+	//save
+	void txtSave(TCHAR* saveFileName, std::vector<tstring>vStr);
+	TCHAR* vectorArrayCombine(std::vector<tstring> vArray);
 
-	//세이브용
-	void txtSave(char* saveFileName, vector<string>vStr);
-	char* vectorArrayCombine(vector<string> vArray);
+	//load
+	std::vector<tstring>txtLoad(TCHAR* loadFileName);
+	std::vector<tstring>charArraySeperation(TCHAR charArray[]);
 
-	//로드
-
-	vector<string>txtLoad(char* loadFileName);
-	vector<string>charArraySeperation(char charArray[]);
-
-
+private:
+	DECLARE_SINGLE(txtData);
 };
 

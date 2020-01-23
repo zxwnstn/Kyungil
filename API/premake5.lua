@@ -10,10 +10,13 @@ workspace "API"
 		"x86",
 		"x64"
 	}
-	characterset ("MBCS")
+	characterset ("Unicode")
 
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+IncludeDir = {}
+IncludeDir["FMOD"] = "vendor/fmod/inc"
 
 project "WindowApiLib"
 	location "WindowApiLib"
@@ -62,7 +65,6 @@ project "WhiteBoard"
 	{
 		"%{prj.name}/src"
 	}
-
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
@@ -220,7 +222,16 @@ project "HOMEWORK_TEMPLATE"
 	}
 	includedirs
 	{
-		"%{prj.name}/src"
+		"%{prj.name}/src",
+		"%{IncludeDir.FMOD}"
+	}
+	libdirs
+	{
+		{ "vendor/fmod/lib"}
+	}
+	links
+	{
+		"fmod_vc.lib"
 	}
 
 	filter "system:windows"

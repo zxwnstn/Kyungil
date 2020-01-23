@@ -1,6 +1,5 @@
-#include "Etc/stdafx.h"
 #include "mainGame.h"
-#include "Scene/Scene.h"
+#include "Scene/SampleScene.h"
 
 mainGame::mainGame()
 {
@@ -11,11 +10,11 @@ mainGame::~mainGame()
 
 HRESULT mainGame::init()
 {
-	gameNode::init(true);
-	//image init
+	gameNode::init();
 	
-	SCENEMANAGER->addScene("사나love", new Scene);
-	SCENEMANAGER->changeScene("사나love");
+	//add Scene
+	SCENEMANAGER->addScene(TEXT("Sample"), new SampleScene);
+	SCENEMANAGER->changeScene(TEXT("Sample"));
 
 	return S_OK;
 }
@@ -39,12 +38,11 @@ void mainGame::update()
 void mainGame::render()
 {
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
-	
-	SCENEMANAGER->render();
 
-	if (m_showRect)
-		SCENEMANAGER->debugRender();
-
+	SCENEMANAGER->render(getMemDC());
+	SCENEMANAGER->afterRender(getMemDC());
+	if(m_showRect)
+		SCENEMANAGER->debugRender(getMemDC());
 	if (m_showFPS)
 		TIMEMANAGER->render(getMemDC());
 

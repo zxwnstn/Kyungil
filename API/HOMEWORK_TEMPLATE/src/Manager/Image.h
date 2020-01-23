@@ -1,6 +1,7 @@
 #pragma once
-#include "Etc/stdafx.h"
-
+#include "Common/utils.h"
+#include "stdafx.h"
+#include <Windows.h>
 
 class Image
 {
@@ -53,7 +54,7 @@ public:
 
 private:
 	LPIMAGE_INFO	_imageInfo;		//이미지 정보
-	char			_fileName[255];	//이미지 이름
+	TCHAR			_fileName[255];	//이미지 이름
 	bool			_isTrans;		//배경색 날리기
 	COLORREF		_transColor;	//배경색 날릴 RGB
 
@@ -63,11 +64,11 @@ private:
 public:
 
 	HRESULT init(int width, int height);
-	HRESULT init(const char* fileName, int width, int height, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
+	HRESULT init(const TCHAR* fileName, int width, int height, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 
 	//프레임 이미지 파일로 초기화
-	HRESULT init(const char* fileName, int width, int height, int frameX, int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
-	HRESULT init(const char* fileName, int x, int y, int width, int height, int frameX, int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
+	HRESULT init(const TCHAR* fileName, int width, int height, int frameX, int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
+	HRESULT init(const TCHAR* fileName, int x, int y, int width, int height, int frameX, int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 	void setTransColor(bool isTrans, COLORREF transColor);
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }
 	void release();
@@ -89,45 +90,45 @@ public:
 	void alphaRender(HDC hdc, BYTE alpha);
 	void alphaRender(HDC hdc,int destX, int destY, BYTE alpha);
 	void alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
+	void frameAlphaRender(HDC hdc, int destX, int destY, int frameX, int frameY, BYTE alpha);
+
 
 
 	//이미지 핸들러
-	inline float getX() { return _imageInfo->x; }
-	inline void setX(float x) { _imageInfo->x = x; }
-	inline float getY() { return _imageInfo->y; }
-	inline void setY(float y) { _imageInfo->y = y; }
+	float getX() { return _imageInfo->x; }
+	void setX(float x) { _imageInfo->x = x; }
+	float getY() { return _imageInfo->y; }
+	void setY(float y) { _imageInfo->y = y; }
 
-	inline void setCenter(float x, float y) {
+	void setCenter(float x, float y) {
 		_imageInfo->x = x - (_imageInfo->width) / 2;
 		_imageInfo->y = y - (_imageInfo->height) / 2;
 	}
-	inline int getWidth() { return _imageInfo->width; }
-	inline int getHeight() { return _imageInfo->height; }
+	int getWidth() { return _imageInfo->width; }
+	int getHeight() { return _imageInfo->height; }
 
 	//BoudBox
-	inline RECT getBoundingBox() {
-		RECT rc = RectMakeCenter(_imageInfo->x, _imageInfo->y, _imageInfo->width, _imageInfo->height);
+	RECT getBoundingBox() {
+		RECT rc = UTIL::RectMakeCenter(_imageInfo->x, _imageInfo->y, _imageInfo->width, _imageInfo->height);
 		return rc;
 	}
-	inline int getFrameX() { return _imageInfo->currentFrameX; }
-	inline void setFrameX(int frameX) {
+	int getFrameX() { return _imageInfo->currentFrameX; }
+	void setFrameX(int frameX) {
 		_imageInfo->currentFrameX = frameX;
 		if (frameX > _imageInfo->maxFrameX)
 			_imageInfo->currentFrameX = _imageInfo->maxFrameX;
 	}
-	inline int getFrameY() { return _imageInfo->currentFrameY; }
-	inline void setFrameY(int frameY) {
+	int getFrameY() { return _imageInfo->currentFrameY; }
+	void setFrameY(int frameY) {
 		_imageInfo->currentFrameY = frameY;
 		if (frameY > _imageInfo->maxFrameY)
 			_imageInfo->currentFrameY = _imageInfo->maxFrameY;
 	}
 
 	//getter
-	inline int getFrameWidth() { return _imageInfo->FrameWidth; }
-	inline int getFrameheight() { return _imageInfo->FrameHeight; }
-	inline int getMaxFrameX() { return _imageInfo->maxFrameX; }
-	inline int getMaxFrameY() { return _imageInfo->maxFrameY; }
-	
-
+	int getFrameWidth() { return _imageInfo->FrameWidth; }
+	int getFrameheight() { return _imageInfo->FrameHeight; }
+	int getMaxFrameX() { return _imageInfo->maxFrameX; }
+	int getMaxFrameY() { return _imageInfo->maxFrameY; }
 };
 

@@ -1,31 +1,30 @@
 #pragma once
+#include "Common/Managers.h"
 #include "Manager/Image.h"
+#include "stdafx.h"
+static Image* _backBuffer = IMAGEMANAGER->addImage(TEXT("backBuffer"), WINSIZEX, WINSIZEY);
 
-static Image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSIZEY);
-
-
-class gameNode
-{
-private:
-	//void setBackBuffer();
-	HDC		_hdc;
-	bool	_managerInit;
+class gameNode {
 
 public:
 	gameNode();
 	~gameNode();
 
-	virtual HRESULT init(bool managerInit);
+public:
 	virtual HRESULT init();
 	virtual void release();
-	virtual void update(float deltaTime);
+	virtual void update();
 	virtual void render();
-	virtual void debugRender() {};
 
-	Image* getBackBuffer() { return _backBuffer; }
-	HDC getHDC() { return _hdc; }
-	HDC getMemDC() { return _backBuffer->getMemDC(); }
+public:
+	Image* getBackBuffer()	{ return _backBuffer; }
+	HDC getHDC()			{ return _hdc; }
+	HDC getMemDC()			{ return _backBuffer->getMemDC(); }
 
+public:
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
+private:
+	HDC	_hdc;
+	static bool _managerInit;
 };

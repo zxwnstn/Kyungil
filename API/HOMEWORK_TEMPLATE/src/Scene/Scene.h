@@ -1,17 +1,19 @@
 #pragma once
-#include "Common/gameNode.h"
 
-class Scene :
-	public gameNode
-{
+class Scene {
+
 public:
+	Scene() {};
+	virtual ~Scene() {};
 
-	HRESULT init();
-	void release();
-	void update(float deltaTime);
-	void render();
+public:
+	virtual bool init() = 0;
+	virtual void update(float _deltaTime) = 0;
 
-	Scene();
-	~Scene();
+public:
+	virtual void render(HDC hdc) = 0;
+	virtual void afterRender(HDC hdc) = 0;
+	virtual void debugRender(HDC hdc) = 0;
+	virtual void release() = 0;
 };
 

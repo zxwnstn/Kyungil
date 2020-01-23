@@ -1,27 +1,29 @@
 #pragma once
-#include "Common/singletonBase.h"
+#include "stdafx.h"
 #include <bitset>
-using namespace std;
 #define KEYMAX 256
 
-class keyManager :  public singletonBase<keyManager>
-{
-private:
-
-	bitset<KEYMAX> _keyUp;
-	bitset<KEYMAX> _keyDown;
-	
+class keyManager {
 public:
-	keyManager();
-	~keyManager();
-
 	HRESULT init();
-
 	void release();
 
+public:
 	bool isOnceKeyDown(int key);
 	bool isOnceKeyUp(int key);
 	bool isStayKeyDown(int key);
 	bool isToggleKey(int key);
+
+public:
+	void setCustomKey(int dest, int userKey);
+
+private:
+	std::bitset<KEYMAX> _keyUp;
+	std::bitset<KEYMAX> _keyDown;
+
+	BYTE playerKey[KEYMAX];
+
+private:
+	DECLARE_SINGLE(keyManager)
 };
 

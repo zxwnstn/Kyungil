@@ -1,4 +1,3 @@
-#include "Etc/stdafx.h"
 #include "timer.h"
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
@@ -58,7 +57,7 @@ void timer::tick(float lockFPS)
 	{//지원하지 않으면 time함수를 이용.(1/1000)
 		_curTime = timeGetTime();
 	}
-	//마지막 시간과ㅏ 현재시간의 경과량
+	//마지막 시간과 현재시간의 경과량
 	_timeElapsed = (_curTime - _lastTime) * _timeScale;
 
 
@@ -91,12 +90,11 @@ void timer::tick(float lockFPS)
 
 }
 
-unsigned long timer::getFrameRate(char * str) const
+unsigned long timer::getFrameRate(TCHAR * str) const
 {
 
-	if (str != NULL)
-	{
-		wsprintf(str, "FPS : %d", _frameRate);
+	if (str != NULL){
+		_stprintf(str, TEXT("FPS : %d"), _frameRate);
 	}
 	return _frameRate;
 }
