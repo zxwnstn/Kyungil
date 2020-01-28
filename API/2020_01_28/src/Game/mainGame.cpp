@@ -1,5 +1,5 @@
 #include "mainGame.h"
-#include "Scene/SampleScene.h"
+#include "GameScene/PackManScene.h"
 
 mainGame::mainGame()
 {
@@ -13,8 +13,8 @@ HRESULT mainGame::init()
 	gameNode::init();
 	
 	//add Scene
-	SCENEMANAGER->addScene("Sample", new SampleScene);
-	SCENEMANAGER->changeScene("Sample");
+	SCENEMANAGER->addScene("packMan", new PackManScene);
+	SCENEMANAGER->changeScene("packMan");
 
 	return S_OK;
 }
@@ -26,9 +26,9 @@ void mainGame::release()
 
 void mainGame::update()
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_F1))
+	if (KEYMANAGER->isOnceKeyDown(GAME_RECTMODE))
 		m_showRect = !m_showRect;
-	if (KEYMANAGER->isOnceKeyDown(VK_F2))
+	if (KEYMANAGER->isOnceKeyDown(GAME_SHOWFPS))
 		m_showFPS = !m_showFPS;
 
 	TIMEMANAGER->update(60.f);

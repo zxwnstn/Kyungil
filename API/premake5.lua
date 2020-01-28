@@ -4,6 +4,7 @@ workspace "API"
 		"Debug",
 		"Release"
 	}
+	startproject = "HOMEWORK_TEMPLATE"
 
 	platforms
 	{

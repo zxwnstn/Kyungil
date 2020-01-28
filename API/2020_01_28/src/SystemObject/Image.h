@@ -1,6 +1,5 @@
 #pragma once
 #include "Common/utils.h"
-
 #include <Windows.h>
 
 class Image

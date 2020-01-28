@@ -1,13 +1,14 @@
 #include "utils.h"
 #include <math.h>
 #include <memory>
+#include <cassert>
 
 namespace UTIL
 {
 	float getDistance(float startX, float startY, float endX, float endY)
 	{
 		float x = endX - startX;
-		float y = endY -  startY;
+		float y = endY - startY;
 
 		return sqrtf(x * x + y * y);
 	}
@@ -16,7 +17,7 @@ namespace UTIL
 	{
 		float dx = src_x - tar_x;
 		float dy = src_y - tar_y;
-		float angle =0.f;
+		float angle = 0.f;
 		float distance = sqrtf(dx * dx + dy * dy);
 
 
@@ -28,7 +29,7 @@ namespace UTIL
 			angle = acosf(dx / distance);
 		if (dx > 0 && dy < 0)
 			angle = PI - acosf(dx / distance);
-		
+
 
 		return angle;
 	}
@@ -48,7 +49,7 @@ namespace UTIL
 		rect.bottom += c1.radius;
 
 		if (rect.left <= c1.p.x  && c1.p.x <= rect.right)
-			if(rect.top <= c1.p.y  && c1.p.y <= rect.bottom)
+			if (rect.top <= c1.p.y  && c1.p.y <= rect.bottom)
 				return true;
 
 		return false;
@@ -82,6 +83,15 @@ namespace UTIL
 	}
 
 	bool isRectRectCollision(const IRECT & rect1, const IRECT & rect2)
+	{
+		if (rect1.left < rect2.right && rect1.right > rect2.left &&
+			rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
+			return true;
+		}
+		return false;
+	}
+
+	bool isRectRectCollision(const IRECT & rect1, const RECT & rect2)
 	{
 		if (rect1.left < rect2.right && rect1.right > rect2.left &&
 			rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
@@ -143,6 +153,50 @@ namespace UTIL
 
 		if (originColor != _targetColor)
 			return false;
+		return true;
+	}
+
+	bool isRectColorSame(HDC _targetImgDC, const RECT& rect, int _divisionX, int _divisionY, COLORREF _targetColor)
+	{
+		assert(_divisionX >= 0);
+		assert(_divisionY >= 0);
+
+		int width = rect.right - rect.left;
+		int height = rect.bottom - rect.top;
+
+		float divisionWidth = width / _divisionX;
+		float divisionHeight = height / _divisionY;
+
+
+		for (float i = rect.left; i <= rect.right; i += divisionWidth) {
+			for (float j = rect.top; j <= rect.bottom; j += divisionHeight) {
+				COLORREF originColor = GetPixel(_targetImgDC, i, j);
+				if (originColor != _targetColor)
+					return false;
+			}
+		}
+		return true;
+	}
+
+	bool isRectColorSame(HDC _targetImgDC, const IRECT& rect, int _divisionX, int _divisionY, COLORREF _targetColor)
+	{
+		assert(_divisionX >= 0);
+		assert(_divisionY >= 0);
+
+		int width = rect.right - rect.left;
+		int height = rect.bottom - rect.top;
+
+		float divisionWidth = width / _divisionX;
+		float divisionHeight = height / _divisionY;
+
+
+		for (float i = rect.left; i <= rect.right; i += divisionWidth) {
+			for (float j = rect.top; j <= rect.bottom; j += divisionHeight) {
+				COLORREF originColor = GetPixel(_targetImgDC, i, j);
+				if (originColor != _targetColor)
+					return false;
+			}
+		}
 		return true;
 	}
 

@@ -25,8 +25,10 @@ HRESULT keyManager::init()
 	playerKey[P1_EVENT] = VK_SPACE;
 	playerKey[P1_USEITEM] = VK_TAB;
 
+	playerKey[GAME_SHOWFPS] = VK_F1;
 	playerKey[GAME_RECTMODE] = VK_F2;
 	playerKey[GAME_DEBUGMODE] = VK_F3;
+	playerKey[GAME_RTT] = VK_F4;
 	playerKey[GAME_LMOUSE] = VK_LBUTTON;
 	playerKey[GAME_RMOUSE] = VK_RBUTTON;
 
