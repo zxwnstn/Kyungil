@@ -1,22 +1,22 @@
 #include "gameNode.h"
-bool gameNode::_managerInit = false;
+bool GameNode::_managerInit = false;
 
-gameNode::gameNode()
+GameNode::GameNode()
 {
 }
 
-gameNode::~gameNode()
+GameNode::~GameNode()
 {
 }
 
-void gameNode::update()
+void GameNode::update()
 {
 }
-void gameNode::render()
+void GameNode::render()
 {
 }
 
-HRESULT gameNode::init()
+HRESULT GameNode::init()
 {
 	_hdc = GetDC(m_hWnd);
 	_managerInit = false;
@@ -29,14 +29,13 @@ HRESULT gameNode::init()
 		SOUNDMANAGER->init();
 		TIMEMANAGER->init();
 		SCENEMANAGER->init();
-		//NETWORKMANAGER->init();
 	}
 
 	return S_OK;
 }
 
 
-void gameNode::release()
+void GameNode::release()
 {
 	//매니저 해제
 	if (_managerInit) {
@@ -45,20 +44,18 @@ void gameNode::release()
 		SOUNDMANAGER->release();
 		TIMEMANAGER->release();
 		SCENEMANAGER->release();
-		//NETWORKMANAGER->release();
 
 		IMAGEMANAGER->Destroy();
 		KEYMANAGER->Destroy();
 		SOUNDMANAGER->Destroy();
 		TIMEMANAGER->Destroy();
 		SCENEMANAGER->Destroy();
-		//NETWORKMANAGER->Destroy();
 	}
 	ReleaseDC(m_hWnd, _hdc);
 }
 
 
-LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
+LRESULT GameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	switch (iMessage)
 	{

@@ -1,10 +1,6 @@
 #pragma once
 #include "stdafx.h"
 #include "Scene.h"
-#include "Game/GameObject/Object.h"
-#include "Common/Managers.h"
-#include "Game/GameObject/PackMan.h"
-#include "Game/GameObject/Coddaczi.h"
 
 class PackManScene
 	:public Scene
@@ -26,7 +22,8 @@ public:
 private:
 	std::shared_ptr<PackMan> packMan;
 	std::vector<std::shared_ptr<Coddaczi>> coddaczis;
-	RECT back = { 0, 0, WINSIZEX, WINSIZEY };
 	Image* backGround;
+
+	RECT back = { 0, 0, WINSIZEX, WINSIZEY };
 };
 

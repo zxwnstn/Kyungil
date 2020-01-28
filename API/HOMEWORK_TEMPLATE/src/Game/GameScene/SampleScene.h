@@ -1,7 +1,5 @@
 #pragma once
-#include "stdafx.h"
 #include "Scene.h"
-#include "Common/Managers.h"
 
 class SampleScene :
 	public Scene 

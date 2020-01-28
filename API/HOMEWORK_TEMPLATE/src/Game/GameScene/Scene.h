@@ -1,5 +1,8 @@
 #pragma once
-#include <Windows.h>
+#include "stdafx.h"
+#include "Common/SystemManagers.h"
+#include "Game/GameObject/Object.h"
+#include "Common/UTILS.h"
 
 class Scene {
 public:
@@ -16,4 +19,3 @@ public:
 	virtual void afterRender(HDC hdc) = 0;
 	virtual void debugRender(HDC hdc) = 0;
 };
-

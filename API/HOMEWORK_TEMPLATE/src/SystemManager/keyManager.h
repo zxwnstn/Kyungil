@@ -3,7 +3,7 @@
 #include <bitset>
 #define KEYMAX 256
 
-class keyManager {
+class KeyManager {
 public:
 	HRESULT init();
 	void release();
@@ -24,6 +24,7 @@ private:
 	BYTE playerKey[KEYMAX];
 
 private:
-	DECLARE_SINGLE(keyManager)
+	DECLARE_SINGLE(KeyManager)
 };
 
+#define KEYMANAGER KeyManager::GetInst()

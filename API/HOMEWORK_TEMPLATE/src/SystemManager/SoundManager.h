@@ -5,10 +5,8 @@
 
 //define your sound game channel
 enum class Channel {
-	bgm,
-	object,
-	character,
-	effects
+	eChannelBgm,
+	eChannelEffect
 };
 
 class SoundManager
@@ -42,4 +40,4 @@ private:
 	DECLARE_SINGLE(SoundManager)
 };
 
-
+#define SOUNDMANAGER SoundManager::GetInst()

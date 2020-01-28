@@ -1,22 +1,22 @@
 #include "sceneManager.h"
-DEFINITION_SINGLE(sceneManager)
+DEFINITION_SINGLE(SceneManager)
 
-sceneManager::sceneManager()
+SceneManager::SceneManager()
 {
 }
 
 
-sceneManager::~sceneManager()
+SceneManager::~SceneManager()
 {
 }
 
-bool sceneManager::init()
+bool SceneManager::init()
 {
 	_currentScene = nullptr;
 	return true;
 }
 
-void sceneManager::release()
+void SceneManager::release()
 {
 	for (auto iter = _mSceneList.begin(); iter != _mSceneList.end(); ) {
 		if (iter->second != nullptr){
@@ -30,31 +30,31 @@ void sceneManager::release()
 	_mSceneList.clear();
 }
 
-void sceneManager::update(float deltaTime)
+void SceneManager::update(float deltaTime)
 {
 	if (_currentScene)
 		_currentScene->update(deltaTime);
 }
 
-void sceneManager::render(HDC hdc)
+void SceneManager::render(HDC hdc)
 {
 	if (_currentScene)
 		_currentScene->render(hdc);
 }
 
-void sceneManager::afterRender(HDC hdc)
+void SceneManager::afterRender(HDC hdc)
 {
 	if (_currentScene)
 		_currentScene->afterRender(hdc);
 }
 
-void sceneManager::debugRender(HDC hdc)
+void SceneManager::debugRender(HDC hdc)
 {
 	if (_currentScene)
 		_currentScene->debugRender(hdc);
 }
 
-Scene * sceneManager::addScene(std::string sceneName, Scene* scene) {
+Scene * SceneManager::addScene(std::string sceneName, Scene* scene) {
 	
 	if(!scene) 
 		return nullptr;
@@ -63,7 +63,7 @@ Scene * sceneManager::addScene(std::string sceneName, Scene* scene) {
 	return scene;
 }
 
-bool sceneManager::changeScene(std::string sceneName)
+bool SceneManager::changeScene(std::string sceneName)
 {
 	miSceneList find = _mSceneList.find(sceneName);
 

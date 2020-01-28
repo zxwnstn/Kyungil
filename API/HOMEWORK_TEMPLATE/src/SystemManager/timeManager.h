@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "SystemObject/timer.h"
 
-class timeManager {
+class TimeManager {
 
 public:
 	bool init();
@@ -14,9 +14,10 @@ public:
 	float getWorldTime() const		{ return _timer->getWorldTime(); }
 
 private:
-	timer* _timer;
+	Timer* _timer;
 
 private:
-	DECLARE_SINGLE(timeManager)
+	DECLARE_SINGLE(TimeManager)
 };
 
+#define TIMEMANAGER TimeManager::GetInst()

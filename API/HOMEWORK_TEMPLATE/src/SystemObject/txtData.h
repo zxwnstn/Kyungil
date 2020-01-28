@@ -1,8 +1,12 @@
 #pragma once
 #include "stdafx.h"
 
-class txtData 
+class TxtData
 {
+public:
+	TxtData();
+	~TxtData();
+
 public:
 	bool init();
 
@@ -14,8 +18,5 @@ public:
 	//load
 	std::vector<std::string>txtLoad(char* loadFileName);
 	std::vector<std::string>charArraySeperation(char charArray[]);
-
-private:
-	DECLARE_SINGLE(txtData);
 };
 

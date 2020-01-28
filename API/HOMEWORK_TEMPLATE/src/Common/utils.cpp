@@ -1,6 +1,6 @@
-#include "utils.h"
+#include "UTILS.h"
+#include <cassert>
 #include <math.h>
-#include <memory>
 
 namespace UTIL
 {
@@ -8,7 +8,6 @@ namespace UTIL
 	{
 		float x = endX - startX;
 		float y = endY -  startY;
-
 		return sqrtf(x * x + y * y);
 	}
 
@@ -19,7 +18,6 @@ namespace UTIL
 		float angle =0.f;
 		float distance = sqrtf(dx * dx + dy * dy);
 
-
 		if (dx < 0 && dy < 0)
 			angle = PI2 - acosf(dx / distance);
 		if (dx < 0 && dy > 0)
@@ -28,7 +26,6 @@ namespace UTIL
 			angle = acosf(dx / distance);
 		if (dx > 0 && dy < 0)
 			angle = PI - acosf(dx / distance);
-		
 
 		return angle;
 	}
@@ -82,6 +79,14 @@ namespace UTIL
 	}
 
 	bool isRectRectCollision(const IRECT & rect1, const IRECT & rect2)
+	{
+		if (rect1.left < rect2.right && rect1.right > rect2.left &&
+			rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
+			return true;
+		}
+		return false;
+	}
+	bool isRectRectCollision(const IRECT & rect1, const RECT & rect2)
 	{
 		if (rect1.left < rect2.right && rect1.right > rect2.left &&
 			rect1.top < rect2.bottom && rect1.bottom > rect2.top) {
@@ -145,6 +150,51 @@ namespace UTIL
 			return false;
 		return true;
 	}
+
+	bool isRectColorSame(HDC _targetImgDC, const RECT& rect, int _divisionX, int _divisionY, COLORREF _targetColor)
+	{
+		assert(_divisionX >= 0);
+		assert(_divisionY >= 0);
+
+		int width = rect.right - rect.left;
+		int height = rect.bottom - rect.top;
+
+		float divisionWidth = width / _divisionX;
+		float divisionHeight = height / _divisionY;
+
+
+		for (float i = rect.left; i <= rect.right; i += divisionWidth) {
+			for (float j = rect.top; j <= rect.bottom; j += divisionHeight) {
+				COLORREF originColor = GetPixel(_targetImgDC, i, j);
+				if (originColor != _targetColor)
+					return false;
+			}
+		}
+		return true;
+	}
+
+	bool isRectColorSame(HDC _targetImgDC, const IRECT& rect, int _divisionX, int _divisionY, COLORREF _targetColor)
+	{
+		assert(_divisionX >= 0);
+		assert(_divisionY >= 0);
+
+		int width = rect.right - rect.left;
+		int height = rect.bottom - rect.top;
+
+		float divisionWidth = width / _divisionX;
+		float divisionHeight = height / _divisionY;
+
+
+		for (float i = rect.left; i <= rect.right; i += divisionWidth) {
+			for (float j = rect.top; j <= rect.bottom; j += divisionHeight) {
+				COLORREF originColor = GetPixel(_targetImgDC, i, j);
+				if (originColor != _targetColor)
+					return false;
+			}
+		}
+		return true;
+	}
+
 
 	bool operator==(const IRECT& rect1, const IRECT& rect2) {
 		if (rect1.left == rect2.left && rect1.right == rect2.right &&

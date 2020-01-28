@@ -1,16 +1,16 @@
 #include "keyManager.h"
-DEFINITION_SINGLE(keyManager)
+DEFINITION_SINGLE(KeyManager)
 
-keyManager::keyManager()
+KeyManager::KeyManager()
 {
 }
 
 
-keyManager::~keyManager()
+KeyManager::~KeyManager()
 {
 }
 
-HRESULT keyManager::init()
+HRESULT KeyManager::init()
 {
 	//키가 전부 눌려있지 않은 상태로 초기화하자
 	for (int i = 0; i < KEYMAX; i++){
@@ -35,11 +35,11 @@ HRESULT keyManager::init()
 	return S_OK;
 }
 
-void keyManager::release()
+void KeyManager::release()
 {
 }
 
-bool keyManager::isOnceKeyDown(int key)
+bool KeyManager::isOnceKeyDown(int key)
 {
 	//GetAsyncKeyState현재 키의 상태를 알아오는 녀석
 	//키가 눌려졌을때나 떨어졌을때 호출
@@ -54,7 +54,7 @@ bool keyManager::isOnceKeyDown(int key)
 	return false;
 }
 
-bool keyManager::isOnceKeyUp(int key)
+bool KeyManager::isOnceKeyUp(int key)
 {
 	if (GetAsyncKeyState(key) & 0x8000)
 		_keyUp.set(playerKey[key],true);
@@ -67,14 +67,14 @@ bool keyManager::isOnceKeyUp(int key)
 	return false;
 }
 
-bool keyManager::isStayKeyDown(int key)
+bool KeyManager::isStayKeyDown(int key)
 {
 	if (GetAsyncKeyState(playerKey[key]) & 0x8000)
 		return true;
 	return false;
 }
 
-bool keyManager::isToggleKey(int key)
+bool KeyManager::isToggleKey(int key)
 {
 
 	//GetKeyState :현재 키의 토글상태
@@ -84,7 +84,7 @@ bool keyManager::isToggleKey(int key)
 	return false;
 }
 
-void keyManager::setCustomKey(int dest, int userKey)
+void KeyManager::setCustomKey(int dest, int userKey)
 {
 	playerKey[dest] = userKey;
 }

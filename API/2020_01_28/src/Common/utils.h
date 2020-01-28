@@ -70,7 +70,6 @@ namespace UTIL
 	bool isPointRectCollision(const FPOINT & point, const FRECT& rect);
 	bool isPointRectCollision(const POINT & point, const IRECT & rect);
 
-
 	bool isPixelColorSame(HDC _targetImgDC, const int _x, const int _y, COLORREF _targetColor = RGB(255, 0, 255));
 	bool isPixelColorSame(HDC _targetImgDC, const POINT& _destPos, COLORREF _targetColor = RGB(255, 0, 255));
 	bool isRectColorSame(HDC _targetImgDC, const RECT& rect, int _divisionX = 1, int _divisionY = 1, COLORREF _targetColor = RGB(255, 0, 255));
@@ -107,7 +106,4 @@ namespace UTIL
 	void drawRect(HDC hdc, const UTIL::IRECT& rect);
 	IRECT IRectMake(int x, int y, int width, int height);
 	IRECT IRectMakeCenter(int x, int y, int width, int height);
-	
-
-
 }

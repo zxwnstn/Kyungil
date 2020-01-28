@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "Game/GameScene/Scene.h"
 
-class sceneManager {
+class SceneManager {
 public:
 	bool init();
 	void release();
@@ -14,7 +14,7 @@ public:
 	void debugRender(HDC hdc);
 
 public:
-	Scene* addScene(std::string sceneName, Scene* scene);
+	class Scene* addScene(std::string sceneName, Scene* scene);
 	bool changeScene(std::string sceneName);
 
 private:
@@ -26,6 +26,7 @@ private:
 	mSceneList _mSceneList;
 
 private:
-	DECLARE_SINGLE(sceneManager)
+	DECLARE_SINGLE(SceneManager)
 };
 
+#define SCENEMANAGER SceneManager::GetInst()

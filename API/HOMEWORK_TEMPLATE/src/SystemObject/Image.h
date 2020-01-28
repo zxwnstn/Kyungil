@@ -49,6 +49,7 @@ public:
 		}
 	}IMAGE_INFO, *LPIMAGE_INFO;
 
+public:
 	Image();
 	~Image();
 
@@ -62,7 +63,6 @@ private:
 	LPIMAGE_INFO	_blendImage;	//알파 블렌드를 사용하기 위한 이미지
 
 public:
-
 	HRESULT init(int width, int height);
 	HRESULT init(const char* fileName, int width, int height, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 
@@ -91,7 +91,6 @@ public:
 	void alphaRender(HDC hdc,int destX, int destY, BYTE alpha);
 	void alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
 	void frameAlphaRender(HDC hdc, int destX, int destY, int frameX, int frameY, BYTE alpha);
-
 
 
 	//이미지 핸들러
@@ -126,9 +125,9 @@ public:
 	}
 
 	//getter
-	int getFrameWidth() { return _imageInfo->FrameWidth; }
-	int getFrameheight() { return _imageInfo->FrameHeight; }
-	int getMaxFrameX() { return _imageInfo->maxFrameX; }
-	int getMaxFrameY() { return _imageInfo->maxFrameY; }
+	int getFrameWidth()		{ return _imageInfo->FrameWidth; }
+	int getFrameheight()	{ return _imageInfo->FrameHeight; }
+	int getMaxFrameX()		{ return _imageInfo->maxFrameX; }
+	int getMaxFrameY()		{ return _imageInfo->maxFrameY; }
 };
 

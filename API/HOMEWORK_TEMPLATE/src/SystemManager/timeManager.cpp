@@ -1,27 +1,27 @@
 #include "timeManager.h"
-DEFINITION_SINGLE(timeManager)
+DEFINITION_SINGLE(TimeManager)
 
-timeManager::timeManager()
+TimeManager::TimeManager()
 {
 }
 
-timeManager::~timeManager()
+TimeManager::~TimeManager()
 {
 }
 
-bool timeManager::init()
+bool TimeManager::init()
 {
-	_timer = new timer;
+	_timer = new Timer;
 	_timer->init();
 	return true;
 }
 
-void timeManager::release()
+void TimeManager::release()
 {
 	delete _timer;
 }
 
-void timeManager::update(float lock)
+void TimeManager::update(float lock)
 {
 	if (_timer != nullptr)
 	{
@@ -29,7 +29,7 @@ void timeManager::update(float lock)
 	}
 }
 
-void timeManager::render(HDC hdc)
+void TimeManager::render(HDC hdc)
 {
 	char str[256];
 

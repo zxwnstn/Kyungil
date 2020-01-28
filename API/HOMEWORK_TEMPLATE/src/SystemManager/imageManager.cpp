@@ -1,4 +1,4 @@
-#include "imageManager.h"
+#include "ImageManager.h"
 DEFINITION_SINGLE(ImageManager)
 
 ImageManager::ImageManager()

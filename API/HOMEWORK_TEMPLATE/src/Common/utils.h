@@ -61,6 +61,7 @@ namespace UTIL
 	bool isRectRectCollision(const RECT & rect1, const FRECT & rect2);
 	bool isRectRectCollision(const FRECT & rect1, const FRECT & rect2);
 	bool isRectRectCollision(const IRECT& rect1, const IRECT & rect2);
+	bool isRectRectCollision(const IRECT& rect1, const RECT & rect2);
 
 	//점과 사각형 충돌
 	bool isPointRectCollision(const POINT & point, const RECT& rect);
@@ -72,6 +73,9 @@ namespace UTIL
 
 	bool isPixelColorSame(HDC _targetImgDC, const int _x, const int _y, COLORREF _targetColor = RGB(255, 0, 255));
 	bool isPixelColorSame(HDC _targetImgDC, const POINT& _destPos, COLORREF _targetColor = RGB(255, 0, 255));
+
+	bool isRectColorSame(HDC _targetImgDC, const RECT& rect, int _divisionX = 1, int _divisionY = 1, COLORREF _targetColor = RGB(255, 0, 255));
+	bool isRectColorSame(HDC _targetImgDC, const IRECT& rect, int _division = 1, int _divisionY = 1, COLORREF _targetColor = RGB(255, 0, 255));
 
 
 	//점 만들기

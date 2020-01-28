@@ -1,20 +1,19 @@
 #include "txtData.h"
-DEFINITION_SINGLE(txtData)
 
-txtData::txtData()
+TxtData::TxtData()
 {
 }
-txtData::~txtData()
+TxtData::~TxtData()
 {
 }
 
-bool txtData::init()
+bool TxtData::init()
 {
 	return true;
 }
 
 //한줄짜리 데이터를 담아둘것(모든 데이터를 한줄 단위로 짤라서 지정한다.)
-void txtData::txtSave(char * saveFileName, std::vector<std::string> vStr)
+void TxtData::txtSave(char * saveFileName, std::vector<std::string> vStr)
 {
 
 	HANDLE file;
@@ -36,7 +35,7 @@ void txtData::txtSave(char * saveFileName, std::vector<std::string> vStr)
 
 }
 //현재 사용할 데이터(한줄짜리 데이터를 쉼표 단위로 띄어서 저장)
-char * txtData::vectorArrayCombine(std::vector<std::string> vArray)
+char * TxtData::vectorArrayCombine(std::vector<std::string> vArray)
 {
 	char str[128];
 	ZeroMemory(str, sizeof(str));
@@ -53,7 +52,7 @@ char * txtData::vectorArrayCombine(std::vector<std::string> vArray)
 	return str;
 }
 
-std::vector<std::string> txtData::txtLoad(char * loadFileName)
+std::vector<std::string> TxtData::txtLoad(char * loadFileName)
 {
 	HANDLE file;
 	char str[128];
@@ -72,7 +71,7 @@ std::vector<std::string> txtData::txtLoad(char * loadFileName)
 	CloseHandle(file);
 	return charArraySeperation(str);
 }
-std::vector<std::string> txtData::charArraySeperation(char charArray[])
+std::vector<std::string> TxtData::charArraySeperation(char charArray[])
 {
 	std::vector<std::string>vArray;
 

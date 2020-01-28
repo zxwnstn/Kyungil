@@ -4,16 +4,16 @@
 //timeGetTime 함수를 사용하기 위한 라이브러리 추가
 //윈도우가 시작되고 난 뒤의 시간을 리턴함.
 
-timer::timer()
+Timer::Timer()
 {
 }
 
 
-timer::~timer()
+Timer::~Timer()
 {
 }
 
-HRESULT timer::init()
+HRESULT Timer::init()
 {
 	//QueryPerformanceCounter 고해상도 타이머의 현재 cpu의 클럭수를 얻는 녀석
 	//QueryPerformanceFrequency 고해상도 타ㅏ이머의 주파수를 반환함.
@@ -45,7 +45,7 @@ HRESULT timer::init()
 	return S_OK;
 }
 
-void timer::tick(float lockFPS)
+void Timer::tick(float lockFPS)
 {
 	//고성능 타이머를 지원한다면
 	if (_isHardware)
@@ -63,7 +63,6 @@ void timer::tick(float lockFPS)
 
 	if (lockFPS > 0.0f)
 	{
-
 		//고정 프레임의 시간을 만족할때까지 돌려라
 		while (_timeElapsed < (1.0f / lockFPS) )
 		{
@@ -74,25 +73,21 @@ void timer::tick(float lockFPS)
 		}
 	}
 
-
 	_lastTime = _curTime;				//마지막 시간을 기록
 	_FPSFrameCount++;					//자동으로 프레임 카운트 증가
 	_FPStimeElapsed += _timeElapsed;	//초당 프레임 시간 경과량 증가
 	_worldTime += _timeElapsed;			//전체 시간 경과량 증가
 
-										//프레임 초기화를 1초마다 진행
 	if (_FPStimeElapsed > 1.0f)
 	{
 		_frameRate = _FPSFrameCount;
 		_FPSFrameCount = 0;
 		_FPStimeElapsed = 0.0f;
 	}
-
 }
 
-unsigned long timer::getFrameRate(char * str) const
+unsigned long Timer::getFrameRate(char * str) const
 {
-
 	if (str != NULL){
 		sprintf(str, "FPS : %d", _frameRate);
 	}

@@ -1,13 +1,13 @@
 #pragma once
-#include "Common/gameNode.h"
+#include "Common/GameNode.h"
 
-class mainGame :  public gameNode
+class MainGame :  public GameNode
 {
 private:
 
 public:
-	mainGame();
-	~mainGame();
+	MainGame();
+	~MainGame();
 
 	HRESULT init() override;	
 	void release() override;

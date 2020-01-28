@@ -1,16 +1,16 @@
-#include "mainGame.h"
+#include "MainGame.h"
 #include "GameScene/SampleScene.h"
 
-mainGame::mainGame()
+MainGame::MainGame()
 {
 }
-mainGame::~mainGame()
+MainGame::~MainGame()
 {
 }
 
-HRESULT mainGame::init()
+HRESULT MainGame::init()
 {
-	gameNode::init();
+	GameNode::init();
 	
 	//add Scene
 	SCENEMANAGER->addScene("Sample", new SampleScene);
@@ -19,12 +19,12 @@ HRESULT mainGame::init()
 	return S_OK;
 }
 
-void mainGame::release()
+void MainGame::release()
 {
-	gameNode::release();
+	GameNode::release();
 }  
 
-void mainGame::update()
+void MainGame::update()
 {
 	if (KEYMANAGER->isOnceKeyDown(GAME_RECTMODE))
 		m_showRect = !m_showRect;
@@ -35,7 +35,7 @@ void mainGame::update()
 	SCENEMANAGER->update(TIMEMANAGER->getElapsedTime());
 }
 
-void mainGame::render()
+void MainGame::render()
 {
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 

@@ -44,3 +44,4 @@ private:
 	DECLARE_SINGLE(ImageManager)
 };
 
+#define IMAGEMANAGER ImageManager::GetInst()

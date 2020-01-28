@@ -1,14 +1,14 @@
 #pragma once
 #include "stdafx.h"
-#include "Common/Managers.h"
+#include "Common/SystemManagers.h"
 
 static Image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSIZEY);
 
-class gameNode {
+class GameNode {
 
 public:
-	gameNode();
-	~gameNode();
+	GameNode();
+	~GameNode();
 
 public:
 	virtual HRESULT init();
