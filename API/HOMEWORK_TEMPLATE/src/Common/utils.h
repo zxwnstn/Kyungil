@@ -70,6 +70,10 @@ namespace UTIL
 	bool isPointRectCollision(const POINT & point, const IRECT & rect);
 
 
+	bool isPixelColorSame(HDC _targetImgDC, const int _x, const int _y, COLORREF _targetColor = RGB(255, 0, 255));
+	bool isPixelColorSame(HDC _targetImgDC, const POINT& _destPos, COLORREF _targetColor = RGB(255, 0, 255));
+
+
 	//점 만들기
 	POINT PointMake(int x, int y);
 
@@ -102,5 +106,6 @@ namespace UTIL
 	IRECT IRectMake(int x, int y, int width, int height);
 	IRECT IRectMakeCenter(int x, int y, int width, int height);
 	
-	char* ConvertWCtoC(const wchar_t* str);
+
+
 }

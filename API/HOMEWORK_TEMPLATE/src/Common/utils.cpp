@@ -128,6 +128,24 @@ namespace UTIL
 		return false;
 	}
 
+	bool isPixelColorSame(HDC _targetImgDC, const POINT & _destPos, COLORREF _targetColor)
+	{
+		COLORREF originColor = GetPixel(_targetImgDC, _destPos.x, _destPos.y);
+
+		if (originColor != _targetColor)
+			return false;
+		return true;
+	}
+
+	bool isPixelColorSame(HDC _targetImgDC, const int _x, const int _y, COLORREF _targetColor)
+	{
+		COLORREF originColor = GetPixel(_targetImgDC, _x, _y);
+
+		if (originColor != _targetColor)
+			return false;
+		return true;
+	}
+
 	bool operator==(const IRECT& rect1, const IRECT& rect2) {
 		if (rect1.left == rect2.left && rect1.right == rect2.right &&
 			rect1.top == rect2.top && rect1.bottom == rect2.bottom)
@@ -276,14 +294,5 @@ namespace UTIL
 	int getFromIntTo(int fromNum, int toNum)
 	{
 		return rand() % (toNum - fromNum + 1) + fromNum;
-	}
-	
-	char* ConvertWCtoC(const wchar_t * str)
-	{
-		char* pStr;
-		int strSize = WideCharToMultiByte(CP_ACP, 0, str, -1, NULL, 0, NULL, NULL);
-		pStr = new char[strSize];
-		WideCharToMultiByte(CP_ACP, 0, str, -1, &(*pStr), strSize, 0, 0);
-		return pStr;
 	}
 }

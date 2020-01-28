@@ -1,8 +1,8 @@
 #pragma once
-#include "Common/Managers.h"
-#include "Manager/Image.h"
 #include "stdafx.h"
-static Image* _backBuffer = IMAGEMANAGER->addImage(TEXT("backBuffer"), WINSIZEX, WINSIZEY);
+#include "Common/Managers.h"
+
+static Image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSIZEY);
 
 class gameNode {
 

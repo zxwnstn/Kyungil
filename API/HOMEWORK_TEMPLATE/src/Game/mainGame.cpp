@@ -13,8 +13,8 @@ HRESULT mainGame::init()
 	gameNode::init();
 	
 	//add Scene
-	SCENEMANAGER->addScene(TEXT("Sample"), new SampleScene);
-	SCENEMANAGER->changeScene(TEXT("Sample"));
+	SCENEMANAGER->addScene("Sample", new SampleScene);
+	SCENEMANAGER->changeScene("Sample");
 
 	return S_OK;
 }
