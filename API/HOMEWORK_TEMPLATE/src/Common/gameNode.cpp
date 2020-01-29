@@ -29,8 +29,8 @@ HRESULT GameNode::init()
 		SOUNDMANAGER->init();
 		TIMEMANAGER->init();
 		SCENEMANAGER->init();
+		ANIMANAGER->init();
 	}
-
 	return S_OK;
 }
 
@@ -44,12 +44,14 @@ void GameNode::release()
 		SOUNDMANAGER->release();
 		TIMEMANAGER->release();
 		SCENEMANAGER->release();
+		ANIMANAGER->release();
 
 		IMAGEMANAGER->Destroy();
 		KEYMANAGER->Destroy();
 		SOUNDMANAGER->Destroy();
 		TIMEMANAGER->Destroy();
 		SCENEMANAGER->Destroy();
+		ANIMANAGER->Destroy();
 	}
 	ReleaseDC(m_hWnd, _hdc);
 }

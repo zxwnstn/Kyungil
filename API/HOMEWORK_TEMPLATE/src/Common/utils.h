@@ -109,7 +109,4 @@ namespace UTIL
 	void drawRect(HDC hdc, const UTIL::IRECT& rect);
 	IRECT IRectMake(int x, int y, int width, int height);
 	IRECT IRectMakeCenter(int x, int y, int width, int height);
-	
-
-
 }

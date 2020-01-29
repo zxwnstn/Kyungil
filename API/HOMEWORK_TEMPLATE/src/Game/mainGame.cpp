@@ -1,5 +1,6 @@
 #include "MainGame.h"
 #include "GameScene/SampleScene.h"
+#include "../example/ExScene/ExAnimationManagerScene.h"
 
 MainGame::MainGame()
 {
@@ -32,7 +33,9 @@ void MainGame::update()
 		m_showFPS = !m_showFPS;
 
 	TIMEMANAGER->update(60.f);
-	SCENEMANAGER->update(TIMEMANAGER->getElapsedTime());
+	deltaTime = TIMEMANAGER->getElapsedTime();
+	SCENEMANAGER->update(deltaTime);
+	ANIMANAGER->update(deltaTime);
 }
 
 void MainGame::render()

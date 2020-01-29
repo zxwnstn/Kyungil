@@ -13,5 +13,8 @@ public:
 	void release() override;
 	void update() override;
 	void render() override;
+
+private:
+	float deltaTime;
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Common/utils.h"
-
+#include "SystemObject/Animation.h"
 #include <Windows.h>
 
 class Image
@@ -52,26 +52,15 @@ public:
 public:
 	Image();
 	~Image();
-
-private:
-	LPIMAGE_INFO	_imageInfo;		//이미지 정보
-	char			_fileName[255];	//이미지 이름
-	bool			_isTrans;		//배경색 날리기
-	COLORREF		_transColor;	//배경색 날릴 RGB
-
-	BLENDFUNCTION	_blendFunc;		//알파블렌드를 위한 정보
-	LPIMAGE_INFO	_blendImage;	//알파 블렌드를 사용하기 위한 이미지
+	void release();
 
 public:
+	//이미지 파일로 초기화
 	HRESULT init(int width, int height);
 	HRESULT init(const char* fileName, int width, int height, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
-
-	//프레임 이미지 파일로 초기화
 	HRESULT init(const char* fileName, int width, int height, int frameX, int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 	HRESULT init(const char* fileName, int x, int y, int width, int height, int frameX, int frameY, bool isTrans = false, COLORREF transColor = RGB(255, 0, 255));
 	void setTransColor(bool isTrans, COLORREF transColor);
-	inline HDC getMemDC() { return _imageInfo->hMemDC; }
-	void release();
 
 	//일반 렌더
 	void render(HDC hdc);
@@ -84,7 +73,7 @@ public:
 
 	//loop render
 	void loopRender(HDC hdc, LPRECT drawArea, int offsetX, int offsetY);
-	void loopAlphaRender(HDC hdc, LPRECT drawArea, int offsetX, int offsetY, BYTE alpha); //알파는 투명도
+	void loopAlphaRender(HDC hdc, LPRECT drawArea, int offsetX, int offsetY, BYTE alpha);
 	
 	//alpha render
 	void alphaRender(HDC hdc, BYTE alpha);
@@ -92,42 +81,55 @@ public:
 	void alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
 	void frameAlphaRender(HDC hdc, int destX, int destY, int frameX, int frameY, BYTE alpha);
 
+	//animation render
+	void aniRender(HDC hdc, int destX, int destY, Animation* ani);
 
 	//이미지 핸들러
-	float getX() { return _imageInfo->x; }
-	void setX(float x) { _imageInfo->x = x; }
-	float getY() { return _imageInfo->y; }
-	void setY(float y) { _imageInfo->y = y; }
+	HDC getMemDC() { return _imageInfo->hMemDC; }
+	float getX()			{ return _imageInfo->x; }
+	float getY()			{ return _imageInfo->y; }
+	int getWidth()			{ return _imageInfo->width; }
+	int getHeight()			{ return _imageInfo->height; }
+	int getFrameWidth()		{ return _imageInfo->FrameWidth; }
+	int getFrameHeight()	{ return _imageInfo->FrameHeight; }
+	int getFrameX()			{ return _imageInfo->currentFrameX; }
+	int getFrameY()			{ return _imageInfo->currentFrameY; }
+	int getMaxFrameX()		{ return _imageInfo->maxFrameX; }
+	int getMaxFrameY()		{ return _imageInfo->maxFrameY; }
 
-	void setCenter(float x, float y) {
+	void setX(float x)		{ _imageInfo->x = x; }
+	void setY(float y)		{ _imageInfo->y = y; }
+	void setCenter(float x, float y) 
+	{
 		_imageInfo->x = x - (_imageInfo->width) / 2;
 		_imageInfo->y = y - (_imageInfo->height) / 2;
 	}
-	int getWidth() { return _imageInfo->width; }
-	int getHeight() { return _imageInfo->height; }
+	void setFrameX(int frameX)
+	{
+		_imageInfo->currentFrameX = frameX;
+		if (frameX > _imageInfo->maxFrameX)
+			_imageInfo->currentFrameX = _imageInfo->maxFrameX;
+	}
+	void setFrameY(int frameY) 
+	{
+		_imageInfo->currentFrameY = frameY;
+		if (frameY > _imageInfo->maxFrameY)
+			_imageInfo->currentFrameY = _imageInfo->maxFrameY;
+	}
 
 	//BoudBox
 	RECT getBoundingBox() {
 		RECT rc = UTIL::RectMakeCenter(_imageInfo->x, _imageInfo->y, _imageInfo->width, _imageInfo->height);
 		return rc;
 	}
-	int getFrameX() { return _imageInfo->currentFrameX; }
-	void setFrameX(int frameX) {
-		_imageInfo->currentFrameX = frameX;
-		if (frameX > _imageInfo->maxFrameX)
-			_imageInfo->currentFrameX = _imageInfo->maxFrameX;
-	}
-	int getFrameY() { return _imageInfo->currentFrameY; }
-	void setFrameY(int frameY) {
-		_imageInfo->currentFrameY = frameY;
-		if (frameY > _imageInfo->maxFrameY)
-			_imageInfo->currentFrameY = _imageInfo->maxFrameY;
-	}
 
-	//getter
-	int getFrameWidth()		{ return _imageInfo->FrameWidth; }
-	int getFrameheight()	{ return _imageInfo->FrameHeight; }
-	int getMaxFrameX()		{ return _imageInfo->maxFrameX; }
-	int getMaxFrameY()		{ return _imageInfo->maxFrameY; }
+private:
+	LPIMAGE_INFO	_imageInfo;		//이미지 정보
+	char			_fileName[255];	//이미지 이름
+	bool			_isTrans;		//배경색 날리기
+	COLORREF		_transColor;	//배경색 날릴 RGB
+
+	BLENDFUNCTION	_blendFunc;		//알파블렌드를 위한 정보
+	LPIMAGE_INFO	_blendImage;	//알파 블렌드를 사용하기 위한 이미지
 };
 
