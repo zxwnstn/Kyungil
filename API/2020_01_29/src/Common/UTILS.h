@@ -93,7 +93,6 @@ namespace UTIL
 	//사각형 그리기
 	void RectangleMake(HDC hdc, int x, int y, int width, int height);
 	void drawRect(HDC hdc, const RECT& rect);
-	void DrawColorRect(HDC hdc, const RECT& rect, COLORREF color = RGB(0, 0, 0));
 	
 	//사각형 그리기(중심점)
 	void RectangleMakeCenter(HDC hdc, int x, int y, int width, int height);
@@ -105,7 +104,8 @@ namespace UTIL
 
 	//IRECT
 	bool operator==(const IRECT& rect1, const IRECT& rect2);
-	void DrawColorRect(HDC hdc, const UTIL::IRECT& rect, COLORREF color = RGB(0, 0, 0));
+	void DrawColorRect(HDC hdc, const IRECT& rect, bool _cleanEdge = false, COLORREF color = RGB(0, 0, 0));
+	void DrawColorRect(HDC hdc, const RECT& rect, bool _cleanEdge = false, COLORREF color = RGB(0, 0, 0));
 	void drawRect(HDC hdc, const UTIL::IRECT& rect);
 	IRECT IRectMake(int x, int y, int width, int height);
 	IRECT IRectMakeCenter(int x, int y, int width, int height);

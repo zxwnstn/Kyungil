@@ -18,4 +18,6 @@ public:
 	virtual void render(HDC hdc) = 0;
 	virtual void afterRender(HDC hdc) = 0;
 	virtual void debugRender(HDC hdc) = 0;
+
+	virtual void setData(int data) {};
 };

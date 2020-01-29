@@ -15,7 +15,8 @@ HRESULT MainGame::init()
 	
 	//add Scene
 	SCENEMANAGER->addScene("Sample", new SampleScene);
-	SCENEMANAGER->changeScene("Sample");
+	SCENEMANAGER->addScene("ex", new ExAnimationManagerScene);
+	SCENEMANAGER->changeScene("ex");
 
 	return S_OK;
 }

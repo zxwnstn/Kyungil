@@ -63,7 +63,7 @@ Scene * SceneManager::addScene(std::string sceneName, Scene* scene) {
 	return scene;
 }
 
-bool SceneManager::changeScene(std::string sceneName)
+bool SceneManager::changeScene(std::string sceneName, bool _existSceneRelease)
 {
 	miSceneList find = _mSceneList.find(sceneName);
 
@@ -79,7 +79,10 @@ bool SceneManager::changeScene(std::string sceneName)
 	if (SUCCEEDED(find->second->init()))
 	{
 		//혹시 기존에 씬이 있다면 릴리즈
-		if (_currentScene)_currentScene->release();
+		if (_existSceneRelease) {
+			if (_currentScene)
+				_currentScene->release();
+		}
 
 		_currentScene = find->second;
 		return S_OK;

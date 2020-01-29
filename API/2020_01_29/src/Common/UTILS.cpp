@@ -278,12 +278,22 @@ namespace UTIL
 		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
 	}
 
-	void DrawColorRect(HDC hdc, const RECT & rect, COLORREF color) {
+	void DrawColorRect(HDC hdc, const RECT & rect, bool _cleanEdge, COLORREF color) {
 		HBRUSH oldBrush, curBrush;
+		HGDIOBJ oldPen;
 		curBrush = CreateSolidBrush(color);
 		oldBrush = (HBRUSH)SelectObject(hdc, curBrush);
+
+		SelectObject(hdc, curBrush);
+		if (_cleanEdge)
+			oldPen = SelectObject(hdc, GetStockObject(NULL_PEN));
+
 		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+
 		SelectObject(hdc, oldBrush);
+		if (_cleanEdge)
+			SelectObject(hdc, oldPen);
+
 		DeleteObject(curBrush);
 	}
 
@@ -310,12 +320,22 @@ namespace UTIL
 	}
 
 	//IRECT
-	void DrawColorRect(HDC hdc, const UTIL::IRECT & rect, COLORREF color) {
+	void DrawColorRect(HDC hdc, const IRECT & rect, bool _cleanEdge, COLORREF color) {
 		HBRUSH oldBrush, curBrush;
+		HGDIOBJ oldPen;
 		curBrush = CreateSolidBrush(color);
 		oldBrush = (HBRUSH)SelectObject(hdc, curBrush);
+
+		SelectObject(hdc, curBrush);
+		if (_cleanEdge)
+			oldPen = SelectObject(hdc, GetStockObject(NULL_PEN));
+
 		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+
 		SelectObject(hdc, oldBrush);
+		if (_cleanEdge)
+			SelectObject(hdc, oldPen);
+
 		DeleteObject(curBrush);
 	}
 

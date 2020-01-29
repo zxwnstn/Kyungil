@@ -15,7 +15,8 @@ public:
 
 public:
 	class Scene* addScene(std::string sceneName, Scene* scene);
-	bool changeScene(std::string sceneName);
+	bool changeScene(std::string sceneName, bool _existSceneRelease = true);
+	Scene* getCurScene() { return _currentScene; }
 
 private:
 	typedef std::map<std::string, Scene*> mSceneList;
