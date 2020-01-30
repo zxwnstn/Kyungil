@@ -1,6 +1,8 @@
+#include "stdafx.h"
 #include "MainGame.h"
 #include "GameScene/SampleScene.h"
-#include "../example/ExScene/ExAnimationManagerScene.h"
+//#include "../example/ExScene/ExAnimationManagerScene.h"
+#include "../example/ExScene/ExEffectManagerScene.h"
 
 MainGame::MainGame()
 {
@@ -15,8 +17,10 @@ HRESULT MainGame::init()
 	
 	//add Scene
 	SCENEMANAGER->addScene("Sample", new SampleScene);
-	SCENEMANAGER->addScene("ex", new ExAnimationManagerScene);
-	SCENEMANAGER->changeScene("ex");
+	//SCENEMANAGER->addScene("animation", new ExAnimationManagerScene);
+	SCENEMANAGER->addScene("effect", new ExEffectManagerScene);
+	//SCENEMANAGER->changeScene("ex");
+	SCENEMANAGER->changeScene("effect");
 
 	return S_OK;
 }
@@ -35,6 +39,7 @@ void MainGame::update()
 
 	TIMEMANAGER->update(60.f);
 	deltaTime = TIMEMANAGER->getElapsedTime();
+	EFFECTMANAGER->update();
 	SCENEMANAGER->update(deltaTime);
 	ANIMANAGER->update(deltaTime);
 }
@@ -45,6 +50,7 @@ void MainGame::render()
 
 	SCENEMANAGER->render(getMemDC());
 	SCENEMANAGER->afterRender(getMemDC());
+	EFFECTMANAGER->render(getMemDC());
 	if(m_showRect)
 		SCENEMANAGER->debugRender(getMemDC());
 	if (m_showFPS)

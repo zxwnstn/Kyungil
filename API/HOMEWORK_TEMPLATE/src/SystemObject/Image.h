@@ -1,7 +1,5 @@
 #pragma once
-#include "Common/utils.h"
 #include "SystemObject/Animation.h"
-#include <Windows.h>
 
 class Image
 {

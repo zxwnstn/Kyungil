@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 class Animation
 {
@@ -34,11 +33,7 @@ public:
 	int getFrameHeight()	{ return _frameHeight; }
 	bool isPlay()			{ return _play; }
 	
-	void setName(const std::string& _name) { name = _name; }
-	std::string getName() { return name; }
-
 private:
-	std::string name;
 	std::vector<POINT> _frameList;			//프레임위치목록
 	std::vector<int> _playList;				//플레이 목록
 

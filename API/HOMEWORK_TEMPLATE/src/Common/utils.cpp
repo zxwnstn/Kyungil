@@ -1,6 +1,5 @@
+#include "stdafx.h"
 #include "UTILS.h"
-#include <cassert>
-#include <math.h>
 
 namespace UTIL
 {
@@ -284,13 +283,13 @@ namespace UTIL
 		curBrush = CreateSolidBrush(color);
 		oldBrush = (HBRUSH)SelectObject(hdc, curBrush);
 
-		SelectObject(hdc, oldBrush);
+		SelectObject(hdc, curBrush);
 		if (_cleanEdge)
 			oldPen = SelectObject(hdc, GetStockObject(NULL_PEN));
 
 		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
 
-		SelectObject(hdc, curBrush);
+		SelectObject(hdc, oldBrush);
 		if (_cleanEdge)
 			SelectObject(hdc, oldPen);
 
@@ -320,19 +319,19 @@ namespace UTIL
 	}
 
 	//IRECT
-	void DrawColorRect(HDC hdc, const UTIL::IRECT & rect, bool _cleanEdge, COLORREF color) {
+	void DrawColorRect(HDC hdc, const IRECT & rect, bool _cleanEdge, COLORREF color) {
 		HBRUSH oldBrush, curBrush;
 		HGDIOBJ oldPen;
 		curBrush = CreateSolidBrush(color);
 		oldBrush = (HBRUSH)SelectObject(hdc, curBrush);
 
-		SelectObject(hdc, oldBrush);
+		SelectObject(hdc, curBrush);
 		if (_cleanEdge)
 			oldPen = SelectObject(hdc, GetStockObject(NULL_PEN));
 
 		Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
 
-		SelectObject(hdc, curBrush);
+		SelectObject(hdc, oldBrush);
 		if (_cleanEdge)
 			SelectObject(hdc, oldPen);
 

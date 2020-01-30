@@ -1,6 +1,5 @@
 #pragma once
 #include "../../vendor/fmod/inc/fmod.hpp"
-#include "stdafx.h"
 #define CHNNEL_MAX 50
 
 //define your sound game channel

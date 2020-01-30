@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "gameNode.h"
 bool GameNode::_managerInit = false;
 
@@ -30,6 +31,7 @@ HRESULT GameNode::init()
 		TIMEMANAGER->init();
 		SCENEMANAGER->init();
 		ANIMANAGER->init();
+		EFFECTMANAGER->init();
 	}
 	return S_OK;
 }
@@ -45,6 +47,7 @@ void GameNode::release()
 		TIMEMANAGER->release();
 		SCENEMANAGER->release();
 		ANIMANAGER->release();
+		EFFECTMANAGER->release();
 
 		IMAGEMANAGER->Destroy();
 		KEYMANAGER->Destroy();
@@ -52,6 +55,7 @@ void GameNode::release()
 		TIMEMANAGER->Destroy();
 		SCENEMANAGER->Destroy();
 		ANIMANAGER->Destroy();
+		EFFECTMANAGER->Destroy();
 	}
 	ReleaseDC(m_hWnd, _hdc);
 }

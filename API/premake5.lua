@@ -215,7 +215,10 @@ project "HOMEWORK_TEMPLATE"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
-
+	
+	pchheader "stdafx.h"
+	pchsource "HOMEWORK_TEMPLATE/src/stdafx.cpp"
+	
 	files
 	{
 		"%{prj.name}/src/**.h",

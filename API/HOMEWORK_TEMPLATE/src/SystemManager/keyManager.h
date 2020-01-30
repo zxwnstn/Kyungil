@@ -1,6 +1,4 @@
 #pragma once
-#include "stdafx.h"
-#include <bitset>
 #define KEYMAX 256
 
 class KeyManager {

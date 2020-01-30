@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "AnimationManager.h"
-#include "SystemManager/ImageManager.h"
-#include "SystemManager/TimeManager.h"
+#include "TimeManager.h"
+#include "ImageManager.h"
+
 DEFINITION_SINGLE(AnimationManager)
 
 AnimationManager::AnimationManager()

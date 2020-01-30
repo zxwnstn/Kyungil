@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "txtData.h"
 
 TxtData::TxtData()

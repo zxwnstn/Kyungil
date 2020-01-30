@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "keyManager.h"
 DEFINITION_SINGLE(KeyManager)
 

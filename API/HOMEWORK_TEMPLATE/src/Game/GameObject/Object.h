@@ -1,6 +1,4 @@
 #pragma once
-#include "stdafx.h"
-#include "Common/UTILS.h"
 #include "Common/SystemManagers.h"
 #include "Game/GameTypes.h"
 

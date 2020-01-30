@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "sceneManager.h"
 DEFINITION_SINGLE(SceneManager)
 

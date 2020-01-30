@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "animation.h"
-
 
 Animation::Animation()
 	:_frameNum(0), _frameWidth(0), _frameHeight(0), _loop(false),

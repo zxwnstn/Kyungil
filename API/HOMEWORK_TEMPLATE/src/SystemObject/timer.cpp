@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "timer.h"
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")

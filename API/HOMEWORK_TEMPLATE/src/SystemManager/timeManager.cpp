@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "timeManager.h"
 DEFINITION_SINGLE(TimeManager)
 

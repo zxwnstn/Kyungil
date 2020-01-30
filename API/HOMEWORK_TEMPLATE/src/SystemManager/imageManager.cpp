@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "ImageManager.h"
 DEFINITION_SINGLE(ImageManager)
 

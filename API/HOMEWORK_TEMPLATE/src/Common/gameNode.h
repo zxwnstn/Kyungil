@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "Common/SystemManagers.h"
 
 static Image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINSIZEY);
