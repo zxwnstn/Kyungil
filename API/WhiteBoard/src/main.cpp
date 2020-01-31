@@ -1,89 +1,175 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <memory>
 using namespace std;
 
+typedef string Item;
 
-class pocketmon {
+class Inventory 
+{
 public:
-	virtual void meaw() = 0; // 포켓몬이라는 큰 범주는 울음소리를 특정할수 없다. 
-};
-
-//포켓몬을 상속받는 클래스들을 만들자.
-class firy
-	: public pocketmon
-{
-	//상속 받은 가상 함수 meow를 재정의
-	void meaw() override 
+	void showInven() 
 	{
-		cout << "파이파이!" << endl;
-	}
-};
-
-class pica
-	: public pocketmon
-{
-	//상속 받은 가상 함수 meow를 재정의
-	void meaw() override
-	{
-		cout << "피카!!" << endl;
-	}
-};
-
-class cater
-	: public pocketmon
-{
-	//상속 받은 가상 함수 meow를 재정의
-	void meaw() override
-	{
-		cout << "버그버그!" << endl;
-	}
-};
-
-
-class player {
-
-public:
-	void init() {
-		//static 변수 direction에 따라 내가 가질 포켓몬을 미리 결정할수 있다.
-		switch (direction)
+		cout << "=========== 인벤 아이템 목록 ===============" << endl;
+		for (int i = 0; i < inven_items.size(); ++i) 
 		{
-		case 0:
-			myPocketMon = new firy;
-			break;
-		case 1:
-			myPocketMon = new pica;
-			break;
-		case 2:
-			myPocketMon = new cater;
-			break;
+			cout << inven_items[i] << endl;
+		}
+		cout << endl;
+	}
+
+	void init() {
+		inven_items.push_back("낡은 검");
+		inven_items.push_back("낡은 신발");
+		inven_items.push_back("낡은 영환");
+	}
+
+
+	Item pop_item(Item _item)
+	{
+		for (auto it = inven_items.begin(); it != inven_items.end(); ++it) 
+		{
+			if (*it == _item) {
+				inven_items.erase(it);
+				return _item;
+			}
+		}
+		return "없음";
+	}
+
+	void push_item(Item _item) {
+		inven_items.push_back(_item);
+	}
+
+private:
+	vector<Item> inven_items;
+
+};
+
+
+
+
+class person {
+
+public:
+	void push_Item(Item _item){
+		inven.push_item(_item);
+	}
+
+	Item pop_Item(Item _item) {
+		Item item = inven.pop_item(_item);
+		return item;
+	}
+
+	void init() {
+		inven.init();
+		gold = 500;
+	}
+
+	void showItems() {
+		inven.showInven();
+	}
+
+private:
+	Inventory inven;
+	int gold;
+};
+
+
+
+
+class store {
+public:
+	void enterVisitor(person* _visitor) {
+		visitor = _visitor;
+		cout << "손님이 입장 하셧습니다." << endl;
+	}
+	void leaveVisitor() {
+		if (visitor != nullptr) {
+			visitor = nullptr;
+			cout << "손님이 떠낫습니다." << endl;
 		}
 	}
 
-	//포켓몬의 울음소리를 듣고싶다..
-	void goPocket() 
+	void visitor_Buy_Item(Item _item) 
 	{
-		myPocketMon->meaw();
+		for (auto it = store_items.begin(); it != store_items.end(); ++it) 
+		{
+			if (*it == _item) 
+			{
+				store_items.erase(it);
+				visitor->push_Item(_item);
+				cout << "손님이" << _item << " 아이템을 샀습니다" << endl;
+				return;
+			}
+		}
+		cout << "손님이 원하는 아이템이 없습니다!" << endl;
 	}
 
-public:
-	static int direction;
-	pocketmon* myPocketMon;
+	void visitor_Sell_Item(Item _item) 
+	{
+		Item item = visitor->pop_Item(_item);
+		
+		if (item == "없음") {
+			cout << "손님의 인벤 목록에 " << _item << "이 없습니다" << endl;
+		}
+		else {
+			store_items.push_back(item);
+			cout << "손님의 인벤 목록에 " << _item << "이 있었습니다, 상점의 아이템 목록에 추가했습니다" << endl;
+		}
+	}
+
+	void showStoreItem() {
+		cout << "=========== 상점 아이템 목록 ===============" << endl;
+		for (int i = 0; i < store_items.size(); ++i) {
+			cout << store_items[i] << endl;
+		}
+		cout << endl;
+	}
+
+	void init() {
+		store_items.push_back("소검");
+		store_items.push_back("대검");
+		store_items.push_back("날카로운검");
+		store_items.push_back("영환이 검");
+	}
+
+private:
+	person* visitor = nullptr;
+	vector<Item> store_items;
 };
-
-//static 변수는 반드시 이런식으로 초기화 해줘야 한다.
-int player::direction = -1;
-
-
 
 
 int main() {
-	//객체가 생성되기 전에도 값을 변경할수 있음
-	player::direction = 2;
-	//이때 부터 새로운 player는 cater를 가지게 될것이라는 것을 알수 있음
+	person youngHwan;
+	youngHwan.init();
 
-	player* p1 = new player;
-	p1->init();
+	store junsooStore;
+	junsooStore.init();
 
-	p1->goPocket();
+	cout << "이닛 하고 직후" << endl;
+	youngHwan.showItems();
+	junsooStore.showStoreItem();
 
+
+
+	junsooStore.enterVisitor(&youngHwan);
+
+	junsooStore.visitor_Buy_Item("소검");
+	junsooStore.visitor_Buy_Item("대검");
+	junsooStore.visitor_Buy_Item("태환사신기");
+
+	cout << "쇼핑 중" << endl;
+	youngHwan.showItems();
+	junsooStore.showStoreItem();
+
+	junsooStore.visitor_Sell_Item("낡은 검");
+	junsooStore.visitor_Sell_Item("미친놈");
+
+	cout << "쇼핑 마침" << endl;
+	youngHwan.showItems();
+	junsooStore.showStoreItem();
+
+	junsooStore.leaveVisitor();
 }
