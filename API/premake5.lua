@@ -467,3 +467,40 @@ project "2020_01_29"
 	
 	filter "configurations:Release"
 		optimize "On"
+
+project "MapTool"
+	location "MapTool"
+	kind "WindowedApp"
+	language "C++"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+	includedirs
+	{
+		"%{prj.name}/src",
+	}
+	libdirs
+	{
+		{ "vendor/fmod/lib"}
+	}
+	links
+	{
+		"fmod_vc.lib"
+	}
+
+	filter "system:windows"
+		cppdialect "C++17"
+		staticruntime "On"
+		systemversion "latest"
+
+	filter "configurations:Debug"
+		symbols "On"
+	
+	filter "configurations:Release"
+		optimize "On"

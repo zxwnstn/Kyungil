@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "MainGame.h"
-#include "GameScene/SampleScene.h"
-//#include "../example/ExScene/ExAnimationManagerScene.h"
-//#include "../example/ExScene/ExEffectManagerScene.h"
+#include "GameScene/MapEdit.h"
 
 MainGame::MainGame()
 {
@@ -16,12 +14,9 @@ HRESULT MainGame::init()
 	GameNode::init();
 	
 	//add Scene
-	IMAGEMANAGER->addImage("사나", "../Common_Images/사나.bmp", 0, 0, WINSIZEX, WINSIZEY);
-	SOUNDMANAGER->addStream("배경음", "../Common_Music/나만봄.mp3", true);
+	SCENEMANAGER->addScene("MapEddit", new MapEdit);
+	SCENEMANAGER->changeScene("MapEddit");
 
-	SCENEMANAGER->addScene("Sample", new SampleScene);
-	SCENEMANAGER->changeScene("Sample");
-	sceneInit = true;
 	return S_OK;
 }
 
@@ -32,6 +27,7 @@ void MainGame::release()
 
 void MainGame::update()
 {
+	GameNode::update();
 	if (KEYMANAGER->isOnceKeyDown(GAME_RECTMODE))
 		m_showRect = !m_showRect;
 	if (KEYMANAGER->isOnceKeyDown(GAME_SHOWFPS))
@@ -61,8 +57,9 @@ void MainGame::render()
 
 LRESULT MainGame::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
-	if (sceneInit)
-		return SCENEMANAGER->getCurScene()->SceneProc(hWnd, iMessage, wParam, lParam);
+	if (SCENEMANAGER->getCurScene()) {
+		return SCENEMANAGER->getCurScene()->MainProc(hWnd, iMessage, wParam, lParam);
+	}
 	else {
 		switch (iMessage)
 		{
@@ -75,6 +72,6 @@ LRESULT MainGame::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 			PostQuitMessage(0);
 			break;
 		}
-	}	
-	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
+		return DefWindowProc(hWnd, iMessage, wParam, lParam);
+	}
 }

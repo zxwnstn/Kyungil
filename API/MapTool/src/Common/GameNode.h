@@ -20,6 +20,9 @@ public:
 	HDC getHDC()			{ return _hdc; }
 	HDC getMemDC()			{ return _backBuffer->getMemDC(); }
 
+public:
+	virtual LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam) = 0;
+
 private:
 	HDC	_hdc;
 	static bool _managerInit;

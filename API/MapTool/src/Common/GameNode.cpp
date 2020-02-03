@@ -12,6 +12,7 @@ GameNode::~GameNode()
 
 void GameNode::update()
 {
+	InvalidateRect(m_hWnd, NULL, false);
 }
 void GameNode::render()
 {

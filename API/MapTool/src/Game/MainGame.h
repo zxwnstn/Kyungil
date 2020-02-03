@@ -14,10 +14,8 @@ public:
 	void update() override;
 	void render() override;
 
-	bool sceneInit = false;
-
 public:
-	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+	HRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam) override;
 
 private:
 	float deltaTime;

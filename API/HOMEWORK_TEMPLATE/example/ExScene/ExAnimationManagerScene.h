@@ -21,5 +21,8 @@ public:
 
 private:
 	camel* _camel;
+
+	Image* ufoImg;
+	Animation* ufoAni;
 };
 

@@ -15,10 +15,10 @@ public:
 	virtual void release() = 0;
 
 public:
-	virtual LRESULT SceneProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
-
-public:
 	virtual void render(HDC hdc) = 0;
 	virtual void afterRender(HDC hdc) = 0;
 	virtual void debugRender(HDC hdc) = 0;
+
+public:
+	virtual LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 };

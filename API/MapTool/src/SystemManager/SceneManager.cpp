@@ -88,30 +88,3 @@ bool SceneManager::changeScene(std::string sceneName)
 
 	return false;
 }
-
-bool SceneManager::scenePush(std::string sceneName)
-{
-	auto find = _mSceneList.find(sceneName);
-
-	if (find == _mSceneList.end())
-		return false;
-
-	if (SUCCEEDED(find->second->init()))
-	{
-		//혹시 기존에 씬이 있다면 릴리즈
-		_currentScene = find->second;
-		sceneStack.push(find->second);
-
-		return true;
-	}
-}
-
-bool SceneManager::scenePop()
-{
-	if (sceneStack.size() > 1) {
-		sceneStack.top()->release();
-		sceneStack.pop();
-		_currentScene = sceneStack.top();
-	}
-	return false;
-}

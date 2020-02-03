@@ -16,8 +16,6 @@ public:
 	class Scene* addScene(std::string sceneName, Scene* scene);
 	bool changeScene(std::string sceneName);
 	Scene* getCurScene() { return _currentScene; }
-	bool scenePush(std::string sceneName);
-	bool scenePop();
 
 private:
 	typedef std::map<std::string, Scene*> mSceneList;
@@ -26,7 +24,6 @@ private:
 private:
 	Scene* _currentScene = nullptr;
 	mSceneList _mSceneList;
-	std::stack<Scene*> sceneStack;
 
 private:
 	DECLARE_SINGLE(SceneManager)
